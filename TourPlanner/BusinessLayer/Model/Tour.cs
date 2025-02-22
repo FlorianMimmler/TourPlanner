@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.BusinessLayer.Model
 {
-    public class TourLog
+    public class Tour
     {
-        public string Date { get; set; }
-        public string Duration { get; set; }
-        public string Distance { get; set; }
         public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

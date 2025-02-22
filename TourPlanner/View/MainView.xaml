@@ -32,14 +32,24 @@
                 <!-- Tour List (Sidebar) -->
                 <StackPanel Grid.Column="0" Margin="0 0 5 0">
 
-                    <TextBox Name="myTextBox" TextChanged="OnTextBoxTextChanged" Width="auto" Background="{StaticResource search_icon}" />
                     <TextBlock>Tours</TextBlock>
+                    <TextBox Name="myTextBox" TextChanged="OnTextBoxTextChanged" Width="auto" Background="{StaticResource search_icon}" />
 
-                    <ListView>
-                        <ListViewItem Content="Wienerwald"/>
-                        <ListViewItem Content="Dopplerhütte"/>
-                        <ListViewItem Content="Figlwarte"/>
-                        <ListViewItem Content="Dorfunde"/>
+                    <ListView ItemsSource="{Binding Tours}">
+                        <ListView.Resources>
+                            <!-- Hide the column headers -->
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto"
+                                    DisplayMemberBinding="{Binding Id}"  />
+                                <GridViewColumn Width="auto"  
+                                    DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                     <Button Margin="5" Content="+"/>
                 </StackPanel>
