@@ -10,22 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.BusinessLayer.ViewModel;
 
-namespace TourPlanner.View
+namespace TourPlanner.View.Subviews.Sidebar
 {
     /// <summary>
-    /// Interaktionslogik für MainView.xaml
+    /// Interaktionslogik für SidebarHeaderView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class SidebarHeaderView : UserControl
     {
-        public MainView()
+        public SidebarHeaderView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
-
-        
     }
 }

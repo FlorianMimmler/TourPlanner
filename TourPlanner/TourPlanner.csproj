@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\icons\add_icon.png" />
     <None Remove="Resources\icons\search_icon.png" />
   </ItemGroup>
 
@@ -18,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\icons\add_icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\icons\search_icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -4,58 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.View" xmlns:sys="clr-namespace:System;assembly=netstandard"
+        xmlns:sidebar="clr-namespace:TourPlanner.View.Subviews.Sidebar" 
+        xmlns:menu="clr-namespace:TourPlanner.View.Subviews.Menu" 
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-    
-
-    
+        Title="Tour Planner" Height="450" Width="800">
 
     <Grid>
         <!-- Top Menu -->
         <DockPanel LastChildFill="True">
-            <ToolBar DockPanel.Dock="Top">
-                <Button>File</Button>
-                <Button>Edit</Button>
-                <Button>Options</Button>
-                <Button>Help</Button>
-            </ToolBar>
+            
+            <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
 
             <!-- Main Layout -->
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
                     <!-- Sidebar -->
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                    <!-- Spacer Column for the Border -->
+                    <ColumnDefinition Width="Auto"/>
                     <!-- Main Content -->
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Tour List (Sidebar) -->
-                <StackPanel Grid.Column="0" Margin="0 0 5 0">
+                <sidebar:SidebarView Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
+                <!-- <Sidebar:SidebarView  Grid.Column="0" Margin="0 0 5 0"></Sidebar:SidebarView> -->
 
-                    <TextBlock>Tours</TextBlock>
-                    <TextBox Name="myTextBox" TextChanged="OnTextBoxTextChanged" Width="auto" Background="{StaticResource search_icon}" />
-
-                    <ListView ItemsSource="{Binding Tours}">
-                        <ListView.Resources>
-                            <!-- Hide the column headers -->
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="auto"
-                                    DisplayMemberBinding="{Binding Id}"  />
-                                <GridViewColumn Width="auto"  
-                                    DisplayMemberBinding="{Binding Name}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Button Margin="5" Content="+"/>
-                </StackPanel>
-                <Border BorderThickness="0 0 1 0 " BorderBrush="Black"/>
+                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" />
+                
                 <!-- Main Content -->
-                <Grid Grid.Column="1" Margin="5 0 0 0">
+                <Grid Grid.Column="2" Margin="5 0 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <!-- Tabs -->
@@ -79,7 +57,7 @@
                     <!-- Tour Logs -->
                     <GroupBox Grid.Row="2" Width="auto" Header="Tour Logs" Margin="5">
                         <DataGrid ItemsSource="{Binding TourLogs}" AutoGenerateColumns="False"
-                            CanUserAddRows="False" ColumnWidth="*" >
+                                CanUserAddRows="False" ColumnWidth="*" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
                                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
