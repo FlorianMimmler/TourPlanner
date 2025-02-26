@@ -23,7 +23,6 @@ namespace TourPlanner.View
         public MainView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
 
         

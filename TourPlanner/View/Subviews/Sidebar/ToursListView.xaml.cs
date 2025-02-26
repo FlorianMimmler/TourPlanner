@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner.BusinessLayer.ViewModel;
 
 namespace TourPlanner.View.Subviews.Sidebar
 {
@@ -23,6 +24,7 @@ namespace TourPlanner.View.Subviews.Sidebar
         public ToursListView()
         {
             InitializeComponent();
+            DataContext = new ToursListViewModel();
         }
     }
 }

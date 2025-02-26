@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TourPlanner.View.Subviews.Maincontent
 {
     /// <summary>
-    /// Interaction logic for MaincontentMap.xaml
+    /// Interaction logic for MaincontentTabs.xaml
     /// </summary>
-    public partial class MaincontentMap : UserControl
+    public partial class TabsView : UserControl
     {
-        public MaincontentMap()
+        public TabsView()
         {
             InitializeComponent();
         }

@@ -19,18 +19,13 @@
         </Grid.RowDefinitions>
 
         <!-- Tabs -->
-        <maincontent:MaincontentTabs Grid.Row="0"> </maincontent:MaincontentTabs>
+        <maincontent:TabsView Grid.Row="0"></maincontent:TabsView>
 
         <!-- Map -->
-        <maincontent:MaincontentMap Grid.Row="1">
-        </maincontent:MaincontentMap>
+        <maincontent:MapView Grid.Row="1"></maincontent:MapView>
 
         <!-- Tour Logs -->
-
-
-        <maincontent:MaincontentTourlogs  Grid.Row="2" >
-            
-        </maincontent:MaincontentTourlogs>
+        <maincontent:TourlogsView Grid.Row="2"></maincontent:TourlogsView>
         
     </Grid>
     
