@@ -11,9 +11,15 @@
 
 
     <TabControl >
-        <TabItem Header="General"/>
-        <TabItem Header="Route"/>
-        <TabItem Header="Misc"/>
+        <TabItem Header="General">
+            <maincontent:GeneralView></maincontent:GeneralView>
+        </TabItem>
+        <TabItem Header="Route">
+            <maincontent:MapView></maincontent:MapView>
+        </TabItem>
+        <TabItem Header="Misc">
+            <maincontent:MiscView></maincontent:MiscView>
+        </TabItem>
     </TabControl>
 
 </UserControl>

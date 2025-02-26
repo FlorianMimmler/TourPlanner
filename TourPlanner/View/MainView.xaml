@@ -12,9 +12,9 @@
         Title="Tour Planner" Height="450" Width="800">
 
     <Grid>
-        <!-- Top Menu -->
         <DockPanel LastChildFill="True">
             
+            <!-- Top Menu -->
             <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
 
             <!-- Main Layout -->
@@ -28,13 +28,13 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Tour List (Sidebar) -->
+                <!-- Sidebar -->
                 <sidebar:SidebarView Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
 
                 <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" />
                 
                 <!-- Main Content -->
-                <maincontent:MaincontentView Grid.Column="2" Margin="5 0 0 0"></maincontent:MaincontentView>
+                <maincontent:MaincontentView Grid.Column="2" Margin="5 0 5 0"></maincontent:MaincontentView>
             
             
             </Grid>
