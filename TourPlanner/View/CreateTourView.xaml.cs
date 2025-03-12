@@ -11,28 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TourPlanner.BusinessLayer.ViewModel;
-using TourPlanner.View.Subviews.Sidebar;
 
 namespace TourPlanner.View
 {
     /// <summary>
-    /// Interaktionslogik für MainView.xaml
+    /// Interaktionslogik für CreateTourView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class CreateTourView : Window
     {
-        public MainView()
+        public CreateTourView()
         {
             InitializeComponent();
-
-            sidebarView.OpenCreateTourRequested += (s, e) =>
-            {
-                CreateTourView createTourView = new CreateTourView();
-                createTourView.ShowDialog();
-            };
-
         }
-
-       
     }
 }

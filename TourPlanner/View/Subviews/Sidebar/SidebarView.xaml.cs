@@ -20,9 +20,13 @@ namespace TourPlanner.View.Subviews.Sidebar
     /// </summary>
     public partial class SidebarView : UserControl
     {
+        public event EventHandler OpenCreateTourRequested;
         public SidebarView()
         {
             InitializeComponent();
+
+            sidebarHeaderView.OpenCreateTourRequested += (s, e) =>
+            OpenCreateTourRequested?.Invoke(this, EventArgs.Empty);
         }
         private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {

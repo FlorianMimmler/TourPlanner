@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.BusinessLayer.Model;
+using TourPlanner.BusinessLayer.Services;
 
 namespace TourPlanner.BusinessLayer.ViewModel
 {
     public class ToursListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Tour> _tours;
+        private readonly TourService _tourService;
 
         public ObservableCollection<Tour> Tours
         {
@@ -26,14 +28,27 @@ namespace TourPlanner.BusinessLayer.ViewModel
         public ToursListViewModel()
         {
 
-            Tours = new ObservableCollection<Tour>
-            {
-                new() {Id = 1, Name ="Wienerwald"},
-                new() {Id = 2, Name="Dorfrunde" },
-                new() {Id = 3, Name="Dopplerhütte"}
+            _tourService = new TourService();
+            Tours = _tourService.GetTours();
 
-            };
+        }
 
+        public void AddTour(Tour tour)
+        {
+            _tourService.AddTour(tour);
+            OnPropertyChanged(nameof(Tours));
+        }
+
+        public void UpdateTour(Tour tour)
+        {
+            _tourService.UpdateTour(tour);
+            OnPropertyChanged(nameof(Tours));
+        }
+
+        public void DeleteTour(int id)
+        {
+            _tourService.DeleteTour(id);
+            OnPropertyChanged(nameof(Tours));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
