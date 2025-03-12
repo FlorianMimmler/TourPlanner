@@ -21,7 +21,6 @@ namespace TourPlanner.BusinessLayer.ViewModel
 
         private void OpenCreateTour()
         {
-            Console.WriteLine("Open modal");
             OpenCreateTourRequested?.Invoke(this, EventArgs.Empty);
         }
     }

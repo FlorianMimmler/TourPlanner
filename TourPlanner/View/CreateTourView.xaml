@@ -6,7 +6,80 @@
         xmlns:local="clr-namespace:TourPlanner.View"
         mc:Ignorable="d"
         Title="CreateTourView" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="24" Margin="5 5 0 0" Text="Create a new Tour"></TextBlock>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5 5 0 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <TextBlock FontSize="20">Name:</TextBlock>
+                    <TextBox FontSize="20"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <TextBlock FontSize="20">Transport Type:</TextBlock>
+                    <ComboBox FontSize="20"></ComboBox>
+                </StackPanel>
+            </Grid>
+            
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="18">Description:</TextBlock>
+                <TextBox FontSize="14" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock FontSize="20">From:</TextBlock>
+                        <TextBox FontSize="20"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock FontSize="20">To:</TextBlock>
+                        <TextBox FontSize="20"></TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock FontSize="20">Distance:</TextBlock>
+                        <TextBox FontSize="20"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock FontSize="20">Estimated Time:</TextBlock>
+                        <TextBox FontSize="20"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Cancel" FontSize="16"></Button>
+            <Button Grid.Column="2" Content="Save" FontSize="16"></Button>
+        </Grid>
         
+
     </Grid>
 </Window>
