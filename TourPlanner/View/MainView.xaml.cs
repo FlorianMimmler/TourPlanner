@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourPlanner.BusinessLayer.Services;
 using TourPlanner.BusinessLayer.ViewModel;
 using TourPlanner.View.Subviews.Sidebar;
 
@@ -21,13 +22,17 @@ namespace TourPlanner.View
     /// </summary>
     public partial class MainView : Window
     {
+        private readonly TourService _tourService;
         public MainView()
         {
             InitializeComponent();
 
+            _tourService = new TourService();
+
             sidebarView.OpenCreateTourRequested += (s, e) =>
             {
                 CreateTourView createTourView = new CreateTourView();
+
                 createTourView.ShowDialog();
             };
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner.BusinessLayer.Services;
 
 namespace TourPlanner.View.Subviews.Sidebar
 {
@@ -21,6 +22,8 @@ namespace TourPlanner.View.Subviews.Sidebar
     public partial class SidebarView : UserControl
     {
         public event EventHandler OpenCreateTourRequested;
+
+        private readonly TourService _tourService;
         public SidebarView()
         {
             InitializeComponent();

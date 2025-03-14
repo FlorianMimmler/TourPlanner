@@ -6,37 +6,36 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.BusinessLayer.Model;
+using TourPlanner.DAL;
 
 namespace TourPlanner.BusinessLayer.Services
 {
-    class TourService
+    public class TourService
     {
 
-        private ObservableCollection<Tour> _tours;
+        private SingletonDatabase _database = SingletonDatabase.Instance;
 
         public TourService()
         {
-            _tours = new ObservableCollection<Tour>()
-            {
-                new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5, EstimatedTime = 1.5, From = "here", To = "there", TransportType = null, Image = ""},
-                new() {Id = 1, Name = "Dorfrunde", Description = "A nice tour", Distance = 2, EstimatedTime = 0.5, From = "here", To = "there", TransportType = null, Image = ""}
-            };
+            
         }
 
         public ObservableCollection<Tour> GetTours()
         {
-            return _tours;
+            return _database.GetTours();
         }
 
-        public void AddTour(Tour tour)
+        public bool AddTour(Tour tour)
         {
-            tour.Id = _tours.Count + 1;
+            /*tour.Id = _tours.Count + 1;
             _tours.Add(tour);
+            */
+            return _database.AddTour(tour);
         }
 
         public void UpdateTour(Tour tour)
         {
-            var existingTour = _tours.FirstOrDefault(t => t.Id == tour.Id);
+            /*var existingTour = _tours.FirstOrDefault(t => t.Id == tour.Id);
             if (existingTour != null)
             {
                 existingTour.Name = tour.Name;
@@ -47,16 +46,19 @@ namespace TourPlanner.BusinessLayer.Services
                 existingTour.Distance = tour.Distance;
                 existingTour.EstimatedTime = tour.EstimatedTime;
                 existingTour.Image = tour.Image;
-            }
+            }*/
+            _database.UpdateTour(tour);
         }
 
         public void DeleteTour(int id)
         {
-            var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
+            /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
             if (tourToRemove != null)
             {
                 _tours.Remove(tourToRemove);
             }
+            */
+            _database.DeleteTour(id);
         }
     }
 }
