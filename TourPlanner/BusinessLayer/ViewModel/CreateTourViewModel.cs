@@ -14,6 +14,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
     public class CreateTourViewModel : INotifyDataErrorInfo
     {
         public ICommand SaveTourCommand { get; }
+        public ICommand CancelTourCreationCommand { get; }
 
         public event EventHandler CloseWindow;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -125,6 +126,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
         public CreateTourViewModel()
         {
             SaveTourCommand = new RelayCommand(SaveTour, CanExecuteSaveTour);
+            CancelTourCreationCommand = new RelayCommand(CancelTourCreation);
             SelectedTransportType = TransportTypes.FirstOrDefault(t => t == Model.TransportTypes.Hiking);
         }
 
@@ -163,6 +165,11 @@ namespace TourPlanner.BusinessLayer.ViewModel
             {
                 CloseWindow?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private void CancelTourCreation()
+        {
+            CloseWindow?.Invoke(this, EventArgs.Empty);
         }
 
         /** Validation Functions **/

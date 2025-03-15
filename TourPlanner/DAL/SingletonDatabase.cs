@@ -35,8 +35,8 @@ namespace TourPlanner.DAL
         {
             _tours = new ObservableCollection<Tour>()
             {
-                new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = null, Image = ""},
-                new() {Id = 1, Name = "Dorfrunde", Description = "A nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = null, Image = ""}
+                new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = TransportTypes.Hiking, Image = ""},
+                new() {Id = 1, Name = "Dorfrunde", Description = "A nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = TransportTypes.Bicycle, Image = ""}
             };
         }
 

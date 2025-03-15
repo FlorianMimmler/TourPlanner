@@ -139,7 +139,8 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Cancel" FontSize="16"></Button>
+            <Button Grid.Column="0" Content="Cancel" FontSize="16"
+                    Command="{Binding CancelTourCreationCommand}"></Button>
             <Button Grid.Column="2" Content="Save" FontSize="16" 
                     Command="{Binding SaveTourCommand}">
                 
