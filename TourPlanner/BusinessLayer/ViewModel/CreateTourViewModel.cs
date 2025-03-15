@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.BusinessLayer.Model;
@@ -71,6 +72,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
 
         private string _distance;
         [Required(ErrorMessage = "Distance is required!")]
+        [RegularExpression(@"^\d+([,]\d+)?$", ErrorMessage = "Invalid distance format (e.g., 5,4 or 123,54)")]
         public string Distance
         {
             get { return this._distance; }
@@ -83,6 +85,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
 
         private string _estimatedTime;
         [Required(ErrorMessage = "Estimated time is required!")]
+        [RegularExpression(@"^([01]?[0-9]|2[0-3]):[0-5][0-9]$", ErrorMessage = "Invalid time format (HH:mm)")]
         public string EstimatedTime
         {
             get { return this._estimatedTime; }
@@ -138,8 +141,8 @@ namespace TourPlanner.BusinessLayer.ViewModel
                 return;
             }
 
-            if (!double.TryParse(Distance.Replace(',', '.'), out double parsedDistance))
-            {
+            if (!double.TryParse(Distance.Replace('.', ','), out double parsedDistance))
+            { 
                 Console.WriteLine("Invalid distance format.");
                 return;
             }
@@ -152,7 +155,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
                 To = To,
                 Distance = parsedDistance,
                 EstimatedTime = EstimatedTime,
-                TransportType = SelectedTransportType.ToString()
+                TransportType = SelectedTransportType
             };
 
             var success = _toursService.AddTour(tour);
@@ -189,8 +192,11 @@ namespace TourPlanner.BusinessLayer.ViewModel
         
             if(results.Any())
             {
-                _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+                if(!_errors.ContainsKey(propertyName))
+                {
+                    _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
+                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+                }
             }
             else
             {

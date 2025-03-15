@@ -37,22 +37,30 @@
                         <TextBlock Grid.Column="0" FontSize="16">Name:</TextBlock>
                         <TextBox x:Name="TourNameInput" Text="{Binding TourName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
                     </Grid>
-                    <Label Grid.Row="1" Content="{Binding ElementName=TourNameInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=TourNameInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
                 <Grid Grid.Column="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="10"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" FontSize="16">Transport Type:</TextBlock>
-                    <ComboBox SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="16">Transport Type:</TextBlock>
+                        <ComboBox x:Name="TransportTypeInput" SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
+                        </Grid>
+                    <Label Content="{Binding ElementName=TransportTypeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
             </Grid>
             
-            <StackPanel Orientation="Vertical" Margin="0 20 0 20">
+            <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                 <TextBlock FontSize="16">Description:</TextBlock>
-                <TextBox Text="{Binding TourDescription, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="50" MaxLength="500" Padding="2"></TextBox>
+                <TextBox x:Name="DescriptionInput" Text="{Binding TourDescription, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="50" MaxLength="500" Padding="2"></TextBox>
+                <Label Height="35" Content="{Binding ElementName=DescriptionInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -63,57 +71,64 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Margin="0 0 40 20">
+                    <Grid Grid.Row="0" Margin="0 0 40 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">From:</TextBlock>
-                        <TextBox Text="{Binding From, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox x:Name="FromInput" Text="{Binding From, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
                     </Grid>
-                    <Grid Grid.Row="1" Margin="0 0 40 0">
+                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=FromInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
+                    <Grid Grid.Row="2" Margin="0 0 40 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">To:</TextBlock>
-                        <TextBox Text="{Binding To, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox x:Name="ToInput" Text="{Binding To, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
                     </Grid>
+                    <Label Height="35" Grid.Row="3" Content="{Binding ElementName=ToInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Margin="0 0 0 20">
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Distance (km):</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2" 
+                        <TextBox x:Name="DistanceInput" Grid.Column="2" FontSize="14" MaxLength="64" Padding="2" 
                             Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
                             PreviewTextInput="DistanceTextBox_PreviewTextInput"
                             LostFocus="DistanceTextBox_LostFocus">
                         </TextBox>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Estimated Time (HH:mm):</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"
+                        <TextBox x:Name="EstimatedTimeInput" Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"
                             Text="{Binding EstimatedTime, UpdateSourceTrigger=PropertyChanged}"
-                            PreviewTextInput="TimeTextBox_PreviewTextInput"
-                            LostFocus="TimeTextBox_LostFocus">
+                            PreviewTextInput="TimeTextBox_PreviewTextInput">
                         </TextBox>
                     </Grid>
+                    <Label Height="35" Grid.Row="3" Content="{Binding ElementName=EstimatedTimeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
             </Grid>
 
