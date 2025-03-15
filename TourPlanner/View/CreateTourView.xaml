@@ -24,13 +24,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Margin="0 0 40 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="10"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" FontSize="16">Name:</TextBlock>
-                    <TextBox Text="{Binding TourName}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="16">Name:</TextBlock>
+                        <TextBox x:Name="TourNameInput" Text="{Binding TourName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                    </Grid>
+                    <Label Grid.Row="1" Content="{Binding ElementName=TourNameInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Grid.ColumnDefinitions>
@@ -39,13 +46,13 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" FontSize="16">Transport Type:</TextBlock>
-                    <ComboBox Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
+                    <ComboBox SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
                 </Grid>
             </Grid>
             
             <StackPanel Orientation="Vertical" Margin="0 20 0 20">
                 <TextBlock FontSize="16">Description:</TextBlock>
-                <TextBox FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="50" MaxLength="500" Padding="2"></TextBox>
+                <TextBox Text="{Binding TourDescription, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="50" MaxLength="500" Padding="2"></TextBox>
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -64,7 +71,7 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">From:</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox Text="{Binding From, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0 0 40 0">
                         <Grid.ColumnDefinitions>
@@ -73,7 +80,7 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">To:</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox Text="{Binding To, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -87,8 +94,12 @@
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" FontSize="16">Distance:</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"></TextBox>
+                        <TextBlock Grid.Column="0" FontSize="16">Distance (km):</TextBlock>
+                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2" 
+                            Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
+                            PreviewTextInput="DistanceTextBox_PreviewTextInput"
+                            LostFocus="DistanceTextBox_LostFocus">
+                        </TextBox>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -96,8 +107,12 @@
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" FontSize="16">Estimated Time:</TextBlock>
-                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"></TextBox>
+                        <TextBlock Grid.Column="0" FontSize="16">Estimated Time (HH:mm):</TextBlock>
+                        <TextBox Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"
+                            Text="{Binding EstimatedTime, UpdateSourceTrigger=PropertyChanged}"
+                            PreviewTextInput="TimeTextBox_PreviewTextInput"
+                            LostFocus="TimeTextBox_LostFocus">
+                        </TextBox>
                     </Grid>
                 </Grid>
             </Grid>
@@ -110,7 +125,10 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Cancel" FontSize="16"></Button>
-            <Button Grid.Column="2" Content="Save" FontSize="16" Command="{Binding SaveTourCommand}"></Button>
+            <Button Grid.Column="2" Content="Save" FontSize="16" 
+                    Command="{Binding SaveTourCommand}">
+                
+            </Button>
         </Grid>
         
 

@@ -15,7 +15,7 @@ namespace TourPlanner.BusinessLayer.Model
         public string To { get; set; }
         public string? TransportType { get; set; }
         public double Distance { get; set; }
-        public double EstimatedTime { get; set; }
+        public string EstimatedTime { get; set; }
         public string? Image { get; set; }
     }
 }
