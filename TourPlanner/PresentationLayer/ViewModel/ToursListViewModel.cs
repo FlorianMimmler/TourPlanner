@@ -32,7 +32,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 if (_selectedTour != value)
                 {
                     _selectedTour = value;
-                    _selectedTourStore.SelectedTour = _selectedTour.Tour;
+                    _selectedTourStore.SelectedTour = _selectedTour?.Tour ?? null;
                 }
             }
         }
@@ -51,6 +51,12 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
             _tourService.TourAdded += TourService_TourAdded;
             _tourService.TourUpdated += TourService_TourUpdated;
+            _tourService.TourDeleted += _tourService_TourDeleted;
+        }
+
+        private void _tourService_TourDeleted(int id)
+        {
+            _tours.Remove(_tours.First(t => t.Tour.Id == id));
         }
 
         private void TourService_TourUpdated(Tour tour)

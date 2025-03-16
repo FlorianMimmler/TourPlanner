@@ -17,6 +17,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         public event Action<Tour> TourAdded;
         public event Action<Tour> TourUpdated;
+        public event Action<int> TourDeleted;
 
         public TourService()
         {
@@ -63,6 +64,7 @@ namespace TourPlanner.BusinessLayer.Services
             }
             */
             _database.DeleteTour(id);
+            TourDeleted?.Invoke(id);
         }
     }
 }

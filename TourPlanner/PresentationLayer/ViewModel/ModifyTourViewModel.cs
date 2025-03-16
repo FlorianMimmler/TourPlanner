@@ -14,6 +14,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
     class ModifyTourViewModel
     {
         public ICommand UpdateTourCommand { get; }
+        public ICommand DeleteTourCommand { get; }
         public ICommand CancelTourModificationCommand { get; }
 
         public event EventHandler CloseWindow;
@@ -42,14 +43,32 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 SelectedTransportType = _tour.TransportType
             };
             UpdateTourCommand = new RelayCommand(UpdateTour, CanExecuteUpdateTour);
+            DeleteTourCommand = new RelayCommand(DeleteTour);
+
             CancelTourModificationCommand = new RelayCommand(CancelTourModification);
 
             TourInputFormViewModel.CloseWindow += (s, e) => CloseWindow?.Invoke(this, EventArgs.Empty);
             
             _toursService.TourUpdated += TourService_TourUpdated;
+            _toursService.TourDeleted += TourService_TourDeleted;
+        }
+
+        private void TourService_TourDeleted(int id)
+        {
+            CloseTourModificationWindow();
+        }
+
+        private void DeleteTour()
+        {
+            _toursService.DeleteTour(_tour.Id);
         }
 
         private void TourService_TourUpdated(Tour tour)
+        {
+            CloseTourModificationWindow();
+        }
+
+        private void CloseTourModificationWindow()
         {
             CloseWindow?.Invoke(this, EventArgs.Empty);
         }
@@ -85,7 +104,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         private void CancelTourModification()
         {
-            CloseWindow?.Invoke(this, EventArgs.Empty);
+            CloseTourModificationWindow();
         }
     }
 }

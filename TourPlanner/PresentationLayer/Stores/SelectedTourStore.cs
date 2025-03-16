@@ -11,10 +11,10 @@ namespace TourPlanner.PresentationLayer.Stores
 {
     public class SelectedTourStore
     {
-        private Tour _selectedTour;
         private TourService _tourService;
 
-        public Tour SelectedTour 
+        private Tour? _selectedTour;
+        public Tour? SelectedTour 
         { 
             get
             {
@@ -33,12 +33,27 @@ namespace TourPlanner.PresentationLayer.Stores
         {
             this._tourService = tourService;
             _tourService.TourUpdated += TourService_TourUpdated;
+            _tourService.TourDeleted += TourService_TourDeleted;
+            _tourService.TourAdded += TourService_TourAdded;
 
+        }
+
+        private void TourService_TourAdded(Tour tour)
+        {
+            SelectedTour = tour;
+        }
+
+        private void TourService_TourDeleted(int id)
+        {
+            if(id == SelectedTour?.Id)
+            {
+                SelectedTour = null;
+            }
         }
 
         private void TourService_TourUpdated(Tour tour)
         {
-            if(tour.Id == SelectedTour.Id)
+            if(tour.Id == SelectedTour?.Id)
             {
                 SelectedTour = tour;
             }
