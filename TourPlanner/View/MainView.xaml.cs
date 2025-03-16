@@ -38,6 +38,9 @@ namespace TourPlanner.View
 
         }
 
-       
+        private void MaincontentView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

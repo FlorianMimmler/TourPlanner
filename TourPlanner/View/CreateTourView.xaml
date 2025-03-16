@@ -46,7 +46,7 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" FontSize="16">Transport Type:</TextBlock>
-                    <ComboBox SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
+                    <ComboBox SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
                 </Grid>
             </Grid>
             

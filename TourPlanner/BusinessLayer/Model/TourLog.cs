@@ -10,7 +10,9 @@ namespace TourPlanner.BusinessLayer.Model
     {
         public string Date { get; set; }
         public string Duration { get; set; }
-        public string Distance { get; set; }
+        public double Distance { get; set; }
         public int Id { get; set; }
+        public int logId { get; set; }
+      
     }
 }

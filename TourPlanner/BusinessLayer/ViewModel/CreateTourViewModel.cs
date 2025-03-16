@@ -18,6 +18,8 @@ namespace TourPlanner.BusinessLayer.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private static readonly TourService _toursService = new TourService();
+        private readonly TourLogService _tourlogService = new(); // to change logs after adding tour
+
 
         /** Binding Variables For View **/
 
@@ -158,6 +160,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
             var success = _toursService.AddTour(tour);
             if (success)
             {
+                _tourlogService.AddTourLogs(tour);
                 CloseWindow?.Invoke(this, EventArgs.Empty);
             }
         }

@@ -14,6 +14,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
     {
         private ObservableCollection<Tour> _tours;
         private readonly TourService _tourService;
+        private readonly TourLogService _tourlogService; // to change logs after adding tour
 
         public ObservableCollection<Tour> Tours
         {
@@ -36,7 +37,9 @@ namespace TourPlanner.BusinessLayer.ViewModel
         public void AddTour(Tour tour)
         {
             _tourService.AddTour(tour);
+            _tourlogService.AddTourLogs(tour); // add to list of logs 
             OnPropertyChanged(nameof(Tours));
+
         }
 
         public void UpdateTour(Tour tour)

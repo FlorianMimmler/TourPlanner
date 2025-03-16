@@ -14,6 +14,6 @@
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" FontSize="18">Tours</TextBlock>
-        <Button Grid.Column="1" Padding="4 -2 4 -2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}"/>
+        <Button Grid.Column="1" Padding="4 -2  4 -2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}"/>
     </Grid>
 </UserControl>

@@ -15,7 +15,7 @@ namespace TourPlanner.DAL
         private static readonly object _lock = new();
 
         private ObservableCollection<Tour> _tours;
-
+        private ObservableCollection<TourLog> _tourlogs;
         public static SingletonDatabase Instance
         {
             get
@@ -36,7 +36,14 @@ namespace TourPlanner.DAL
             _tours = new ObservableCollection<Tour>()
             {
                 new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = null, Image = ""},
-                new() {Id = 1, Name = "Dorfrunde", Description = "A nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = null, Image = ""}
+                new() {Id = 2, Name = "Dorfrunde", Description = "A nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = null, Image = ""}
+            };
+
+            _tourlogs = new ObservableCollection<TourLog>
+            {
+                new() {Distance = 5, Duration = "01:10", Date ="12.03.2025", Id=1},
+                new() {Distance = 2, Duration = "00:30", Date ="13.03.2025", Id=2}
+
             };
         }
 
@@ -77,6 +84,38 @@ namespace TourPlanner.DAL
             }
         }
 
+        public ObservableCollection<TourLog> GetTourLogs()
+        {
+            return _tourlogs;
+        }
+
+
+        public bool AddTourLogs(Tour tour) // to create a new log from existing tour
+        {
+            //tourlog.Id = _tourlogs.Count + 1;
+            //_tourlog.Add(tourlog);
+
+            TourLog? newlog = new TourLog();
+
+            newlog.Id = tour.Id;
+            newlog.Duration = tour.EstimatedTime;
+            newlog.Date = "newdate";
+            newlog.Distance = tour.Distance;
+            
+
+            _tourlogs.Add(newlog);
+            return true;
+
+        }
+
+        public void DeleteTourLog(int Id) // For deleting specific tourlog 
+        {
+            var tourToRemove = _tourlogs.FirstOrDefault(t => t.Id == Id);
+            if (tourToRemove != null)
+            {
+                _tourlogs.Remove(tourToRemove);
+            }
+        }
 
     }
 }

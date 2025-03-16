@@ -10,15 +10,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <GroupBox Header="Tour Logs" Margin="5" Width="auto">
-            <DataGrid ItemsSource="{Binding TourLogs}" AutoGenerateColumns="False"
-                                CanUserAddRows="False" ColumnWidth="*" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition  Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+            
+            
+    <GroupBox Header="Tour Logs" Margin="5" Width="auto" Grid.Column="0">
+            <DataGrid ItemsSource="{Binding TourLogs}" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
                     <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
                     <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" Width="*"/>
+                  
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-    
+
+        <Button Grid.Column="1"  Padding="4 -2 4 -2" Content="add"  />
+
+    </Grid>
 </UserControl>
