@@ -19,7 +19,7 @@
             <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
 
             <!-- Main Layout -->
-            <Grid DockPanel.Dock="Top">
+            <Grid DockPanel.Dock="Top" Margin="5, 10">
                 <Grid.ColumnDefinitions>
                     <!-- Sidebar -->
                     <ColumnDefinition Width="200"/>

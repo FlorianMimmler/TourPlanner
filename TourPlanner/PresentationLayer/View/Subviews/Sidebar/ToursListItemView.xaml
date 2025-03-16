@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Sidebar"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid VerticalAlignment="Center" Margin="0, 5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -14,12 +14,56 @@
         </Grid.ColumnDefinitions>
 
         <!-- ID Column -->
-        <TextBlock Grid.Column="0" Text="{Binding Id}" VerticalAlignment="Center" Margin="5"/>
+        <TextBlock Grid.Column="0" Text="{Binding Id}" FontSize="15" VerticalAlignment="Center" Margin="5, 0"/>
 
         <!-- Name Column -->
-        <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
+        <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="15" VerticalAlignment="Center" Margin="5, 0"/>
 
-        <Button Grid.Column="2" Content="Edit" Command="{Binding ModifyCommand}" Margin="5"/>
+        <Button Grid.Column="2" Content="Edit" FontSize="14" Command="{Binding ModifyCommand}" Padding="10, 2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    
+                    <Setter Property="Background" Value="White"/>
+                    <!-- Flat blue color -->
+                    <Setter Property="Foreground" Value="Black"/>
+                    <!-- White text -->
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border 
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="4"
+                                    BorderBrush="Black"
+                                    BorderThickness="1"
+                                    Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover Effect -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#5faee3"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <!-- Slightly darker blue -->
+                                    </Trigger>
+                                    <!-- Pressed Effect -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#1f618d"/>
+                                        <!-- Even darker blue -->
+                                    </Trigger>
+                                    <!-- Disabled Effect -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#bdc3c7"/>
+                                        <!-- Gray when disabled -->
+                                        <Setter Property="Foreground" Value="#7f8c8d"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </UserControl>

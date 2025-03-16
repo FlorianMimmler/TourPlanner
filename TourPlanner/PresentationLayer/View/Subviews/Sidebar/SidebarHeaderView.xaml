@@ -5,13 +5,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Sidebar"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0 2 0 2">
+             d:DesignHeight="50" d:DesignWidth="800">
+    <Grid Margin="0 2 0 2" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" FontSize="18">Tours</TextBlock>
-        <Button Grid.Column="1" Padding="4 -2 4 -2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}"/>
+        <Button Grid.Column="1" Padding="4,2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}">
+
+            <Button.Style>
+                <Style TargetType="Button">
+
+                    <Setter Property="Background" Value="White"/>
+                    <!-- Flat blue color -->
+                    <Setter Property="Foreground" Value="Black"/>
+                    <!-- White text -->
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border 
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover Effect -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#5faee3"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <!-- Slightly darker blue -->
+                                    </Trigger>
+                                    <!-- Pressed Effect -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#1f618d"/>
+                                        <!-- Even darker blue -->
+                                    </Trigger>
+                                    <!-- Disabled Effect -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#bdc3c7"/>
+                                        <!-- Gray when disabled -->
+                                        <Setter Property="Foreground" Value="#7f8c8d"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+
+        </Button>
     </Grid>
 </UserControl>
