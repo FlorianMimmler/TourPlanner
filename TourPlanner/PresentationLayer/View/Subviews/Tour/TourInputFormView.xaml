@@ -21,7 +21,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="180"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -67,7 +67,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Margin="0 0 40 0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
                     <Label Height="35" Grid.Row="1" Content="{Binding ElementName=FromInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
                     <Grid Grid.Row="2" Margin="0 0 40 0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="180"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
@@ -109,7 +109,7 @@
                     <Label Height="35" Grid.Row="1" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="180"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
