@@ -13,7 +13,6 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" FontSize="18">Tours</TextBlock>
         <Button Grid.Column="1" Padding="4,2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}">
-
             <Button.Style>
                 <Style TargetType="Button">
 
@@ -28,7 +27,7 @@
                                 <Border 
                         Background="{TemplateBinding Background}"
                         CornerRadius="4"
-                        BorderBrush="Black"
+                        BorderBrush="LightGray"
                         BorderThickness="1"
                         Padding="{TemplateBinding Padding}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
