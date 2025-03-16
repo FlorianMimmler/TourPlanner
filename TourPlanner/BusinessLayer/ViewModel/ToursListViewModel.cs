@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TourPlanner.BusinessLayer.Model;
 using TourPlanner.BusinessLayer.Services;
 
@@ -12,9 +13,11 @@ namespace TourPlanner.BusinessLayer.ViewModel
 {
     public class ToursListViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Tour> _tours;
         private readonly TourService _tourService;
+        public event EventHandler<Tour> TourSelected;
 
+
+        private ObservableCollection<Tour> _tours;
         public ObservableCollection<Tour> Tours
         {
             get { return _tours; }
@@ -22,6 +25,21 @@ namespace TourPlanner.BusinessLayer.ViewModel
             {
                 _tours = value;
                 OnPropertyChanged(nameof(Tours));
+            }
+        }
+
+        private Tour _selectedTour;
+        public Tour SelectedTour
+        {
+            get => _selectedTour;
+            set
+            {
+                if (_selectedTour != value)
+                {
+                    _selectedTour = value;
+                    MessageBox.Show("Tour selected in tourlist");
+                    TourSelected?.Invoke(this, _selectedTour); // Fire event
+                }
             }
         }
 

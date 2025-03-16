@@ -11,7 +11,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <ListView ItemsSource="{Binding Tours}">
+    <ListView 
+        ItemsSource="{Binding Tours}"
+        SelectedItem="{Binding SelectedTour, Mode=TwoWay}"
+        SelectionMode="Single">
         <ListView.Resources>
             <!-- Hide the column headers -->
             <Style TargetType="GridViewColumnHeader">
