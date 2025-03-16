@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TourPlanner.BusinessLayer.Services;
 using TourPlanner.PresentationLayer.View.Subviews.Sidebar;
+using TourPlanner.PresentationLayer.ViewModel;
 
 namespace TourPlanner.PresentationLayer.View
 {
@@ -27,7 +28,14 @@ namespace TourPlanner.PresentationLayer.View
 
             sidebarView.OpenCreateTourRequested += (s, e) =>
             {
-                CreateTourView createTourView = new CreateTourView();
+                CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+                
+                CreateTourView createTourView = new CreateTourView()
+                {
+                    DataContext = createTourViewModel
+                };
+
+                createTourViewModel.CloseWindow += (s, e) => createTourView.Close();
 
                 createTourView.ShowDialog();
             };
