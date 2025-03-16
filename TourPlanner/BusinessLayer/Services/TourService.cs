@@ -15,22 +15,25 @@ namespace TourPlanner.BusinessLayer.Services
 
         private SingletonDatabase _database = SingletonDatabase.Instance;
 
+        public event Action<Tour> TourAdded;
+        public event Action<Tour> TourUpdated;
+
         public TourService()
         {
             
         }
 
-        public ObservableCollection<Tour> GetTours()
+        public IEnumerable<Tour> GetTours()
         {
             return _database.GetTours();
         }
 
-        public bool AddTour(Tour tour)
+        public void AddTour(Tour tour)
         {
             /*tour.Id = _tours.Count + 1;
             _tours.Add(tour);
             */
-            return _database.AddTour(tour);
+            TourAdded?.Invoke(_database.AddTour(tour));
         }
 
         public void UpdateTour(Tour tour)
@@ -47,7 +50,8 @@ namespace TourPlanner.BusinessLayer.Services
                 existingTour.EstimatedTime = tour.EstimatedTime;
                 existingTour.Image = tour.Image;
             }*/
-            _database.UpdateTour(tour);
+            if(_database.UpdateTour(tour)) TourUpdated?.Invoke(tour);
+
         }
 
         public void DeleteTour(int id)

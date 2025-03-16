@@ -1,4 +1,5 @@
 ﻿using TourPlanner.BusinessLayer.Model;
+using TourPlanner.BusinessLayer.Services;
 using TourPlanner.PresentationLayer.Stores;
 
 namespace TourPlanner.PresentationLayer.ViewModel

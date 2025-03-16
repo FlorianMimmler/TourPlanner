@@ -10,6 +10,7 @@ using System.Diagnostics.Metrics;
 using System.Windows;
 using TourPlanner.PresentationLayer.View.Subviews.Maincontent;
 using TourPlanner.PresentationLayer.Stores;
+using TourPlanner.BusinessLayer.Services;
 
 namespace TourPlanner.PresentationLayer.ViewModel
 {
@@ -31,6 +32,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
         {
             this._selectedTourStore = selectedTourStore;
             _selectedTourStore.SelectedTourChanged += _selectedTourStore_SelectedTourChanged;
+
         }
 
         protected override void Dispose()

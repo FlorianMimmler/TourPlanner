@@ -10,6 +10,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <!-- ID Column -->
@@ -17,5 +19,7 @@
 
         <!-- Name Column -->
         <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
+
+        <Button Grid.Column="3" Content="Edit" Command="{Binding ModifyCommand}" Margin="5"/>
     </Grid>
 </UserControl>

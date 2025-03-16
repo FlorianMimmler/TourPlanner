@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.BusinessLayer.Model;
+using TourPlanner.BusinessLayer.Services;
 
 namespace TourPlanner.PresentationLayer.Stores
 {
     public class SelectedTourStore
     {
         private Tour _selectedTour;
+        private TourService _tourService;
+
         public Tour SelectedTour 
         { 
             get
@@ -26,5 +29,19 @@ namespace TourPlanner.PresentationLayer.Stores
 
         public event Action SelectedTourChanged;
 
+        public SelectedTourStore(TourService tourService)
+        {
+            this._tourService = tourService;
+            _tourService.TourUpdated += TourService_TourUpdated;
+
+        }
+
+        private void TourService_TourUpdated(Tour tour)
+        {
+            if(tour.Id == SelectedTour.Id)
+            {
+                SelectedTour = tour;
+            }
+        }
     }
 }

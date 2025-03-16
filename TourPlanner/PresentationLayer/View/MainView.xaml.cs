@@ -26,20 +26,6 @@ namespace TourPlanner.PresentationLayer.View
         {
             InitializeComponent();
 
-            sidebarView.OpenCreateTourRequested += (s, e) =>
-            {
-                CreateTourViewModel createTourViewModel = new CreateTourViewModel();
-                
-                CreateTourView createTourView = new CreateTourView()
-                {
-                    DataContext = createTourViewModel
-                };
-
-                createTourViewModel.CloseWindow += (s, e) => createTourView.Close();
-
-                createTourView.ShowDialog();
-            };
-
         }
 
        

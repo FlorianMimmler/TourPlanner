@@ -14,7 +14,7 @@ namespace TourPlanner.DAL
         private static SingletonDatabase? _instance;
         private static readonly object _lock = new();
 
-        private ObservableCollection<Tour> _tours;
+        private IEnumerable<Tour> _tours;
 
         public static SingletonDatabase Instance
         {
@@ -33,26 +33,26 @@ namespace TourPlanner.DAL
 
         private SingletonDatabase() 
         {
-            _tours = new ObservableCollection<Tour>()
+            _tours = new List<Tour>()
             {
                 new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5.5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = TransportType.Hiking, Image = ""},
                 new() {Id = 2, Name = "Dorfrunde", Description = "A really nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = TransportType.Bike, Image = ""}
             };
         }
 
-        public ObservableCollection<Tour> GetTours()
+        public IEnumerable<Tour> GetTours()
         {
             return _tours;
         }
 
-        public bool AddTour(Tour tour)
+        public Tour AddTour(Tour tour)
         {
-            tour.Id = _tours.Count + 1;
-            _tours.Add(tour);
-            return true;
+            tour.Id = _tours.Count() + 1;
+            _tours.Append(tour);
+            return tour;
         }
 
-        public void UpdateTour(Tour tour)
+        public bool UpdateTour(Tour tour)
         {
             var existingTour = _tours.FirstOrDefault(t => t.Id == tour.Id);
             if (existingTour != null)
@@ -66,15 +66,12 @@ namespace TourPlanner.DAL
                 existingTour.EstimatedTime = tour.EstimatedTime;
                 existingTour.Image = tour.Image;
             }
+            return true;
         }
 
         public void DeleteTour(int id)
         {
-            var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
-            if (tourToRemove != null)
-            {
-                _tours.Remove(tourToRemove);
-            }
+            _tours = _tours.Where(t => t.Id != id);
         }
 
 

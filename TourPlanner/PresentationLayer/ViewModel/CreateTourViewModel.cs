@@ -17,21 +17,34 @@ namespace TourPlanner.PresentationLayer.ViewModel
         public ICommand CancelTourCreationCommand { get; }
 
         public event EventHandler CloseWindow;
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private static readonly TourService _toursService = new TourService();
+        private readonly TourService _toursService;
 
         public TourInputFormViewModel TourInputFormViewModel { get; }
         
 
         /** Constructor with Commands **/
-        public CreateTourViewModel()
+        public CreateTourViewModel(TourService tourService)
         {
+            _toursService = tourService;
+
             TourInputFormViewModel = new TourInputFormViewModel();
             SaveTourCommand = new RelayCommand(SaveTour, CanExecuteSaveTour);
             CancelTourCreationCommand = new RelayCommand(CancelTourCreation);
 
             TourInputFormViewModel.CloseWindow += (s, e) => CloseWindow?.Invoke(this, EventArgs.Empty);
+            _toursService.TourAdded += TourService_TourAdded;
+        }
+
+        protected override void Dispose()
+        {
+            _toursService.TourAdded -= TourService_TourAdded;
+        }
+
+        public void TourService_TourAdded(Tour tour)
+        {
+
+            CloseWindow?.Invoke(this, EventArgs.Empty);
         }
 
         public bool CanExecuteSaveTour()
@@ -63,20 +76,13 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 TransportType = TourInputFormViewModel.SelectedTransportType
             };
 
-            var success = _toursService.AddTour(tour);
-            if (success)
-            {
-                CloseWindow?.Invoke(this, EventArgs.Empty);
-            }
+            _toursService.AddTour(tour);
         }
-
-
 
         private void CancelTourCreation()
         {
             CloseWindow?.Invoke(this, EventArgs.Empty);
         }
-
         
     }
 }

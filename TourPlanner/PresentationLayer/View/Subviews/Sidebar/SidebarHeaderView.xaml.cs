@@ -9,16 +9,9 @@ namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
     /// </summary>
     public partial class SidebarHeaderView : UserControl
     {
-        public SidebarHeaderViewModel ViewModel { get; }
-
-        public event EventHandler OpenCreateTourRequested;
-
         public SidebarHeaderView()
         {
             InitializeComponent();
-            ViewModel = new SidebarHeaderViewModel();
-            DataContext = ViewModel;
-            ViewModel.OpenCreateTourRequested += (s, e) => OpenCreateTourRequested?.Invoke(this, EventArgs.Empty);
         }
     }
 

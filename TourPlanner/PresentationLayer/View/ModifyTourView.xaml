@@ -4,9 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View"
+        xmlns:views="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Tour"
         mc:Ignorable="d"
         Title="ModifyTourView" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="20" Text="Create a new Tour"></TextBlock>
+
+        <views:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></views:TourInputFormView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Cancel" FontSize="16"
+                Command="{Binding CancelTourModificationCommand}"></Button>
+            <Button Grid.Column="2" Content="Delete" FontSize="16" 
+                Command="{Binding DeleteTourCommand}"></Button>
+            <Button Grid.Column="3" Content="Save" FontSize="16" Margin="10 0 0 0" 
+                Command="{Binding UpdateTourCommand}">
+
+            </Button>
+        </Grid>
+
+
     </Grid>
 </Window>

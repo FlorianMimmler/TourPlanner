@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
 
-        <sidebar:SidebarHeaderView x:Name="sidebarHeaderView"></sidebar:SidebarHeaderView>
+        <sidebar:SidebarHeaderView x:Name="sidebarHeaderView" DataContext="{Binding SidebarHeaderViewModel}"></sidebar:SidebarHeaderView>
         
         <TextBox Name="myTextBox" TextChanged="OnTextBoxTextChanged" Width="auto" FontSize="16" Background="{StaticResource search_icon}" />
 

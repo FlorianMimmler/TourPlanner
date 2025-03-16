@@ -12,7 +12,7 @@ using TourPlanner.PresentationLayer.Stores;
 
 namespace TourPlanner.PresentationLayer.ViewModel
 {
-    public class ToursListViewModel : INotifyPropertyChanged
+    public class ToursListViewModel : ViewModelBase
     {
         private readonly TourService _tourService;
         private readonly SelectedTourStore _selectedTourStore;
@@ -20,19 +20,11 @@ namespace TourPlanner.PresentationLayer.ViewModel
         public event EventHandler<Tour> TourSelected;
 
 
-        private ObservableCollection<Tour> _tours;
-        public ObservableCollection<Tour> Tours
-        {
-            get { return _tours; }
-            set
-            {
-                _tours = value;
-                OnPropertyChanged(nameof(Tours));
-            }
-        }
+        private ObservableCollection<TourListItemViewModel> _tours;
+        public IEnumerable<TourListItemViewModel> Tours => _tours;
 
-        private Tour _selectedTour;
-        public Tour SelectedTour
+        private TourListItemViewModel _selectedTour;
+        public TourListItemViewModel SelectedTour
         {
             get => _selectedTour;
             set
@@ -40,41 +32,40 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 if (_selectedTour != value)
                 {
                     _selectedTour = value;
-                    _selectedTourStore.SelectedTour = _selectedTour;
+                    _selectedTourStore.SelectedTour = _selectedTour.Tour;
                 }
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, TourService tourService)
         {
-
-            _tourService = new TourService();
-            Tours = _tourService.GetTours();
+            _tourService = tourService;
             _selectedTourStore = selectedTourStore;
+            _tours = new ObservableCollection<TourListItemViewModel>();
+
+            foreach (var tour in _tourService.GetTours())
+            {
+                var tourListItemViewModel = new TourListItemViewModel(tour, tourService);
+                _tours.Add(tourListItemViewModel);
+            }
+
+            _tourService.TourAdded += TourService_TourAdded;
+            _tourService.TourUpdated += TourService_TourUpdated;
         }
 
-        public void AddTour(Tour tour)
+        private void TourService_TourUpdated(Tour tour)
         {
-            _tourService.AddTour(tour);
-            OnPropertyChanged(nameof(Tours));
+            _tours.First(t => t.Tour.Id == tour.Id)?.UpdateTour(tour);
         }
 
-        public void UpdateTour(Tour tour)
+        protected override void Dispose()
         {
-            _tourService.UpdateTour(tour);
-            OnPropertyChanged(nameof(Tours));
+            _tourService.TourAdded -= TourService_TourAdded;
         }
 
-        public void DeleteTour(int id)
+        private void TourService_TourAdded(Tour tour)
         {
-            _tourService.DeleteTour(id);
-            OnPropertyChanged(nameof(Tours));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _tours.Add(new TourListItemViewModel(tour, _tourService));
         }
     }
 }

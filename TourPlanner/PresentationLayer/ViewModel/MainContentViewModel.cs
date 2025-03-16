@@ -1,4 +1,5 @@
-﻿using TourPlanner.PresentationLayer.Stores;
+﻿using TourPlanner.BusinessLayer.Services;
+using TourPlanner.PresentationLayer.Stores;
 using TourPlanner.PresentationLayer.View.Subviews.Maincontent;
 
 namespace TourPlanner.PresentationLayer.ViewModel

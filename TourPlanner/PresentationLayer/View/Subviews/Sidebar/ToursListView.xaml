@@ -12,23 +12,20 @@
 
     <ListView 
         ItemsSource="{Binding Tours}"
-        SelectedItem="{Binding SelectedTour, Mode=TwoWay}"
+        SelectedItem="{Binding SelectedTour}"
         SelectionMode="Single">
         <ListView.Resources>
             <!-- Hide the column headers -->
             <Style TargetType="GridViewColumnHeader">
                 <Setter Property="Visibility" Value="Collapsed"/>
             </Style>
-
-            <!-- Define the DataTemplate for each item with a Key -->
-            <DataTemplate x:Key="ToursListItemTemplate" DataType="{x:Type model:Tour}">
-                <local:ToursListItemView />
-            </DataTemplate>
         </ListView.Resources>
 
         <!-- Use the DataTemplate for each item -->
         <ListView.ItemTemplate>
-            <StaticResource ResourceKey="ToursListItemTemplate"/>
+            <DataTemplate>
+                <local:ToursListItemView></local:ToursListItemView>
+            </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
 </UserControl>
