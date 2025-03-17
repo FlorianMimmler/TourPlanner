@@ -18,12 +18,13 @@ namespace TourPlanner.PresentationLayer.ViewModel
     public class TourlogsViewModel : ViewModelBase
     {
 
-        private ObservableCollection<TourLog> _tourLogs;
+        private ObservableCollection<TourLogItemViewModel> _tourLogs;
 
         private TourService _tourService;
         private TourLogService _tourlogsService;
         private SelectedTourStore _selectedTourStore;
         public ICommand OpenCreateTourLogCommand { get; }
+
 
         public event EventHandler OpenCreateTourLogRequested;
 
@@ -34,22 +35,46 @@ namespace TourPlanner.PresentationLayer.ViewModel
             _tourService = tourService;
             _tourlogsService = tourlogsService;
             _selectedTourStore = selectedTourStore;
-            TourLogs = new ObservableCollection<TourLog>();
+            TourLogs = new ObservableCollection<TourLogItemViewModel>();
 
             _selectedTourStore.SelectedTourChanged += SelectedTourStore_SelectedTourChanged;
+
+            _tourlogsService.TourLogUpdated += TourlogsService_TourLogUpdated;
+
+        }
+
+        private void TourlogsService_TourLogUpdated(TourLog tourLog)
+        {
+            TourLogItemViewModel tourLogItemViewModel = TourLogs.First(item=>item.Id==tourLog.Id);
+            if (tourLogItemViewModel != null)
+            {
+                tourLogItemViewModel.Update(tourLog);
+            }
+
+        }
+
+        private void OpenModifyTourLogView()
+        {
+            //ModifyTourLogViewModel modifyTourLogViewModel = new();
+
         }
 
         private void SelectedTourStore_SelectedTourChanged()
         {
             if(_selectedTourStore.SelectedTour == null)
             {
-                TourLogs = new ObservableCollection<TourLog>();
+                TourLogs = new ObservableCollection<TourLogItemViewModel>();
                 return;
             }
-            TourLogs= new ObservableCollection<TourLog>(_tourlogsService.GetTourlogsByTour(_selectedTourStore.SelectedTour.Id));
+            IEnumerable<TourLog> tourLogs = _tourlogsService.GetTourlogsByTour(_selectedTourStore.SelectedTour.Id);
+            TourLogs = new ObservableCollection<TourLogItemViewModel>();
+            foreach(TourLog item in tourLogs)
+            {
+                TourLogs.Add(new TourLogItemViewModel(item, _tourlogsService));
+            }
         }  
 
-        public ObservableCollection<TourLog> TourLogs
+        public ObservableCollection<TourLogItemViewModel> TourLogs
         {
             get { return _tourLogs; }
             set

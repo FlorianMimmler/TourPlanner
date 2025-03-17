@@ -24,7 +24,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
         private readonly Tour _tour;
 
         public TourInputFormViewModel TourInputFormViewModel { get; }
-
+         
 
         /** Constructor with Commands **/
         public ModifyTourViewModel(Tour tour, TourService tourService)

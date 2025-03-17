@@ -26,7 +26,18 @@
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
                     <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
                     <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" Width="*"/>
-                  
+
+
+                    <DataGridTemplateColumn Header="Edit" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Command="{Binding OpenModifyTourLogCommand}" CommandParameter="{Binding}" />
+                                
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+               
+
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

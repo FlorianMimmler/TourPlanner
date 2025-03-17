@@ -15,6 +15,10 @@ namespace TourPlanner.BusinessLayer.Services
 
         private SingletonDatabase _database = SingletonDatabase.Instance;
 
+        public event Action<TourLog> TourLogAdded;
+        public event Action<TourLog> TourLogUpdated;
+        public event Action<int> TourLogDeleted;
+
         public TourLogService()
         {
 
@@ -70,6 +74,7 @@ namespace TourPlanner.BusinessLayer.Services
             }
             */
             _database.UpdateTourLogs(tourlog);
+            TourLogUpdated?.Invoke(tourlog);  
         }
     }
 }
