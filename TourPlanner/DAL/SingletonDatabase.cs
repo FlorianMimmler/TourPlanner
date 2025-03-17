@@ -117,5 +117,18 @@ namespace TourPlanner.DAL
             }
         }
 
+
+        public void UpdateTourLogs(TourLog tourlog)
+        {
+            var existingTourlog = _tourlogs.FirstOrDefault(t => t.Id == tourlog.Id);
+            if (existingTourlog != null)
+            {
+                existingTourlog.Duration = tourlog.Duration;
+                existingTourlog.Date = tourlog.Date;
+                existingTourlog.Distance = tourlog.Distance;
+                existingTourlog.Id = tourlog.Id;
+            }
+        }
+
     }
 }

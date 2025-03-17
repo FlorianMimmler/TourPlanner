@@ -54,5 +54,17 @@ namespace TourPlanner.BusinessLayer.Services
             */
             _database.DeleteTourLog(id);
         }
+
+
+        public void UpdateTourLog(TourLog tourlog)
+        {
+            /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
+            if (tourToRemove != null)
+            {
+                _tours.Remove(tourToRemove);
+            }
+            */
+            _database.UpdateTourLogs(tourlog);
+        }
     }
 }
