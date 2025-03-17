@@ -21,6 +21,39 @@
             </Style>
             <Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="0 4 0 4"></Setter>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="LightGray" BlurRadius="4" ShadowDepth="0" Opacity="0.3"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <Border 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1"
+                                Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <!-- Hover Effect -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#5faee3"/>
+                                    <!-- Slightly darker blue -->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                
+            </Style>
+            <Style TargetType="ListView">
+                <Setter Property="BorderThickness" Value="0"></Setter>
             </Style>
         </ListView.Resources>
 

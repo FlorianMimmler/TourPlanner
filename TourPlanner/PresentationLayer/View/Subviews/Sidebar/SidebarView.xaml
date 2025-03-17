@@ -11,10 +11,38 @@
     <StackPanel>
 
         <sidebar:SidebarHeaderView x:Name="sidebarHeaderView" DataContext="{Binding SidebarHeaderViewModel}"></sidebar:SidebarHeaderView>
-        
-        <TextBox Name="myTextBox" TextChanged="OnTextBoxTextChanged" Width="auto" FontSize="16" Background="{StaticResource search_icon}" />
 
-        <sidebar:ToursListView DataContext="{Binding ToursListViewModel}"></sidebar:ToursListView>
+        <TextBox Name="myTextBox" Margin="0 5 0 0" Padding="2, 1" TextChanged="OnTextBoxTextChanged" Width="auto" FontSize="16" Background="{StaticResource search_icon}">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Cursor" Value="IBeam"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                BorderBrush="LightGray"
+                                BorderThickness="1"
+                                Padding="{TemplateBinding Padding}">
+                                    <!-- ScrollViewer ensures text input is rendered properly -->
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Change BorderBrush to Blue when focused -->
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="#5faee3"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <sidebar:ToursListView Margin="0 5 0 0" DataContext="{Binding ToursListViewModel}"></sidebar:ToursListView>
         
     </StackPanel>
 </UserControl>
