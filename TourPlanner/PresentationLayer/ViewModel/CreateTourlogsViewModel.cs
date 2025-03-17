@@ -28,7 +28,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
 
        public Tour SelectedTour { get; set; } 
 
-        public ObservableCollection<Tour> Tours
+        public IEnumerable<Tour> Tours
         {
             get
             {
