@@ -24,7 +24,6 @@ namespace TourPlanner.PresentationLayer.View.Subviews.Maincontent
         public TourlogsView()
         {
             InitializeComponent();
-            DataContext = new TourlogsViewModel();
         }
     }
 }

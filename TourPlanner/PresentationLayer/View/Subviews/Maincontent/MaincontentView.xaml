@@ -21,10 +21,8 @@
         <maincontent:TabsView DataContext="{Binding TabsViewModel}" Grid.Row="0"></maincontent:TabsView>
 
         <!-- Tour Logs -->
-        <maincontent:TourlogsView Grid.Row="1">
-            
-        </maincontent:TourlogsView>
-        
+        <maincontent:TourlogsView Grid.Row="1" DataContext="{Binding TourlogsViewModel}" />
+
     </Grid>
     
     

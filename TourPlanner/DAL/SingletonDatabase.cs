@@ -43,8 +43,8 @@ namespace TourPlanner.DAL
 
             _tourlogs = new ObservableCollection<TourLog>
             {
-                new() {Distance = 5, Duration = "01:10", Date ="12.03.2025", Id=1},
-                new() {Distance = 2, Duration = "00:30", Date ="13.03.2025", Id=2}
+                new() {Distance = 5, Duration = "01:10", Date ="12.03.2025", Id=1, TourId=1},
+                new() {Distance = 2, Duration = "00:30", Date ="13.03.2025", Id=2, TourId=2}
 
             };
         }
@@ -88,22 +88,19 @@ namespace TourPlanner.DAL
             return _tourlogs;
         }
 
+        public IEnumerable<TourLog> GetTourLogsByTour(int tourId)
+        {
+            return _tourlogs.Where(tourlog => tourlog.TourId == tourId);
+        }
 
-        public bool AddTourLogs(Tour tour) // to create a new log from existing tour
+
+        public TourLog AddTourLog(TourLog log) // to create a new log from existing tour
         {
             //tourlog.Id = _tourlogs.Count + 1;
             //_tourlog.Add(tourlog);
 
-            TourLog? newlog = new TourLog();
-
-            newlog.Id = tour.Id;
-            newlog.Duration = tour.EstimatedTime;
-            newlog.Date = "newdate";
-            newlog.Distance = tour.Distance;
-            
-
-            _tourlogs.Add(newlog);
-            return true;
+            _tourlogs.Add(log);
+            return log;
 
         }
 

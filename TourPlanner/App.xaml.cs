@@ -17,18 +17,20 @@ public partial class App : Application
 
     private readonly SelectedTourStore _selectedTourStore;
     private readonly TourService _tourService;
+    private TourLogService _tourLogService;
 
     public App()
     {
         _tourService = new TourService();
         _selectedTourStore = new SelectedTourStore(_tourService);
+        _tourLogService = new TourLogService();
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         MainWindow = new MainView()
         {
-            DataContext = new MainViewModel(_selectedTourStore, _tourService)
+            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService)
         };
         MainWindow.Show();
 

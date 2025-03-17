@@ -10,7 +10,7 @@ using TourPlanner.DAL;
 
 namespace TourPlanner.BusinessLayer.Services
 {
-    class TourLogService
+    public class TourLogService
     {
 
         private SingletonDatabase _database = SingletonDatabase.Instance;
@@ -25,12 +25,17 @@ namespace TourPlanner.BusinessLayer.Services
             return _database.GetTourLogs();
         }
 
-        public bool AddTourLogs(Tour tour)
+        public IEnumerable<TourLog> GetTourlogsByTour(int tourId)
+        {
+            return _database.GetTourLogsByTour(tourId);
+        }
+
+        public void AddTourLog(TourLog log)
         {
             /*tour.Id = _tours.Count + 1;
             _tours.Add(tour);
             */
-            return _database.AddTourLogs(tour);
+            _database.AddTourLog(log);
         }
 
         public void DeleteTour(int tourlogid)
