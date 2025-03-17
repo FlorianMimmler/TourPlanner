@@ -13,12 +13,12 @@ namespace TourPlanner.BusinessLayer.Model
 
     }
 
-    public enum TransportTypes
+    public enum TransportType
     {
-        Car,
-        Bicycle,
+        Bike,
         Hiking,
-
-
+        Running,
+        Vacation,
+        Unknown
     }
 }
