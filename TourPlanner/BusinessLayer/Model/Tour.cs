@@ -17,5 +17,10 @@ namespace TourPlanner.BusinessLayer.Model
         public double Distance { get; set; }
         public string EstimatedTime { get; set; }
         public string? Image { get; set; }
+
+        public override string ToString()
+        {
+            return Name;  // Display the Name property
+        }
     }
 }

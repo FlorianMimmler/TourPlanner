@@ -5,92 +5,96 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.View"
         mc:Ignorable="d"
-        SizeToContent="Height"
-        Title="CreateTourLogView" Height="450" Width="800">
+        Title="CreateTourLogView" Height="350" Width="450">
 
+    <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!-- Titel -->
-        <TextBlock Grid.Row="0" FontSize="22" FontWeight="Bold" Text="Create Tour Log" 
+            <!-- Titel -->
+            <TextBlock Grid.Row="0" FontSize="20" Text="Create Tour Log" 
                Margin="0 0 0 15"/>
 
-        <!-- Auswahl der Tour -->
-        <Grid Grid.Row="1" Margin="0 5 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- Auswahl der Tour -->
+            <Grid Grid.Row="1" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Select Tour:" Margin="0 0 10 0"/>
-            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Tours}" DisplayMemberPath="Name"
+                <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Tours}"
                   FontSize="14" Padding="5"/>
-        </Grid>
+            </Grid>
 
-        <!-- Datum -->
-        <Grid Grid.Row="2" Margin="0 5 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- Datum -->
+            <Grid Grid.Row="2" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Date:" Margin="0 0 10 0"/>
-            <TextBox Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="14" Padding="5"/>
-        </Grid>
+                <TextBox Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource FormTextBoxStyle}"
+                     MinWidth="140"/>
+            </Grid>
 
-        <!-- Zeit -->
-        <Grid Grid.Row="3" Margin="0 5 0 15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- Zeit -->
+            <Grid Grid.Row="3" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Duration:" Margin="0 0 10 0"/>
-            <TextBox Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="14" Padding="5"/>
-        </Grid>
+                <TextBox Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource FormTextBoxStyle}"
+                     MinWidth="140"/>
+            </Grid>
 
-        <!-- Zeit -->
-        <Grid Grid.Row="4" Margin="0 5 0 15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- Zeit -->
+            <Grid Grid.Row="4" Margin="0 5 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Distance:" Margin="0 0 10 0"/>
-            <TextBox Grid.Column="1" Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="14" Padding="5"/>
+                <TextBox Grid.Column="1" Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource FormTextBoxStyle}"
+                     MinWidth="140"/>
+            </Grid>
+
+
+
+            <!-- Buttons: Save & Cancel -->
+            <Grid Grid.Row="5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="Cancel" FontSize="16" Padding="8" 
+                        Command="{Binding CancelCommand}"
+                        Width="100" Margin="0 0 10 0"
+                        Style="{StaticResource BaseButtonStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                   <Button Content="Save" FontSize="16" Padding="8"
+                        Command="{Binding SaveTourLogCommand}"
+                        Width="100"
+                        Style="{StaticResource BaseButtonStyle}"/>
+                </StackPanel>
+            </Grid>
         </Grid>
-
-
-
-        <!-- Buttons: Save & Cancel -->
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Cancel" FontSize="16" Padding="8" 
-                Command="{Binding CancelCommand}"
-                Width="100" Margin="0 0 10 0"/>
-
-            <Button Content="Save" FontSize="16" Padding="8"
-                Command="{Binding SaveTourLogCommand}"
-                Width="100" />
-        </StackPanel>
-    </Grid>
-
-
-
-
+    </ScrollViewer>
 </Window>

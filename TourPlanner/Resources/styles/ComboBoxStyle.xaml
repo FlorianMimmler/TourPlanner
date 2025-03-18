@@ -9,7 +9,7 @@
             </Grid.ColumnDefinitions>
             <Border x:Name="Border"
                     Grid.ColumnSpan="2"
-                    CornerRadius="2"
+                    CornerRadius="4"
                     BorderThickness="1"
                     Background="Transparent"
                     BorderBrush="{DynamicResource BorderLightBrush}"/>
@@ -48,7 +48,7 @@
                         <ContentPresenter x:Name="ContentSite"
                                           IsHitTestVisible="False"
                                           Content="{TemplateBinding SelectionBoxItem}"
-                                          Margin="8,3,23,3"
+                                          Margin="8,6,23,6"
                                           VerticalAlignment="Stretch"
                                           HorizontalAlignment="Left"/>
                         <Popup x:Name="Popup"

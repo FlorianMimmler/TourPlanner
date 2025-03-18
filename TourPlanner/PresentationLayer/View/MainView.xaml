@@ -9,7 +9,7 @@
         xmlns:maincontent="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent" 
         xmlns:vms="clr-namespace:TourPlanner.PresentationLayer.ViewModel"
         mc:Ignorable="d"
-        Title="Tour Planner" Height="650" Width="800"
+        Title="Tour Planner" Height="600" Width="900"
         Background="{DynamicResource WindowBrush}">
 
     <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">

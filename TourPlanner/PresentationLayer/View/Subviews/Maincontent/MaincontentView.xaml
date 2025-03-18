@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <!-- Tabs -->
-            <RowDefinition Height="2*" MaxHeight="400"/>
+            <RowDefinition Height="1.5*" MaxHeight="400"/>
             <!-- Tour Logs -->
             <RowDefinition Height="1*"/>
            
