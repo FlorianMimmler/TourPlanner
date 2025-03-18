@@ -11,7 +11,7 @@ namespace TourPlanner.PresentationLayer.Stores
 {
     public class SelectedTourStore
     {
-        private TourService _tourService;
+        private ITourService _tourService;
 
         private Tour? _selectedTour;
         public Tour? SelectedTour 
@@ -29,7 +29,7 @@ namespace TourPlanner.PresentationLayer.Stores
 
         public event Action SelectedTourChanged;
 
-        public SelectedTourStore(TourService tourService)
+        public SelectedTourStore(ITourService tourService)
         {
             this._tourService = tourService;
             _tourService.TourUpdated += TourService_TourUpdated;

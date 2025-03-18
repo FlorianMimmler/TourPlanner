@@ -14,7 +14,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 {
     public class ToursListViewModel : ViewModelBase
     {
-        private readonly TourService _tourService;
+        private readonly ITourService _tourService;
         private readonly SelectedTourStore _selectedTourStore;
 
         public event EventHandler<Tour> TourSelected;
@@ -37,7 +37,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore, TourService tourService)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService)
         {
             _tourService = tourService;
             _selectedTourStore = selectedTourStore;

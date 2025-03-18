@@ -20,7 +20,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         private ObservableCollection<TourLogItemViewModel> _tourLogs;
 
-        private TourService _tourService;
+        private ITourService _tourService;
         private TourLogService _tourlogsService;
         private SelectedTourStore _selectedTourStore;
         public ICommand OpenCreateTourLogCommand { get; }
@@ -28,7 +28,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public event EventHandler OpenCreateTourLogRequested;
 
-        public TourlogsViewModel(TourService tourService, TourLogService tourlogsService, SelectedTourStore selectedTourStore)
+        public TourlogsViewModel(ITourService tourService, TourLogService tourlogsService, SelectedTourStore selectedTourStore)
         {
             // Sample data for Tour Logs
             OpenCreateTourLogCommand = new RelayCommand(OpenCreateTourLogView);

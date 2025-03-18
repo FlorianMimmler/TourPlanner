@@ -16,7 +16,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
     {
         public SidebarViewModel SidebarViewModel { get; }
         public MainContentViewModel MainContentViewModel { get; }
-        public MainViewModel(SelectedTourStore _selectedTourStore, TourService tourService, TourLogService tourlogsService)
+        public MainViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, TourLogService tourlogsService)
         {
             SidebarViewModel = new SidebarViewModel(_selectedTourStore, tourService);
             MainContentViewModel = new MainContentViewModel(_selectedTourStore, tourService, tourlogsService);

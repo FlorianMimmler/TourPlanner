@@ -19,7 +19,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public event EventHandler CloseWindow;
 
-        private readonly TourService _toursService;
+        private readonly ITourService _toursService;
         
         private readonly Tour _tour;
 
@@ -27,7 +27,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
          
 
         /** Constructor with Commands **/
-        public ModifyTourViewModel(Tour tour, TourService tourService)
+        public ModifyTourViewModel(Tour tour, ITourService tourService)
         {
             _toursService = tourService;
             this._tour = tour;

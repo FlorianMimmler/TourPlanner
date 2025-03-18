@@ -9,7 +9,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
         public TabsViewModel TabsViewModel { get;}
         public TourlogsViewModel TourlogsViewModel { get; }
 
-        public MainContentViewModel(SelectedTourStore selectedTourStore, TourService tourService, TourLogService tourlogsService)
+        public MainContentViewModel(SelectedTourStore selectedTourStore, ITourService tourService, TourLogService tourlogsService)
         {
             TabsViewModel = new TabsViewModel(selectedTourStore);
             TourlogsViewModel = new TourlogsViewModel(tourService, tourlogsService, selectedTourStore);

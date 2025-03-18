@@ -12,11 +12,11 @@ namespace TourPlanner.PresentationLayer.ViewModel
 {
     public class SidebarHeaderViewModel
     {
-        private TourService _tourService;
+        private ITourService _tourService;
 
         public ICommand OpenCreateTourCommand { get; }
 
-        public SidebarHeaderViewModel(TourService tourService)
+        public SidebarHeaderViewModel(ITourService tourService)
         {
             OpenCreateTourCommand = new RelayCommand(OpenCreateTour);
             _tourService = tourService;

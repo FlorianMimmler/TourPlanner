@@ -24,10 +24,10 @@ namespace TourPlanner.BusinessLayer.ViewModel
         public event EventHandler CloseWindow;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private TourService _toursService;
+        private ITourService _toursService;
         private TourLogService _tourlogService; // to change logs after adding tour
 
-        public CreateTourLogViewModel(TourService toursService, TourLogService tourlogService)
+        public CreateTourLogViewModel(ITourService toursService, TourLogService tourlogService)
         {
             _toursService = toursService;
             _tourlogService = tourlogService;

@@ -16,7 +16,7 @@ public partial class App : Application
 {
 
     private readonly SelectedTourStore _selectedTourStore;
-    private readonly TourService _tourService;
+    private readonly ITourService _tourService;
     private TourLogService _tourLogService;
 
     public App()

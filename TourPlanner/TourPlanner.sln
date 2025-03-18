@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner", "TourPlanner.csproj", "{FC05D52A-CE69-4234-AE8A-B8D2431BDE4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner", "TourPlanner.csproj", "{FC05D52A-CE69-4234-AE8A-B8D2431BDE4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner_UnitTests", "..\TourPlanner_UnitTests\TourPlanner_UnitTests.csproj", "{14130AA9-65C4-4AE8-9EFA-F9B44D613EB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FC05D52A-CE69-4234-AE8A-B8D2431BDE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC05D52A-CE69-4234-AE8A-B8D2431BDE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC05D52A-CE69-4234-AE8A-B8D2431BDE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14130AA9-65C4-4AE8-9EFA-F9B44D613EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14130AA9-65C4-4AE8-9EFA-F9B44D613EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14130AA9-65C4-4AE8-9EFA-F9B44D613EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14130AA9-65C4-4AE8-9EFA-F9B44D613EB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

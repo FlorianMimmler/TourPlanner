@@ -18,13 +18,13 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public event EventHandler CloseWindow;
 
-        private readonly TourService _toursService;
+        private readonly ITourService _toursService;
 
         public TourInputFormViewModel TourInputFormViewModel { get; }
         
 
         /** Constructor with Commands **/
-        public CreateTourViewModel(TourService tourService)
+        public CreateTourViewModel(ITourService tourService)
         {
             _toursService = tourService;
 

@@ -13,7 +13,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 {
     public class TourListItemViewModel : ViewModelBase
     {
-        private TourService _tourService;
+        private ITourService _tourService;
 
         public Tour Tour { get; private set; }
 
@@ -23,7 +23,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public ICommand ModifyCommand { get; }
 
-        public TourListItemViewModel(Tour tour, TourService tourService)
+        public TourListItemViewModel(Tour tour, ITourService tourService)
         {
             ModifyCommand = new RelayCommand(OpenModifyTourView);
             Tour = tour;

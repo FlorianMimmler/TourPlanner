@@ -10,7 +10,7 @@ using TourPlanner.DAL;
 
 namespace TourPlanner.BusinessLayer.Services
 {
-    public class TourService
+    public class TourService : ITourService
     {
 
         private SingletonDatabase _database = SingletonDatabase.Instance;
@@ -21,7 +21,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         public TourService()
         {
-            
+
         }
 
         public IEnumerable<Tour> GetTours()
@@ -51,7 +51,7 @@ namespace TourPlanner.BusinessLayer.Services
                 existingTour.EstimatedTime = tour.EstimatedTime;
                 existingTour.Image = tour.Image;
             }*/
-            if(_database.UpdateTour(tour)) TourUpdated?.Invoke(tour);
+            if (_database.UpdateTour(tour)) TourUpdated?.Invoke(tour);
 
         }
 
