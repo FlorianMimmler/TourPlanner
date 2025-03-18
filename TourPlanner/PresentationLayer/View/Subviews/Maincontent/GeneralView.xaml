@@ -7,7 +7,7 @@
              xmlns:viewmodel="clr-namespace:TourPlanner.PresentationLayer.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Foreground="Black"
+             Foreground="{DynamicResource ControlDarkBrush}"
              >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,18 +23,30 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0 0 15 0">
-                    <TextBlock FontSize="14">From:</TextBlock>
-                    <TextBlock FontSize="14">To:</TextBlock>
-                    <TextBlock FontSize="14">Transport Type:</TextBlock>
-                    <TextBlock FontSize="14">Tour Distance:</TextBlock>
-                    <TextBlock FontSize="14">Estimated Time:</TextBlock>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0,5,0,0"/>
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock>From:</TextBlock>
+                    <TextBlock>To:</TextBlock>
+                    <TextBlock>Transport Type:</TextBlock>
+                    <TextBlock>Tour Distance:</TextBlock>
+                    <TextBlock>Estimated Time:</TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                    <TextBlock FontSize="14"  Text="{Binding From}"></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding To}"></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding TransportType}"></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding Distance}"></TextBlock>
-                    <TextBlock FontSize="14" Text="{Binding EstimatedTime}"></TextBlock>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="0,5,0,0"/>
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="{Binding From}"></TextBlock>
+                    <TextBlock Text="{Binding To}"></TextBlock>
+                    <TextBlock Text="{Binding TransportType}"></TextBlock>
+                    <TextBlock Text="{Binding Distance}"></TextBlock>
+                    <TextBlock Text="{Binding EstimatedTime}"></TextBlock>
                 </StackPanel>
             </Grid>
             

@@ -6,43 +6,97 @@
              xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent"
              xmlns:maincontent="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent" 
              xmlns:viewmodel="clr-namespace:TourPlanner.PresentationLayer.ViewModel" 
+             xmlns:views="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent"
              d:DataContext="{d:DesignInstance Type=viewmodel:TourlogsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition  Width="1*"/>
-
-        </Grid.ColumnDefinitions>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource WindowBrush}"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" BlurRadius="7" ShadowDepth="1" Opacity="0.25"/>
+                </Setter.Value>
+            </Setter>
             
-            
-    <GroupBox Header="Tour Logs" Margin="5" Width="auto" Grid.Column="0">
-            <DataGrid ItemsSource="{Binding TourLogs}" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="*"/>
-                    <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" Width="*"/>
+        </Style>
+    </UserControl.Resources>
 
 
-                    <DataGridTemplateColumn Header="Edit" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit" Command="{Binding OpenModifyTourLogCommand}" CommandParameter="{Binding}" />
-                                
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-               
+    <Border CornerRadius="8" BorderThickness="1" BorderBrush="{DynamicResource BorderLightBrush}" Style="{StaticResource CardStyle}">
 
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Button Grid.Column="1"  Padding="4 -2 4 -2" Content="add"  Command="{Binding OpenCreateTourLogCommand}"/>
+            <Grid Grid.Row="0" Margin="10 10 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-    </Grid>
+                <TextBlock FontSize="16" Grid.Column="0">Tour Logs</TextBlock>
+
+                <Button Grid.Column="1" Content="Add" FontSize="14"
+                        Command="{Binding OpenCreateTourLogCommand}"
+                        Style="{StaticResource BaseButtonStyle}" Cursor="Hand"/>
+
+            </Grid>
+
+            <Grid  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="10, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="55"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock FontSize="14" Grid.Column="0">Date</TextBlock>
+                    <TextBlock FontSize="14" Grid.Column="1">Distance</TextBlock>
+                    <TextBlock FontSize="14" Grid.Column="2">Duration</TextBlock>
+
+                </Grid>
+
+                <ListView Grid.Row="1" 
+                        ItemsSource="{Binding TourLogs}" 
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        SelectionMode="Single"
+                        MaxHeight="300"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+
+                            <Setter Property="Margin" Value="0 0 0 4"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <views:TourLogItemView DataContext="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+    </Border>
+
+
 </UserControl>

@@ -8,37 +8,39 @@
         xmlns:menu="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Menu" 
         xmlns:maincontent="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent" 
         xmlns:vms="clr-namespace:TourPlanner.PresentationLayer.ViewModel"
-        
         mc:Ignorable="d"
-        Title="Tour Planner" Height="450" Width="800">
+        Title="Tour Planner" Height="650" Width="800"
+        Background="{DynamicResource WindowBrush}">
 
-    <Grid>
-        <DockPanel LastChildFill="True">
+    <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
+        <Grid>
+            <DockPanel LastChildFill="True">
             
-            <!-- Top Menu -->
-            <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
+                <!-- Top Menu -->
+                <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
 
-            <!-- Main Layout -->
-            <Grid DockPanel.Dock="Top" Margin="5, 10">
-                <Grid.ColumnDefinitions>
+                <!-- Main Layout -->
+                <Grid DockPanel.Dock="Top" Margin="5, 10">
+                    <Grid.ColumnDefinitions>
+                        <!-- Sidebar -->
+                        <ColumnDefinition Width="200"/>
+                        <!-- Spacer Column for the Border -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Main Content -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
                     <!-- Sidebar -->
-                    <ColumnDefinition Width="200"/>
-                    <!-- Spacer Column for the Border -->
-                    <ColumnDefinition Width="Auto"/>
-                    <!-- Main Content -->
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <sidebar:SidebarView x:Name="sidebarView" DataContext="{Binding SidebarViewModel}" Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
 
-                <!-- Sidebar -->
-                <sidebar:SidebarView x:Name="sidebarView" DataContext="{Binding SidebarViewModel}" Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
-
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" />
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" />
                 
-                <!-- Main Content -->
-                <maincontent:MaincontentView DataContext="{Binding MainContentViewModel}" Grid.Column="2" Margin="5 0 5 0"></maincontent:MaincontentView>
+                    <!-- Main Content -->
+                    <maincontent:MaincontentView DataContext="{Binding MainContentViewModel}" Grid.Column="2" Margin="5 0 5 0"></maincontent:MaincontentView>
             
             
-            </Grid>
-        </DockPanel>
-    </Grid>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

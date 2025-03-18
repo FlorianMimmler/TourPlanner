@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent"
              xmlns:maincontent="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Maincontent"
-
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="Transparent"
+             MinWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <!-- Tabs -->
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*" MaxHeight="400"/>
             <!-- Tour Logs -->
             <RowDefinition Height="1*"/>
            
@@ -21,7 +22,7 @@
         <maincontent:TabsView DataContext="{Binding TabsViewModel}" Grid.Row="0"></maincontent:TabsView>
 
         <!-- Tour Logs -->
-        <maincontent:TourlogsView Grid.Row="1" DataContext="{Binding TourlogsViewModel}" />
+        <maincontent:TourlogsView Grid.Row="1" DataContext="{Binding TourlogsViewModel}" Margin="0 15 0 0" />
 
     </Grid>
     
