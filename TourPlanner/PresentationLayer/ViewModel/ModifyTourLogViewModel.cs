@@ -53,7 +53,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
             //TourInputFormViewModel.CloseWindow += (s, e) => CloseWindow?.Invoke(this, EventArgs.Empty);
 
             _tourLogService.TourLogUpdated += TourLogService_TourLogUpdated;
-            _tourLogService.TourLogDeleted += TourService_TourDeleted;
+            _tourLogService.TourLogDeleted += TourLogService_TourLogDeleted;
         }
 
 
@@ -94,7 +94,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
         }
 
 
-        private void TourService_TourDeleted(int id)
+        private void TourLogService_TourLogDeleted(int id)
         {
             CloseTourLogModificationWindow();
         }
@@ -108,7 +108,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         private void DeleteTourLog()
         {
-            _tourLogService.DeleteTour(_tourLog.Id);
+            _tourLogService.DeleteTourLog(_tourLog.Id);
         }
 
         private void TourLogService_TourUpdated(TourLog tourLog)

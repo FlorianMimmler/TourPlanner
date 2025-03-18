@@ -62,6 +62,7 @@ namespace TourPlanner.BusinessLayer.Services
             }
             */
             _database.DeleteTourLog(id);
+            TourLogDeleted?.Invoke(id);
         }
 
 
