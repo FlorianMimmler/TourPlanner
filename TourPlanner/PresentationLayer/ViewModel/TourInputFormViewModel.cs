@@ -1,13 +1,18 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.BusinessLayer.Model;
 using TourPlanner.BusinessLayer.Services;
 
@@ -21,12 +26,46 @@ namespace TourPlanner.PresentationLayer.ViewModel
         private static readonly TourService _toursService = new TourService();
         private readonly TourLogService _tourlogService = new(); // to change logs after adding tour
 
+        public ICommand OpenUploadFileCommand { get; }
+        public ICommand RemoveUploadedFileCommand { get; }
+
         public TourInputFormViewModel()
         {
             SelectedTransportType = TransportTypes.FirstOrDefault(t => t == TransportType.Hiking);
+            OpenUploadFileCommand = new RelayCommand(OpenUploadFileWindow);
+            RemoveUploadedFileCommand = new RelayCommand(RemoveUploadedFile, CanRemoveUploadedFile);
+        }
+
+        private bool CanRemoveUploadedFile()
+        {
+            return _fileName != null;
+        }
+
+        private void OpenUploadFileWindow()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp;*.gif)|*.png;*.jpg;*.jpeg;*.bmp;*.gif";
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                string fullPath = fileDialog.FileName;
+                string shortFileName = Path.GetFileName(fullPath);
+                
+                _fileName = shortFileName;
+                OnPropertyChanged(nameof(FileName));
+            }
+        }
+
+        private void RemoveUploadedFile()
+        {
+            _fileName = null;
+            OnPropertyChanged(nameof(FileName));
         }
 
         /** Binding Variables For View **/
+
+        private string? _fileName = null;
+        public string FileName => _fileName ?? "Choose File";
 
         private string _tourName;
         [Required(ErrorMessage = "Tour name is required!")]

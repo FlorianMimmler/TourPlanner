@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" FontSize="20" Text="Create a new Tour"></TextBlock>
 
-            <tourview:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></tourview:TourInputFormView>
+            <tourview:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}" Margin="0 0 0 20"></tourview:TourInputFormView>
         
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>

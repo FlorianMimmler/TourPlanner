@@ -164,6 +164,12 @@
                 </Grid>
             </Grid>
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="14" Text="{Binding FileName}" VerticalAlignment="Center"/>
+                <Button FontSize="14" Content="Upload" Margin="5 0 0 0" Command="{Binding OpenUploadFileCommand}" Style="{StaticResource BaseButtonStyle}"/>
+                <Button FontSize="14" Content="Remove File" Margin="5 0 0 0" Command="{Binding RemoveUploadedFileCommand}" Style="{StaticResource DeleteButtonStyle}"/>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>
