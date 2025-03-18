@@ -6,15 +6,86 @@
              xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Tour"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ContentAreaBrushLight}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ControlDarkColor}"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="8"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                                                (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="#bdc3c7" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReadOnly">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                                                (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="#7f8c8d" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ScrollViewer Margin="0"
+                        x:Name="PART_ContentHost" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover Effect -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="{DynamicResource ControlMediumBrush}"/>
+                                <!-- Slightly darker blue -->
+                            </Trigger>
+                            <!-- Pressed Effect -->
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{DynamicResource ControlMediumBrush}"/>
+                            </Trigger>
+                            <!-- Disabled Effect -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="{DynamicResource DisabledControlBrushLight}"/>
+                                <!-- Gray when disabled -->
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5 10 5 20">
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5 10 5 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="0 0 40 0">
+                <Grid Grid.Column="0" Margin="0 0 20 0">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -26,9 +97,14 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Name:</TextBlock>
-                        <TextBox x:Name="TourNameInput" Text="{Binding TourName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox 
+                            x:Name="TourNameInput" 
+                            Text="{Binding TourName, UpdateSourceTrigger=PropertyChanged}" 
+                            Grid.Column="2" 
+                            MaxLength="144"
+                            MinWidth="120"/>
                     </Grid>
-                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=TourNameInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                    <Label Height="28" Grid.Row="1" Content="{Binding ElementName=TourNameInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
@@ -42,16 +118,30 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Transport Type:</TextBlock>
-                        <ComboBox x:Name="TransportTypeInput" SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TransportTypes}"  Grid.Column="2" FontSize="14" Padding="2"></ComboBox>
+                        <ComboBox 
+                            MinWidth="80" 
+                            x:Name="TransportTypeInput" 
+                            SelectedItem="{Binding SelectedTransportType, UpdateSourceTrigger=PropertyChanged}" 
+                            ItemsSource="{Binding TransportTypes}" 
+                            Grid.Column="2" 
+                            FontSize="14" 
+                            Padding="2">
+                        </ComboBox>
                     </Grid>
                     <Label Content="{Binding ElementName=TransportTypeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
             </Grid>
 
-            <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+            <StackPanel Orientation="Vertical">
                 <TextBlock FontSize="16">Description:</TextBlock>
-                <TextBox x:Name="DescriptionInput" Text="{Binding TourDescription, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="50" MaxLength="500" Padding="2"></TextBox>
-                <Label Height="35" Content="{Binding ElementName=DescriptionInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                <TextBox 
+                    x:Name="DescriptionInput" 
+                    Text="{Binding TourDescription, UpdateSourceTrigger=PropertyChanged}" 
+                    TextWrapping="Wrap" 
+                    AcceptsReturn="True" 
+                    MinHeight="50" 
+                    MaxLength="500"/>
+                <Label Height="28" Content="{Binding ElementName=DescriptionInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -65,26 +155,35 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Margin="0 0 40 0">
+                    <Grid Grid.Row="0" Margin="0 0 20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">From:</TextBlock>
-                        <TextBox x:Name="FromInput" Text="{Binding From, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox 
+                            x:Name="FromInput" 
+                            Text="{Binding From, UpdateSourceTrigger=PropertyChanged}" 
+                            Grid.Column="2"
+                            MaxLength="144"/>
                     </Grid>
-                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=FromInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
-                    <Grid Grid.Row="2" Margin="0 0 40 0">
+                    <Label Height="28" Grid.Row="1" Content="{Binding ElementName=FromInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
+                    <Grid Grid.Row="2" Margin="0 0 20 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">To:</TextBlock>
-                        <TextBox x:Name="ToInput" Text="{Binding To, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" FontSize="14" MaxLength="144" Padding="2"></TextBox>
+                        <TextBox 
+                            x:Name="ToInput" 
+                            Text="{Binding To, UpdateSourceTrigger=PropertyChanged}" 
+                            Grid.Column="2" 
+                            MaxLength="144"
+                            MinWidth="120"/>
                     </Grid>
-                    <Label Height="35" Grid.Row="3" Content="{Binding ElementName=ToInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                    <Label Height="28" Grid.Row="3" Content="{Binding ElementName=ToInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -100,13 +199,16 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Distance (km):</TextBlock>
-                        <TextBox x:Name="DistanceInput" Grid.Column="2" FontSize="14" MaxLength="64" Padding="2" 
-                    Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
-                    PreviewTextInput="DistanceTextBox_PreviewTextInput"
-                    LostFocus="DistanceTextBox_LostFocus">
-                        </TextBox>
+                        <TextBox 
+                            x:Name="DistanceInput" 
+                            Grid.Column="2" 
+                            MaxLength="64"
+                            Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
+                            PreviewTextInput="DistanceTextBox_PreviewTextInput"
+                            LostFocus="DistanceTextBox_LostFocus"
+                            MinWidth="80"/>
                     </Grid>
-                    <Label Height="35" Grid.Row="1" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
+                    <Label Height="28" Grid.Row="1" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 0 0 5"></Label>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="180"></ColumnDefinition>
@@ -114,12 +216,15 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontSize="16">Estimated Time (HH:mm):</TextBlock>
-                        <TextBox x:Name="EstimatedTimeInput" Grid.Column="2" FontSize="14" MaxLength="64" Padding="2"
-                    Text="{Binding EstimatedTime, UpdateSourceTrigger=PropertyChanged}"
-                    PreviewTextInput="TimeTextBox_PreviewTextInput">
-                        </TextBox>
+                        <TextBox 
+                            x:Name="EstimatedTimeInput" 
+                            Grid.Column="2"  
+                            MaxLength="64"
+                            Text="{Binding EstimatedTime, UpdateSourceTrigger=PropertyChanged}"
+                            PreviewTextInput="TimeTextBox_PreviewTextInput"
+                            MinWidth="80"/>
                     </Grid>
-                    <Label Height="35" Grid.Row="3" Content="{Binding ElementName=EstimatedTimeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                    <Label Height="28" Grid.Row="3" Content="{Binding ElementName=EstimatedTimeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>
             </Grid>
 

@@ -8,31 +8,37 @@
         mc:Ignorable="d"
         xmlns:viewmodel="clr-namespace:TourPlanner.PresentationLayer.ViewModel"
         SizeToContent="Height"
-        Title="CreateTourView" Height="auto" Width="600">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" FontSize="20" Text="Create a new Tour"></TextBlock>
+        Title="CreateTourView" Height="auto" Width="600"
+        Background="{DynamicResource WindowBrush}"
+        >
 
-        <tourview:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></tourview:TourInputFormView>
+    <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="auto">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="20" Text="Create a new Tour"></TextBlock>
+
+            <tourview:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></tourview:TourInputFormView>
         
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Cancel" FontSize="16"
-                    Command="{Binding CancelTourCreationCommand}"></Button>
-            <Button Grid.Column="2" Content="Save" FontSize="16" 
-                    Command="{Binding SaveTourCommand}">
-                
-            </Button>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Cancel" FontSize="16"
+                        Command="{Binding CancelTourCreationCommand}"
+                        Style="{StaticResource BaseButtonStyle}"/>
+                <Button Grid.Column="2" Content="Save" FontSize="16" 
+                        Command="{Binding SaveTourCommand}"
+                        Style="{StaticResource BaseButtonStyle}"/>
+            </Grid>
+        
+
         </Grid>
-        
-
-    </Grid>
+    </ScrollViewer>
 </Window>

@@ -6,34 +6,39 @@
         xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View"
         xmlns:views="clr-namespace:TourPlanner.PresentationLayer.View.Subviews.Tour"
         mc:Ignorable="d"
-        Title="ModifyTourView" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" FontSize="20" Text="Create a new Tour"></TextBlock>
+        Title="ModifyTourView" Height="auto" Width="600"
+        SizeToContent="Height"
+        Background="{DynamicResource WindowBrush}"
+        >
 
-        <views:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></views:TourInputFormView>
+    <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="auto">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="20" Text="Edit Tour"></TextBlock>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Cancel" FontSize="16"
-                Command="{Binding CancelTourModificationCommand}"></Button>
-            <Button Grid.Column="2" Content="Delete" FontSize="16" 
-                Command="{Binding DeleteTourCommand}"></Button>
-            <Button Grid.Column="3" Content="Save" FontSize="16" Margin="10 0 0 0" 
-                Command="{Binding UpdateTourCommand}">
+            <views:TourInputFormView Grid.Row="1" DataContext="{Binding TourInputFormViewModel}"></views:TourInputFormView>
 
-            </Button>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Cancel" FontSize="16"
+                    Command="{Binding CancelTourModificationCommand}"
+                    Style="{StaticResource BaseButtonStyle}"/>
+                <Button Grid.Column="2" Content="Delete" FontSize="16" 
+                    Command="{Binding DeleteTourCommand}"
+                    Style="{StaticResource DeleteButtonStyle}"/>
+                <Button Grid.Column="3" Content="Save" FontSize="16" Margin="10 0 0 0" 
+                    Command="{Binding UpdateTourCommand}"
+                    Style="{StaticResource BaseButtonStyle}"/>
+            </Grid>
         </Grid>
-
-
-    </Grid>
+    </ScrollViewer>
 </Window>

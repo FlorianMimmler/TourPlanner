@@ -6,6 +6,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/icons.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/Colors.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/styles/ComboBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/styles/ButtonStyles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
