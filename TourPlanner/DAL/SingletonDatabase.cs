@@ -44,8 +44,8 @@ namespace TourPlanner.DAL
 
             _tourlogs = new List<TourLog>
             {
-                new() {Distance = 5, Duration = "01:10", Date ="12.03.2025", Id=1, TourId=1},
-                new() {Distance = 2, Duration = "00:30", Date ="13.03.2025", Id=2, TourId=2}
+                new() {Distance = 5, Duration = "01:10", Date = DateTime.Now, Id=1, TourId=1},
+                new() {Distance = 2, Duration = "00:30", Date = DateTime.Now, Id=2, TourId=2}
 
             };
         }

@@ -15,7 +15,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
     {
         private  TourLog _tourLog;
         private readonly TourLogService _tourLogService;
-        public string Date => _tourLog.Date ?? "";
+        public string Date => _tourLog.Date.ToShortDateString() ?? "";
         public string Duration => _tourLog.Duration ?? "";
         public string Distance => _tourLog.Distance.ToString() ?? ""; 
         public ICommand OpenModifyTourLogCommand { get; }

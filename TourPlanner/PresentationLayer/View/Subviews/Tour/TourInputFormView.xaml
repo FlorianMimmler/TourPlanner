@@ -158,7 +158,7 @@
                             Text="{Binding EstimatedTime, UpdateSourceTrigger=PropertyChanged}"
                             PreviewTextInput="TimeTextBox_PreviewTextInput"
                             MinWidth="80"
-                            Style="{StaticResource FormTextBoxStyle}"/>
+                            Style="{StaticResource FormTextBoxStyle}" Cursor="IBeam"/>
                     </Grid>
                     <Label Height="28" Grid.Row="3" Content="{Binding ElementName=EstimatedTimeInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 </Grid>

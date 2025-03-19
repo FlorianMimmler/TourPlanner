@@ -8,7 +8,7 @@ namespace TourPlanner.BusinessLayer.Model
 {
     public class TourLog
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Duration { get; set; }
         public double Distance { get; set; }
         public int Id { get; set; }

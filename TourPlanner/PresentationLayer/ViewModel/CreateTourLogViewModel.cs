@@ -34,6 +34,8 @@ namespace TourPlanner.BusinessLayer.ViewModel
             CancelCommand = new RelayCommand(Cancel);
 
             _tourlogService.TourLogAdded += TourLogService_TourLogAdded;
+
+            Date = DateTime.Now;
         }
 
         private void TourLogService_TourLogAdded(TourLog log)
@@ -110,9 +112,9 @@ namespace TourPlanner.BusinessLayer.ViewModel
             }
         }
 
-        private string _date;
+        private DateTime _date;
         [Required(ErrorMessage = "Date is required!")]
-        public string Date
+        public DateTime Date
         {
             get { return this._date; }
             set

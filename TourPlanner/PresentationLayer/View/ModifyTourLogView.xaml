@@ -35,8 +35,8 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Date:" Margin="0 0 10 0"/>
-                <TextBox x:Name="DateInput" Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource FormTextBoxStyle}"
+                <DatePicker x:Name="DateInput" Grid.Column="1" SelectedDate="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                 
                      MinWidth="140"/>
             </Grid>
             <Label Grid.Row="3" Content="{Binding ElementName=DateInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>

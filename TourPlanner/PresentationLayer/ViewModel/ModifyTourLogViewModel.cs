@@ -53,9 +53,9 @@ namespace TourPlanner.PresentationLayer.ViewModel
         }
 
 
-        private string _date;
+        private DateTime _date;
         [Required(ErrorMessage = "Date is required!")]
-        public string Date
+        public DateTime Date
         {
             get { return this._date; }
             set
