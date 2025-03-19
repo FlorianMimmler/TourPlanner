@@ -8,4 +8,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\icons\add_icon.png" />
+    <None Remove="Resources\icons\search_icon.png" />
+    <None Remove="Resources\img\map_placeholder.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="res.xaml" />
+    <Page Remove="Resources\icons.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\icons\add_icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons\search_icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\icons.xaml" />
+    <Resource Include="Resources\img\map_placeholder.jpeg" />
+  </ItemGroup>
+
 </Project>

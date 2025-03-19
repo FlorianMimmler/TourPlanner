@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Control colors -->
+    <SolidColorBrush x:Key="WindowBrush" Color="#fffafa"/>
+    <SolidColorBrush x:Key="ContentAreaBrushLight" Color="#f5f5f5"/>
+    <SolidColorBrush x:Key="ContentAreaBrushDark" Color="#2f4f4f"/>
+
+    <SolidColorBrush x:Key="DisabledControlBrushLight" Color="#FFEFEFEF"/>
+    <SolidColorBrush x:Key="DisabledControlBrushDark" Color="#FFD0D6DC"/>
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#FF888888"/>
+
+    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFD0D6DC"/>
+    <SolidColorBrush x:Key="SelectedUnfocusedBrush" Color="#FFDDDDDD"/>
+
+    <SolidColorBrush x:Key="ControlLightBrush" Color="White"/>
+    <SolidColorBrush x:Key="ControlMediumBrush" Color="#5FAEE3"/>
+
+    <!-- Accent Color -->
+    <SolidColorBrush x:Key="ControlDarkBrush" Color="#FF2E2E2E"/>
+
+    <SolidColorBrush x:Key="ControlMouseOverBrush" Color="#FF71B7E8"/>
+    <SolidColorBrush x:Key="ControlPressedBrush" Color="#FF3A80B3"/>
+
+    <SolidColorBrush x:Key="GlyphBrush" Color="#FF444444"/>
+    <SolidColorBrush x:Key="GlyphMouseOverBrush" Color="#FF2E2E2E"/>
+
+    <!-- Border colors -->
+    <SolidColorBrush x:Key="BorderLightBrush" Color="#dcdcdc"/>
+    <SolidColorBrush x:Key="BorderMediumBrush" Color="#FF777777"/>
+    <SolidColorBrush x:Key="BorderDarkBrush" Color="#FF333333"/>
+
+    <SolidColorBrush x:Key="PressedBorderLightBrush" Color="#FF777777"/>
+    <SolidColorBrush x:Key="PressedBorderDarkBrush" Color="#FF333333"/>
+
+    <SolidColorBrush x:Key="DisabledBorderLightBrush" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="DisabledBorderDarkBrush" Color="#FF777777"/>
+
+    <SolidColorBrush x:Key="DefaultBorderBrushDark" Color="#FF1A1A1A"/>
+
+
+</ResourceDictionary>
