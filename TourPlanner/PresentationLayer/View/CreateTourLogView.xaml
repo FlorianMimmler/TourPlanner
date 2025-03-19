@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.View"
         mc:Ignorable="d"
-        Title="CreateTourLogView" Height="350" Width="450">
+        Title="CreateTourLogView" Height="400" Width="450">
 
     <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
         <Grid Margin="20">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -31,26 +35,13 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Select Tour:" Margin="0 0 10 0"/>
-                <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox x:Name="TourInput" Grid.Column="1" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Tours}"
                   FontSize="14" Padding="5"/>
             </Grid>
+            <Label Grid.Row="2" Content="{Binding ElementName=TourInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
             <!-- Datum -->
-            <Grid Grid.Row="2" Margin="0 5 0 5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
-                   Text="Date:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource FormTextBoxStyle}"
-                     MinWidth="140"/>
-            </Grid>
-
-            <!-- Zeit -->
             <Grid Grid.Row="3" Margin="0 5 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -58,14 +49,31 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+                   Text="Date:" Margin="0 0 10 0"/>
+                <TextBox x:Name="DateInput" Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource FormTextBoxStyle}"
+                     MinWidth="140"/>
+            </Grid>
+            <Label Grid.Row="4" Content="{Binding ElementName=DateInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
+            <!-- Zeit -->
+            <Grid Grid.Row="5" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Duration:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox x:Name="DurationInput" Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+                         PreviewTextInput="TimeTextBox_PreviewTextInput"
                 Style="{StaticResource FormTextBoxStyle}"
                      MinWidth="140"/>
             </Grid>
+            <Label Grid.Row="6" Content="{Binding ElementName=DurationInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
             <!-- Zeit -->
-            <Grid Grid.Row="4" Margin="0 5 0 20">
+            <Grid Grid.Row="7" Margin="0 5 0 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="*"/>
@@ -73,15 +81,18 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Distance:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource FormTextBoxStyle}"
-                     MinWidth="140"/>
+                <TextBox x:Name="DistanceInput" Grid.Column="1" 
+                         Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
+                         PreviewTextInput="DistanceTextBox_PreviewTextInput"
+                         LostFocus="DistanceTextBox_LostFocus"
+                        Style="{StaticResource FormTextBoxStyle}"
+                        MinWidth="140"/>
             </Grid>
-
+            <Label Grid.Row="8" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
 
             <!-- Buttons: Save & Cancel -->
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="9" Cursor="">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Content="Cancel" FontSize="16" Padding="8" 
                         Command="{Binding CancelCommand}"

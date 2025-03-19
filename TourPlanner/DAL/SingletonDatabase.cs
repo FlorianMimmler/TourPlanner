@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TourPlanner.BusinessLayer.Model;
 
 namespace TourPlanner.DAL
@@ -15,8 +16,8 @@ namespace TourPlanner.DAL
         private static readonly object _lock = new();
 
        
-        private ObservableCollection<TourLog> _tourlogs;
-        private IEnumerable<Tour> _tours;
+        private List<TourLog> _tourlogs;
+        private List<Tour> _tours;
 
         public static SingletonDatabase Instance
         {
@@ -41,7 +42,7 @@ namespace TourPlanner.DAL
                 new() {Id = 2, Name = "Dorfrunde", Description = "A really nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = TransportType.Bike, Image = ""}
             };
 
-            _tourlogs = new ObservableCollection<TourLog>
+            _tourlogs = new List<TourLog>
             {
                 new() {Distance = 5, Duration = "01:10", Date ="12.03.2025", Id=1, TourId=1},
                 new() {Distance = 2, Duration = "00:30", Date ="13.03.2025", Id=2, TourId=2}
@@ -57,7 +58,7 @@ namespace TourPlanner.DAL
         public Tour AddTour(Tour tour)
         {
             tour.Id = _tours.Count() + 1;
-            _tours.Append(tour);
+            _tours.Add(tour);
             return tour;
         }
 
@@ -80,10 +81,15 @@ namespace TourPlanner.DAL
 
         public void DeleteTour(int id)
         {
-            _tours = _tours.Where(t => t.Id != id);
+            var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
+            if (tourToRemove != null)
+            {
+                _tours.Remove(tourToRemove);
+            }
+
         }
 
-        public ObservableCollection<TourLog> GetTourLogs()
+        public IEnumerable<TourLog> GetTourLogs()
         {
             return _tourlogs;
         }
@@ -96,8 +102,7 @@ namespace TourPlanner.DAL
 
         public TourLog AddTourLog(TourLog log) // to create a new log from existing tour
         {
-            //tourlog.Id = _tourlogs.Count + 1;
-            //_tourlog.Add(tourlog);
+            log.Id = _tourlogs.Count() + 1;
 
             _tourlogs.Add(log);
             return log;
@@ -106,10 +111,10 @@ namespace TourPlanner.DAL
 
         public void DeleteTourLog(int Id) // For deleting specific tourlog 
         {
-            var tourToRemove = _tourlogs.FirstOrDefault(t => t.Id == Id);
-            if (tourToRemove != null)
+            var tourLogToRemove = _tourlogs.FirstOrDefault(tourlog => tourlog.Id == Id);
+            if (tourLogToRemove != null)
             {
-                _tourlogs.Remove(tourToRemove);
+                _tourlogs.Remove(tourLogToRemove);
             }
         }
 

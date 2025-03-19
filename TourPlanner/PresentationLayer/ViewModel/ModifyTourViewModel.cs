@@ -75,7 +75,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public bool CanExecuteUpdateTour()
         {
-            return Validator.TryValidateObject(TourInputFormViewModel, new ValidationContext(TourInputFormViewModel), null);
+            return Validator.TryValidateObject(TourInputFormViewModel, new ValidationContext(TourInputFormViewModel), null, true);
         }
         public void UpdateTour()
         {

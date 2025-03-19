@@ -18,14 +18,10 @@ using TourPlanner.BusinessLayer.Services;
 
 namespace TourPlanner.PresentationLayer.ViewModel
 {
-    public class TourInputFormViewModel: ViewModelBase, INotifyDataErrorInfo
+    public class TourInputFormViewModel: ValidatorViewModel
     {
 
         public event EventHandler CloseWindow;
-
-        private static readonly TourService _toursService = new TourService();
-        private readonly TourLogService _tourlogService = new(); // to change logs after adding tour
-
         public ICommand OpenUploadFileCommand { get; }
         public ICommand RemoveUploadedFileCommand { get; }
 
@@ -150,7 +146,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
             }
         }
 
-        public string? this[string columnName]
+        /*public string? this[string columnName]
         {
             get
             {
@@ -164,49 +160,6 @@ namespace TourPlanner.PresentationLayer.ViewModel
                     _ => null,
                 };
             }
-        }
-
-
-        /** Validation Functions **/
-
-        Dictionary<string, List<string>> _errors = new();
-
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-
-        public bool HasErrors => _errors.Count > 0;
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            if (_errors.ContainsKey(propertyName))
-            {
-                return _errors[propertyName];
-            }
-            else
-            {
-                return Enumerable.Empty<string>();
-            }
-        }
-
-        public void Validate(string propertyName, object propertyValue)
-        {
-            var results = new List<ValidationResult>();
-            Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
-
-            if (results.Any())
-            {
-                if (!_errors.ContainsKey(propertyName))
-                {
-                    _errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
-                    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-                }
-            }
-            else
-            {
-                _errors.Remove(propertyName);
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-
-
-        }
+        }*/
     }
 }

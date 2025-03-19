@@ -49,7 +49,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         public bool CanExecuteSaveTour()
         {
-            return Validator.TryValidateObject(TourInputFormViewModel, new ValidationContext(TourInputFormViewModel), null);
+            return Validator.TryValidateObject(TourInputFormViewModel, new ValidationContext(TourInputFormViewModel), null, true);
         }
         public void SaveTour()
         {

@@ -15,17 +15,13 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TourPlanner.PresentationLayer.ViewModel
 {
-    class ModifyTourLogViewModel
+    class ModifyTourLogViewModel : ValidatorViewModel
     {
 
         public event EventHandler OpenModifyTourLogRequested;
         public ICommand UpdateTourLogCommand { get; }
         public ICommand DeleteTourLogCommand { get; }
         public ICommand CancelTourLogModificationCommand { get; }
-
-        private SingletonDatabase _database = SingletonDatabase.Instance;
-
-
 
         public event EventHandler CloseWindow;
 
@@ -45,7 +41,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
             Duration = _tourLog.Duration;
 
 
-            UpdateTourLogCommand = new RelayCommand(UpdateTourLog /*,CanExecuteUpdateTourLog*/);
+            UpdateTourLogCommand = new RelayCommand(UpdateTourLog ,CanExecuteUpdateTourLog);
             DeleteTourLogCommand = new RelayCommand(DeleteTourLog);
 
             CancelTourLogModificationCommand = new RelayCommand(CancelTourLogModification);
@@ -65,31 +61,33 @@ namespace TourPlanner.PresentationLayer.ViewModel
             set
             {
                 this._date = value;
-                //Validate(nameof(Date), value);
+                Validate(nameof(Date), value);
             }
         }
 
         private string _duration;
         [Required(ErrorMessage = "Duration is required!")]
+        [RegularExpression(@"^([01]?[0-9]|2[0-3]):[0-5][0-9]$", ErrorMessage = "Invalid time format (HH:mm)")]
         public string Duration
         {
             get { return this._duration; }
             set
             {
                 this._duration = value;
-                //Validate(nameof(Duration), value);
+                Validate(nameof(Duration), value);
             }
         }
 
         private string _distance;
         [Required(ErrorMessage = "Distance is required!")]
+        [RegularExpression(@"^\d+([,]\d+)?$", ErrorMessage = "Invalid distance format (e.g., 5,4 or 123,54)")]
         public string Distance
         {
             get { return this._distance; }
             set
             {
                 this._distance = value;
-                //Validate(nameof(Distance), value);
+                Validate(nameof(Distance), value);
             }
         }
 
@@ -121,23 +119,17 @@ namespace TourPlanner.PresentationLayer.ViewModel
             CloseWindow?.Invoke(this, EventArgs.Empty);
         }
 
-        /*public bool CanExecuteUpdateTourLog()
+        public bool CanExecuteUpdateTourLog()
         {
-            return Validator.TryValidateObject(TourInputFormViewModel, new ValidationContext(TourInputFormViewModel), null);
-        }*/
+            return Validator.TryValidateObject(this, new ValidationContext(this), null, true);
+        }
         public void UpdateTourLog()
         {
-            /*if (!CanExecuteUpdateTour())
+            if (!CanExecuteUpdateTourLog())
             {
                 Console.WriteLine("Validation failed. Please fill in all fields correctly.");
                 return;
             }
-
-            if (!double.TryParse(TourInputFormViewModel.Distance.Replace('.', ','), out double parsedDistance))
-            {
-                Console.WriteLine("Invalid distance format.");
-                return;
-            }*/
 
             if (!double.TryParse(Distance.Replace('.', ','), out double parsedDistance))
             {
@@ -150,8 +142,6 @@ namespace TourPlanner.PresentationLayer.ViewModel
             _tourLog.Duration = Duration;
 
             _tourLogService.UpdateTourLog(_tourLog);
-
-
 
         }
 

@@ -24,7 +24,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         }
 
-        public ObservableCollection<TourLog> GetTourlogs()
+        public IEnumerable<TourLog> GetTourlogs()
         {
             return _database.GetTourLogs();
         }
@@ -36,10 +36,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         public void AddTourLog(TourLog log)
         {
-            /*tour.Id = _tours.Count + 1;
-            _tours.Add(tour);
-            */
-            _database.AddTourLog(log);
+            TourLogAdded?.Invoke(_database.AddTourLog(log));
         }
 
         public void DeleteTour(int tourlogid)
@@ -51,6 +48,7 @@ namespace TourPlanner.BusinessLayer.Services
             }
             */
             _database.DeleteTour(tourlogid);
+            TourLogDeleted?.Invoke(tourlogid);
         }
 
         public void DeleteTourLog(int id)

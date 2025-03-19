@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View"
         mc:Ignorable="d"
-        Title="ModifyTourLogView" Height="300" Width="350">
+        Title="ModifyTourLogView" Height="350" Width="350">
 
     <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
         <Grid Margin="20">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -32,13 +35,15 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Date:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox x:Name="DateInput" Grid.Column="1" Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource FormTextBoxStyle}"
                      MinWidth="140"/>
             </Grid>
+            <Label Grid.Row="3" Content="{Binding ElementName=DateInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
 
             <!-- Zeit -->
-            <Grid Grid.Row="3" Margin="0 5 0 5">
+            <Grid Grid.Row="4" Margin="0 5 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
@@ -46,12 +51,15 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Duration:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource FormTextBoxStyle}" MinWidth="140"/>
+                <TextBox x:Name="DurationInput" Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
+                        PreviewTextInput="TimeTextBox_PreviewTextInput"
+                         Style="{StaticResource FormTextBoxStyle}" MinWidth="140"/>
             </Grid>
+            <Label Grid.Row="5" Content="{Binding ElementName=DurationInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
 
             <!-- Distanz -->
-            <Grid Grid.Row="4" Margin="0 5 0 20">
+            <Grid Grid.Row="6" Margin="0 5 0 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
@@ -59,15 +67,16 @@
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
                    Text="Distance:" Margin="0 0 10 0"/>
-                <TextBox Grid.Column="1" Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource FormTextBoxStyle}" MinWidth="140"/>
+                <TextBox x:Name="DistanceInput" Grid.Column="1" Text="{Binding Distance, UpdateSourceTrigger=PropertyChanged}"
+                    PreviewTextInput="DistanceTextBox_PreviewTextInput"
+                    LostFocus="DistanceTextBox_LostFocus"
+                         Style="{StaticResource FormTextBoxStyle}" MinWidth="140"/>
             </Grid>
-
-
+            <Label Grid.Row="7" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
             <!-- Buttons: Save & Cancel & Delete -->
 
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>

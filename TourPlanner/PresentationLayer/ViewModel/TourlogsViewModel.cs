@@ -39,8 +39,30 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
             _selectedTourStore.SelectedTourChanged += SelectedTourStore_SelectedTourChanged;
 
+            _tourlogsService.TourLogAdded += TourlogsService_TourLogAdded;
             _tourlogsService.TourLogUpdated += TourlogsService_TourLogUpdated;
+            _tourlogsService.TourLogDeleted += TourlogsService_TourLogDeleted;
 
+        }
+
+        private void TourlogsService_TourLogDeleted(int id)
+        {
+            TourLogItemViewModel tourLogItemViewModel = TourLogs.First(item => item.Id == id);
+            if (tourLogItemViewModel != null)
+            {
+                TourLogs.Remove(tourLogItemViewModel);
+            }
+        }
+
+        private void TourlogsService_TourLogAdded(TourLog log)
+        {
+            if(_selectedTourStore.SelectedTour?.Id == log.TourId)
+            {
+                TourLogItemViewModel tourLogItemViewModel = new(log, _tourlogsService);
+                TourLogs.Add(tourLogItemViewModel);
+                OnPropertyChanged(nameof(TourLogs));
+            }
+            
         }
 
         private void TourlogsService_TourLogUpdated(TourLog tourLog)
@@ -50,12 +72,6 @@ namespace TourPlanner.PresentationLayer.ViewModel
             {
                 tourLogItemViewModel.Update(tourLog);
             }
-
-        }
-
-        private void OpenModifyTourLogView()
-        {
-            //ModifyTourLogViewModel modifyTourLogViewModel = new();
 
         }
 
@@ -88,7 +104,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
 
         private void OpenCreateTourLogView()
         {
-            CreateTourLogViewModel createTourLogViewModel = new CreateTourLogViewModel(_tourService,_tourlogsService);
+            CreateTourLogViewModel createTourLogViewModel = new CreateTourLogViewModel(_tourService,_tourlogsService, _selectedTourStore.SelectedTour);
             CreateTourLogView createTourLogView = new CreateTourLogView()
             {
                 DataContext = createTourLogViewModel
