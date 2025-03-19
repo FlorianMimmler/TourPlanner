@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Resources\icons\add_icon.png" />
     <None Remove="Resources\icons\search_icon.png" />
+    <None Remove="Resources\img\map_placeholder.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\icons.xaml" />
+    <Resource Include="Resources\img\map_placeholder.jpeg" />
   </ItemGroup>
 
 </Project>

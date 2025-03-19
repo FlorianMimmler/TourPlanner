@@ -10,5 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
 
-    <Border  BorderBrush="Black" BorderThickness="1" Margin="5"></Border>
+    <Grid>
+        <Image Source="{StaticResource map_placeholder}" Stretch="Uniform" />
+    </Grid>
 </UserControl>
