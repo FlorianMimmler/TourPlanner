@@ -74,7 +74,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 Distance = parsedDistance,
                 EstimatedTime = TourInputFormViewModel.EstimatedTime,
                 TransportType = TourInputFormViewModel.SelectedTransportType,
-                Image = TourInputFormViewModel.FileName
+                Image = null
             };
 
             _toursService.AddTour(tour);

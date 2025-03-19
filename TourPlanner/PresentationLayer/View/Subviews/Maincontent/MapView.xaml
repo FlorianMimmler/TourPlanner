@@ -11,6 +11,6 @@
 
 
     <Grid>
-        <Image Source="{StaticResource map_placeholder}" Stretch="Uniform" />
+        <Image Source="{StaticResource map_placeholder}" Stretch="Uniform" HorizontalAlignment="Center" MaxWidth="600" />
     </Grid>
 </UserControl>

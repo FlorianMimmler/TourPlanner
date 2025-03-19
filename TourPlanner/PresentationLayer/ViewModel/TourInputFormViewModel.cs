@@ -22,46 +22,13 @@ namespace TourPlanner.PresentationLayer.ViewModel
     {
 
         public event EventHandler CloseWindow;
-        public ICommand OpenUploadFileCommand { get; }
-        public ICommand RemoveUploadedFileCommand { get; }
 
         public TourInputFormViewModel()
         {
             SelectedTransportType = TransportTypes.FirstOrDefault(t => t == TransportType.Hiking);
-            OpenUploadFileCommand = new RelayCommand(OpenUploadFileWindow);
-            RemoveUploadedFileCommand = new RelayCommand(RemoveUploadedFile, CanRemoveUploadedFile);
-        }
-
-        private bool CanRemoveUploadedFile()
-        {
-            return _fileName != null;
-        }
-
-        private void OpenUploadFileWindow()
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp;*.gif)|*.png;*.jpg;*.jpeg;*.bmp;*.gif";
-
-            if (fileDialog.ShowDialog() == true)
-            {
-                string fullPath = fileDialog.FileName;
-                string shortFileName = Path.GetFileName(fullPath);
-                
-                _fileName = shortFileName;
-                OnPropertyChanged(nameof(FileName));
-            }
-        }
-
-        private void RemoveUploadedFile()
-        {
-            _fileName = null;
-            OnPropertyChanged(nameof(FileName));
         }
 
         /** Binding Variables For View **/
-
-        private string? _fileName = null;
-        public string FileName => _fileName ?? "Choose File";
 
         private string _tourName;
         [Required(ErrorMessage = "Tour name is required!")]
@@ -145,21 +112,5 @@ namespace TourPlanner.PresentationLayer.ViewModel
                 return [.. (TransportType[])Enum.GetValues(typeof(TransportType))];
             }
         }
-
-        /*public string? this[string columnName]
-        {
-            get
-            {
-                return columnName switch
-                {
-                    nameof(Distance) => !Regex.IsMatch(Distance ?? "", @"^\d+([,]\d+)?$")
-                                                ? "Invalid distance format (e.g., 5.4 or 123.54)" : null,
-                    nameof(EstimatedTime) => !Regex.IsMatch(EstimatedTime ?? "", @"^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
-                                                ? "Invalid time format (HH:mm)" : null,
-                    nameof(SelectedTransportType) => SelectedTransportType == 0 ? "Transport type is required!" : null,
-                    _ => null,
-                };
-            }
-        }*/
     }
 }
