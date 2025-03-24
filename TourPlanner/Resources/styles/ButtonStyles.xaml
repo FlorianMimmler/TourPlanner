@@ -4,6 +4,7 @@
     <Style x:Key="BaseButtonStyle" TargetType="Button">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
         <Setter Property="Background" Value="{DynamicResource WindowBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ControlDarkBrush}"/>
         <Setter Property="Padding" Value="8,4"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">

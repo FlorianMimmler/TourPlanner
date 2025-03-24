@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.PresentationLayer.View"
         mc:Ignorable="d"
-        Title="ModifyTourLogView" Height="350" Width="350">
+        Title="ModifyTourLogView" Height="350" Width="350"
+        Background="{DynamicResource WindowBrush}"
+        Foreground="{DynamicResource ControlDarkBrush}">
 
     <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
         <Grid Margin="20">

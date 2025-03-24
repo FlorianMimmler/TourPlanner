@@ -22,19 +22,18 @@
         <Button Grid.Column="2" Content="Edit" FontSize="14" Command="{Binding ModifyCommand}" Padding="10, 2">
             <Button.Style>
                 <Style TargetType="Button">
-                    
-                    <Setter Property="Background" Value="White"/>
                     <!-- Flat blue color -->
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Foreground" Value="{DynamicResource BorderDarkBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
                     <!-- White text -->
                     <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Border 
-                                    Background="{TemplateBinding Background}"
+                                    Background="Transparent"
                                     CornerRadius="4"
-                                    BorderBrush="LightGray"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="1"
                                     Padding="{TemplateBinding Padding}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -42,8 +41,8 @@
                                 <ControlTemplate.Triggers>
                                     <!-- Hover Effect -->
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#5faee3"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverBrush}"/>
                                         <!-- Slightly darker blue -->
                                     </Trigger>
                                     <!-- Pressed Effect -->

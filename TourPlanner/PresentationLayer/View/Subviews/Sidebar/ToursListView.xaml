@@ -22,7 +22,8 @@
             <Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="Margin" Value="0 4 0 4"></Setter>
-                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ControlDarkBrush}" />
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Effect">
                     <Setter.Value>
@@ -54,6 +55,7 @@
             </Style>
             <Style TargetType="ListView">
                 <Setter Property="BorderThickness" Value="0"></Setter>
+                <Setter Property="Background" Value="{DynamicResource WindowBrush}" />
             </Style>
         </ListView.Resources>
 

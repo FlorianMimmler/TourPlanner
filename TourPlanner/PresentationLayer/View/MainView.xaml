@@ -17,10 +17,10 @@
             <DockPanel LastChildFill="True">
             
                 <!-- Top Menu -->
-                <menu:MenuView DockPanel.Dock="Top"></menu:MenuView>
+                <menu:MenuView DockPanel.Dock="Top" DataContext="{Binding MenuViewModel}"></menu:MenuView>
 
                 <!-- Main Layout -->
-                <Grid DockPanel.Dock="Top" Margin="5, 10">
+                <Grid DockPanel.Dock="Top" Margin="5, 10" Cursor="">
                     <Grid.ColumnDefinitions>
                         <!-- Sidebar -->
                         <ColumnDefinition Width="200"/>
@@ -33,7 +33,7 @@
                     <!-- Sidebar -->
                     <sidebar:SidebarView x:Name="sidebarView" DataContext="{Binding SidebarViewModel}" Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
 
-                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" />
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="{DynamicResource BorderLightBrush}" />
                 
                     <!-- Main Content -->
                     <maincontent:MaincontentView DataContext="{Binding MainContentViewModel}" Grid.Column="2" Margin="5 0 5 0"></maincontent:MaincontentView>

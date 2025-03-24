@@ -22,6 +22,10 @@
             </Setter>
             
         </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ControlDarkBrush}"/>
+        </Style>
     </UserControl.Resources>
 
 
@@ -39,7 +43,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock FontSize="16" Grid.Column="0">Tour Logs</TextBlock>
+                <TextBlock FontSize="16" Grid.Column="0" Foreground="{DynamicResource ControlDarkBrush}">Tour Logs</TextBlock>
 
                 <Button Grid.Column="1" Content="Add" FontSize="14"
                         Command="{Binding OpenCreateTourLogCommand}"
@@ -47,7 +51,7 @@
 
             </Grid>
 
-            <Grid  Grid.Row="1">
+            <Grid Grid.Row="1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>

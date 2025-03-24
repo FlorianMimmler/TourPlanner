@@ -9,6 +9,7 @@
         Title="ModifyTourView" Height="auto" Width="600"
         SizeToContent="Height"
         Background="{DynamicResource WindowBrush}"
+        Foreground="{DynamicResource ControlDarkBrush}"
         >
 
     <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="auto">

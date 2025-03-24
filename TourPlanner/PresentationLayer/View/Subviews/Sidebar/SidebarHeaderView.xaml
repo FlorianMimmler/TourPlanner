@@ -11,14 +11,22 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" FontSize="18">Tours</TextBlock>
-        <Button Grid.Column="1" Padding="4,2" Content="{StaticResource add_icon}" Command="{Binding OpenCreateTourCommand}">
+        <TextBlock Grid.Column="0" FontSize="18" Foreground="{DynamicResource ControlDarkBrush}">Tours</TextBlock>
+        <Button Grid.Column="1" Padding="4,2" Command="{Binding OpenCreateTourCommand}" Cursor="Hand">
+            <Viewbox Width="14" Height="14">
+                <Path 
+                Stretch="Uniform"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Data="M468.83-469.33H253.67v-22.34h215.16v-215.16h22.34v215.16h215.16v22.34H491.17v215.16h-22.34v-215.16Z"
+                Fill="{DynamicResource ControlDarkBrush}" />
+            </Viewbox>
             <Button.Style>
                 <Style TargetType="Button">
-
-                    <Setter Property="Background" Value="White"/>
                     <!-- Flat blue color -->
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ControlDarkBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
                     <!-- White text -->
                     <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="Template">
@@ -27,7 +35,7 @@
                                 <Border 
                         Background="{TemplateBinding Background}"
                         CornerRadius="4"
-                        BorderBrush="LightGray"
+                        BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         Padding="{TemplateBinding Padding}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -35,8 +43,8 @@
                                 <ControlTemplate.Triggers>
                                     <!-- Hover Effect -->
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#5faee3"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverBrush}"/>
                                         <!-- Slightly darker blue -->
                                     </Trigger>
                                     <!-- Pressed Effect -->
@@ -46,9 +54,8 @@
                                     </Trigger>
                                     <!-- Disabled Effect -->
                                     <Trigger Property="IsEnabled" Value="False">
-                                        <Setter Property="Background" Value="#bdc3c7"/>
-                                        <!-- Gray when disabled -->
-                                        <Setter Property="Foreground" Value="#7f8c8d"/>
+                                        <Setter Property="Background" Value="{DynamicResource DisabledControlBrushLight}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

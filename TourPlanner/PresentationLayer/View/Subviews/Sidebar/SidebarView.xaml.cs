@@ -25,7 +25,7 @@ namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
         {
             InitializeComponent();
         }
-        private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        /*private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is TextBox box)
             {
@@ -35,5 +35,6 @@ namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
                     box.Background = null;
             }
         }
+        */
     }
 }

@@ -21,6 +21,7 @@
 
             <Button Content="Edit" Grid.Column="3" FontSize="14"
                     Command="{Binding OpenModifyTourLogCommand}" 
+                    Foreground="{DynamicResource ControlDarkBrush}"
                     Style="{StaticResource BaseButtonStyle}"/>
         </Grid>
     </Border>
