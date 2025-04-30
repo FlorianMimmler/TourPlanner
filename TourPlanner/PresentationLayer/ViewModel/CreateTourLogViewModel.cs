@@ -74,7 +74,10 @@ namespace TourPlanner.BusinessLayer.ViewModel
                 Date = Date,
                 Duration = Duration,
                 Distance = parsedDistance,
-                TourId = SelectedTour.Id
+                TourId = SelectedTour.Id,
+                Comment = Comment,
+                Diffculty = Difficulty, 
+                Rating = Rating
             };
 
             _tourlogService.AddTourLog(tourLog);
@@ -150,6 +153,58 @@ namespace TourPlanner.BusinessLayer.ViewModel
             }
         }
 
+        private string _comment;
+        //[Required(ErrorMessage = "Comment is required!")]
+        public string Comment
+        {
+            get { return this._comment; }
+            set
+            {
+                this._comment = value;
+                Validate(nameof(Comment), value);
+            }
+        }
 
+
+
+       
+
+        private double _difficulty;
+        [Required(ErrorMessage = "Difficulty is required!")]
+        //[RegularExpression(@"^\d+([,]\d+)?$", ErrorMessage = "Invalid distance format (e.g., 5,4 or 123,54)")]
+        public double Difficulty
+        {
+            get { return this._difficulty; }
+            set
+            {
+                if (this._difficulty == value)
+                {
+                    return;
+                }
+
+                this._difficulty = value;
+                Validate(nameof(Difficulty), value);
+                OnPropertyChanged("Difficulty");
+
+            }
+        }
+
+        private double _rating;
+        [Required(ErrorMessage = "Rating is required!")]
+        //[RegularExpression(@"^\d+([,]\d+)?$", ErrorMessage = "Invalid distance format (e.g., 5,4 or 123,54)")]
+        public double Rating
+        {
+            get { return this._rating; }
+            set
+            {
+                if (this._rating == value)
+                {
+                    return;
+                }
+                this._rating = value;
+                Validate(nameof(Rating), value);
+                OnPropertyChanged("Rating");
+            }
+        }
     }
 }

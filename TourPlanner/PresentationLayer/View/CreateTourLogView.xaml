@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.View"
         mc:Ignorable="d"
-        Title="CreateTourLogView" Height="400" Width="450"
+        Title="CreateTourLogView" Height="600" Width="450"
         Background="{DynamicResource WindowBrush}"
         Foreground="{DynamicResource ControlDarkBrush}"
         >
@@ -13,6 +13,12 @@
     <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
         <Grid Margin="20">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -34,6 +40,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="*"/>
+                    
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
@@ -75,7 +82,7 @@
             </Grid>
             <Label Grid.Row="6" Content="{Binding ElementName=DurationInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
-            <!-- Zeit -->
+            <!-- Distanz -->
             <Grid Grid.Row="7" Margin="0 5 0 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -92,10 +99,63 @@
                         MinWidth="140"/>
             </Grid>
             <Label Grid.Row="8" Content="{Binding ElementName=DistanceInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <!-- Diffculty -->
+            <Grid Grid.Row="9" Margin="0 5 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+   Text="Diffculty:" Margin="0 0 10 0"/>
+                <Slider Maximum="10" TickFrequency="0.5" IsSnapToTickEnabled="True" x:Name="DifficultyInput" Grid.Column="1" Value="{Binding Difficulty, UpdateSourceTrigger=PropertyChanged}"
+    
+        MinWidth="140"/>
+                <TextBox Grid.Column="2"  Text="{Binding Difficulty}" Style="{StaticResource FormTextBoxStyle}"></TextBox>
+            </Grid>
+            <Label Grid.Row="10" Content="{Binding ElementName=DfficultyInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
+
+            <!-- Rating -->
+            <Grid Grid.Row="11" Margin="0 5 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+           Text="Rating:" Margin="0 0 10 0"/>
+                <Slider Maximum="10" TickFrequency="0.5" IsSnapToTickEnabled="True" x:Name="RatingInput" Grid.Column="1" Value="{Binding Rating, UpdateSourceTrigger=PropertyChanged}"
+ 
+MinWidth="140"/>
+                <TextBox Grid.Column="2"  Text="{Binding Rating}" Style="{StaticResource FormTextBoxStyle}"></TextBox>
+            </Grid>
+            <Label Grid.Row="12" Content="{Binding ElementName=RatingInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
+
+            <!-- Comment -->
+            <Grid Grid.Row="13" Margin="0 5 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" FontSize="16" VerticalAlignment="Center" 
+   Text="Comment:" Margin="0 0 10 0"/>
+                <TextBox x:Name="CommentInput" Grid.Column="1" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         MinHeight="50"
+                         MaxLength="500"
+         Style="{StaticResource FormTextBoxStyle}" MinWidth="140"/>
+            </Grid>
+            <Label Grid.Row="14" Content="{Binding ElementName=CommentInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
 
             <!-- Buttons: Save & Cancel -->
-            <Grid Grid.Row="9" Cursor="">
+            <Grid Grid.Row="15" Cursor="">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Content="Cancel" FontSize="16" Padding="8" 
                         Command="{Binding CancelCommand}"
