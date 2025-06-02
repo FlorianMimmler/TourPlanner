@@ -8,9 +8,9 @@ namespace TourPlanner.PresentationLayer.ViewModel
     {
         public GeneralViewModel GeneralViewModel { get; }
 
-        public TabsViewModel(SelectedTourStore selectedTourStore)
+        public TabsViewModel(SelectedTourStore selectedTourStore, TourStatisticsService tourStatisticsService)
         {
-            this.GeneralViewModel = new GeneralViewModel(selectedTourStore);
+            this.GeneralViewModel = new GeneralViewModel(selectedTourStore, tourStatisticsService);
         }
     }
 }

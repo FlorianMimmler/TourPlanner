@@ -18,6 +18,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
     {
 
         private SelectedTourStore _selectedTourStore;
+        private TourStatisticsService _tourStatisticsService;
         public Tour SelectedTour => _selectedTourStore.SelectedTour;
         public string Name => SelectedTour?.Name ?? "unknown";
         public string Description => SelectedTour?.Description ?? "unknown";
@@ -26,11 +27,15 @@ namespace TourPlanner.PresentationLayer.ViewModel
         public TransportType TransportType => SelectedTour?.TransportType ?? TransportType.Unknown;
         public string Distance => SelectedTour?.Distance.ToString() ?? "0";
         public string EstimatedTime => SelectedTour?.EstimatedTime ?? "unknown";
+        public string Popularity => _tourStatisticsService.CalculatePopularity(SelectedTour).ToString() ?? "0";
+        public string ChildFriendliness => _tourStatisticsService.CalculateChildFriendliness(SelectedTour).ToString() ?? "0";
 
 
-        public GeneralViewModel(SelectedTourStore selectedTourStore)
+
+        public GeneralViewModel(SelectedTourStore selectedTourStore, TourStatisticsService tourStatisticsService)
         {
             this._selectedTourStore = selectedTourStore;
+            _tourStatisticsService = tourStatisticsService;
             _selectedTourStore.SelectedTourChanged += _selectedTourStore_SelectedTourChanged;
 
         }
@@ -49,6 +54,8 @@ namespace TourPlanner.PresentationLayer.ViewModel
             OnPropertyChanged(nameof(TransportType));
             OnPropertyChanged(nameof(Distance));
             OnPropertyChanged(nameof(EstimatedTime));
+            OnPropertyChanged(nameof(Popularity));
+            OnPropertyChanged(nameof(ChildFriendliness));
         }
     }
 }
