@@ -17,7 +17,10 @@ namespace TourPlanner.PresentationLayer.ViewModel
         private readonly TourLogService _tourLogService;
         public string Date => _tourLog.Date.ToShortDateString() ?? "";
         public string Duration => _tourLog.Duration ?? "";
-        public string Distance => _tourLog.Distance.ToString() ?? ""; 
+        public string Distance => _tourLog.Distance.ToString() ?? "";
+        public string Difficulty => _tourLog.Difficulty.ToString() ?? "";
+        public string Rating => _tourLog.Rating.ToString() ?? "";
+        public string Comment => _tourLog.Comment ?? "";
         public ICommand OpenModifyTourLogCommand { get; }
 
         public int Id=> _tourLog.Id;
@@ -47,7 +50,9 @@ namespace TourPlanner.PresentationLayer.ViewModel
             OnPropertyChanged(nameof(Distance));
             OnPropertyChanged(nameof(Duration));
             OnPropertyChanged(nameof(Date));
-
+            OnPropertyChanged(nameof(Difficulty));
+            OnPropertyChanged(nameof(Rating));
+            OnPropertyChanged(nameof(Comment));
 
         }
     }

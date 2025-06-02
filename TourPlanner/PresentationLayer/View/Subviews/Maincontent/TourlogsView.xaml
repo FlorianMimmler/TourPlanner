@@ -62,12 +62,16 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="55"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock FontSize="14" Grid.Column="0">Date</TextBlock>
                     <TextBlock FontSize="14" Grid.Column="1">Distance</TextBlock>
                     <TextBlock FontSize="14" Grid.Column="2">Duration</TextBlock>
+                    <TextBlock FontSize="14" Grid.Column="3">Difficulty</TextBlock>
+                    <TextBlock FontSize="14" Grid.Column="4">Rating</TextBlock>
 
                 </Grid>
 

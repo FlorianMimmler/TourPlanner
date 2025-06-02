@@ -76,7 +76,7 @@ namespace TourPlanner.BusinessLayer.ViewModel
                 Distance = parsedDistance,
                 TourId = SelectedTour.Id,
                 Comment = Comment,
-                Diffculty = Difficulty, 
+                Difficulty = Difficulty, 
                 Rating = Rating
             };
 

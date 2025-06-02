@@ -39,6 +39,9 @@ namespace TourPlanner.PresentationLayer.ViewModel
             Date = _tourLog.Date;
             Distance = _tourLog.Distance.ToString();
             Duration = _tourLog.Duration;
+            Difficulty = _tourLog.Difficulty;
+            Rating = _tourLog.Rating;
+            Comment = _tourLog.Comment;
 
 
             UpdateTourLogCommand = new RelayCommand(UpdateTourLog ,CanExecuteUpdateTourLog);
@@ -193,7 +196,7 @@ namespace TourPlanner.PresentationLayer.ViewModel
             _tourLog.Distance = parsedDistance;
             _tourLog.Duration = Duration;
             _tourLog.Comment = Comment;
-            _tourLog.Diffculty = Difficulty;
+            _tourLog.Difficulty = Difficulty;
             _tourLog.Rating = Rating;
 
             _tourLogService.UpdateTourLog(_tourLog);
