@@ -6,9 +6,9 @@ namespace TourPlanner.BusinessLayer.Services
     {
 
         private ITourService _tourService;
-        private TourLogService _tourLogService;
+        private ITourLogService _tourLogService;
 
-        public TourExportService(ITourService tourService, TourLogService tourLogService)
+        public TourExportService(ITourService tourService, ITourLogService tourLogService)
         {
             _tourService = tourService;
             _tourLogService = tourLogService;

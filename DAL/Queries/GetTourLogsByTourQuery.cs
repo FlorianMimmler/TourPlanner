@@ -1,19 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DAL.QueryInterfaces;
+using Microsoft.EntityFrameworkCore;
 using TourPlanner.Domain.Model;
-using DAL.QueryInterfaces;
 
 namespace DAL.Queries
 {
-    public class GetAllTourLogsQuery : DbQueryBase, IGetAllTourLogsQuery
+    public class GetTourLogsByTourQuery : DbQueryBase, IGetTourLogsByTourQuery
     {
 
-        public GetAllTourLogsQuery(TourPlannerDbContextFactory contextFactory) : base(contextFactory) { }
+        public GetTourLogsByTourQuery(TourPlannerDbContextFactory contextFactory) : base(contextFactory) { }
 
-        public async Task<IEnumerable<TourLog>> ExecuteAsync()
+        public async Task<IEnumerable<TourLog>> ExecuteAsync(Guid tourId)
         {
             using var context = ContextFactory.Create();
 
-            var tourLogsDTOs = await context.TourLogs.ToListAsync();
+            var tourLogsDTOs = await context.TourLogs.Where(tourLog => tourLog.TourId == tourId).ToListAsync();
             return tourLogsDTOs.Select(tourLog => new TourLog
             {
                 Id = tourLog.Id,
@@ -26,6 +26,5 @@ namespace DAL.Queries
                 Rating = tourLog.Rating
             });
         }
-
     }
 }

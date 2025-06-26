@@ -61,7 +61,7 @@ namespace PresentationLayer.ViewModel
             }
         }
 
-        private void _tourService_TourDeleted(int id)
+        private void _tourService_TourDeleted(Guid id)
         {
             _tours.Remove(_tours.First(t => t.Tour.Id == id));
         }

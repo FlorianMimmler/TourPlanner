@@ -18,14 +18,17 @@ namespace PresentationLayer.Commands
         {
             _executeAsync = executeAsync;
             _canExecute = canExecute;
+            _isExecuting = false;
+            RaiseCanExecuteChanged();
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
+            return _canExecute();
             return !_isExecuting && (_canExecute == null || _canExecute());
         }
 
-        public async void Execute(object parameter)
+        public async void Execute(object? parameter)
         {
             _isExecuting = true;
             RaiseCanExecuteChanged();

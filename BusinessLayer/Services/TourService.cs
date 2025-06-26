@@ -1,6 +1,6 @@
 ﻿using TourPlanner.Domain.Model;
-using TourPlanner.DAL;
-using TourPlanner.DAL.QueryInterfaces;
+using DAL;
+using DAL.QueryInterfaces;
 
 namespace TourPlanner.BusinessLayer.Services
 {
@@ -14,7 +14,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         public event Action<Tour> TourAdded;
         public event Action<Tour> TourUpdated;
-        public event Action<int> TourDeleted;
+        public event Action<Guid> TourDeleted;
 
         public TourService(IGetAllToursQuery getAllToursQuery, ICreateTourQuery createTourQuery)
         {
@@ -32,8 +32,16 @@ namespace TourPlanner.BusinessLayer.Services
             /*tour.Id = _tours.Count + 1;
             _tours.Add(tour);
             */
-            await _createTourQuery.ExecuteAsync(tour);
-            TourAdded?.Invoke(tour);
+            try
+            {
+                tour.Id = Guid.NewGuid();
+                await _createTourQuery.ExecuteAsync(tour);
+                TourAdded?.Invoke(tour);
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"[AddTour] Error: {ex.Message}");
+                throw;
+            }
         }
 
         public void UpdateTour(Tour tour)
@@ -54,7 +62,7 @@ namespace TourPlanner.BusinessLayer.Services
 
         }
 
-        public void DeleteTour(int id)
+        public void DeleteTour(Guid id)
         {
             /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
             if (tourToRemove != null)
@@ -62,7 +70,7 @@ namespace TourPlanner.BusinessLayer.Services
                 _tours.Remove(tourToRemove);
             }
             */
-            _database.DeleteTour(id);
+            //_database.DeleteTour(id);
             TourDeleted?.Invoke(id);
         }
     }

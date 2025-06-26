@@ -1,6 +1,6 @@
 ﻿using TourPlanner.Domain.Model;
 
-namespace TourPlanner.DAL
+namespace DAL
 {
     public class SingletonDatabase
     {
@@ -31,14 +31,14 @@ namespace TourPlanner.DAL
         {
             _tours = new List<Tour>()
             {
-                new() {Id = 1, Name = "Wienerwald", Description = "A nice tour", Distance = 5.5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = TransportType.Hiking, Image = ""},
-                new() {Id = 2, Name = "Dorfrunde", Description = "A really nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = TransportType.Bike, Image = ""}
+                new() {Id = new Guid(), Name = "Wienerwald", Description = "A nice tour", Distance = 5.5, EstimatedTime = "01:10", From = "here", To = "there", TransportType = TransportType.Hiking, Image = ""},
+                new() {Id = new Guid(), Name = "Dorfrunde", Description = "A really nice tour", Distance = 2, EstimatedTime = "00:30", From = "here", To = "there", TransportType = TransportType.Bike, Image = ""}
             };
 
             _tourlogs = new List<TourLog>
             {
-                new() {Distance = 5, Duration = "01:10", Date = DateTime.Now, Id=1, TourId=1, Rating = 4, Difficulty = 3, Comment = "Nice tour"},
-                new() {Distance = 2, Duration = "00:30", Date = DateTime.Now, Id=2, TourId=2, Rating = 3, Difficulty = 2, Comment = "Nice tour"}
+                new() {Distance = 5, Duration = "01:10", Date = DateTime.Now, Id=new Guid(), TourId=new Guid(), Rating = 4, Difficulty = 3, Comment = "Nice tour"},
+                new() {Distance = 2, Duration = "00:30", Date = DateTime.Now, Id=new Guid(), TourId=new Guid(), Rating = 3, Difficulty = 2, Comment = "Nice tour"}
 
             };
         }
@@ -50,7 +50,7 @@ namespace TourPlanner.DAL
 
         public Tour AddTour(Tour tour)
         {
-            if (_tours.Count == 0)
+            /*if (_tours.Count == 0)
             {
                 tour.Id = 1;
             }
@@ -58,7 +58,7 @@ namespace TourPlanner.DAL
             {
                 tour.Id = Math.Max(_tours.Count, _tours.Last<Tour>().Id) + 1;
             }
-            _tours.Add(tour);
+            _tours.Add(tour);*/
             return tour;
         }
 
@@ -79,7 +79,7 @@ namespace TourPlanner.DAL
             return true;
         }
 
-        public void DeleteTour(int id)
+        public void DeleteTour(Guid id)
         {
             var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
             if (tourToRemove != null)
@@ -94,7 +94,7 @@ namespace TourPlanner.DAL
             return _tourlogs;
         }
 
-        public IEnumerable<TourLog> GetTourLogsByTour(int tourId)
+        public IEnumerable<TourLog> GetTourLogsByTour(Guid tourId)
         {
             return _tourlogs.Where(tourlog => tourlog.TourId == tourId);
         }
@@ -102,14 +102,14 @@ namespace TourPlanner.DAL
 
         public TourLog AddTourLog(TourLog log) // to create a new log from existing tour
         {
-            log.Id = _tourlogs.Count() + 1;
+            //log.Id = _tourlogs.Count() + 1;
 
             _tourlogs.Add(log);
             return log;
 
         }
 
-        public void DeleteTourLog(int Id) // For deleting specific tourlog 
+        public void DeleteTourLog(Guid Id) // For deleting specific tourlog 
         {
             var tourLogToRemove = _tourlogs.FirstOrDefault(tourlog => tourlog.Id == Id);
             if (tourLogToRemove != null)

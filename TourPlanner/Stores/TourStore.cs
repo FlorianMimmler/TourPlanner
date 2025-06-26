@@ -52,7 +52,7 @@ namespace PresentationLayer.Stores
 
         }
 
-        public void DeleteTour(int id)
+        public void DeleteTour(Guid id)
         {
             _tourService.DeleteTour(id);
 

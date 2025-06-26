@@ -1,22 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TourPlanner.Domain.Model;
-using TourPlanner.DAL.QueryInterfaces;
+using DAL.QueryInterfaces;
 
-namespace TourPlanner.DAL.Queries
+namespace DAL.Queries
 {
-    public class GetAllToursQuery : IGetAllToursQuery
+    public class GetAllToursQuery : DbQueryBase, IGetAllToursQuery
     {
 
-        private readonly TourPlannerDbContextFactory _contextFactory;
-
-        public GetAllToursQuery(TourPlannerDbContextFactory contextFactory)
-        {
-            _contextFactory = contextFactory;
-        }
+        public GetAllToursQuery(TourPlannerDbContextFactory contextFactory) : base(contextFactory) { }
 
         public async Task<IEnumerable<Tour>> ExecuteAsync()
         {
-            using var context = _contextFactory.Create();
+            using var context = ContextFactory.Create();
 
             var toursDTOs = await context.Tours.ToListAsync();
             return toursDTOs.Select(tour => new Tour

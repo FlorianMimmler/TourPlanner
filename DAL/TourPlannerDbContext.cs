@@ -1,7 +1,7 @@
-﻿using TourPlanner.DAL.DTOs;
+﻿using DAL.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace TourPlanner.DAL
+namespace DAL
 {
     public class TourPlannerDbContext: DbContext
     {

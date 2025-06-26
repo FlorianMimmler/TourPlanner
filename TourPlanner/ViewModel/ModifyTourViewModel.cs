@@ -53,7 +53,7 @@ namespace PresentationLayer.ViewModel
             _toursService.TourDeleted += TourService_TourDeleted;
         }
 
-        private void TourService_TourDeleted(int id)
+        private void TourService_TourDeleted(Guid id)
         {
             CloseTourModificationWindow();
         }

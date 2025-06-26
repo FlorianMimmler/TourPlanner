@@ -9,8 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.DAL;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using DAL;
 using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
@@ -25,13 +24,13 @@ namespace PresentationLayer.ViewModel
 
         public event EventHandler CloseWindow;
 
-        private readonly TourLogService _tourLogService;
+        private readonly ITourLogService _tourLogService;
 
         private readonly TourLog _tourLog;
 
 
 
-        public ModifyTourLogViewModel(TourLog tourLog, TourLogService tourLogService)
+        public ModifyTourLogViewModel(TourLog tourLog, ITourLogService tourLogService)
         {
             _tourLogService = tourLogService;
             _tourLog = tourLog;
@@ -147,7 +146,7 @@ namespace PresentationLayer.ViewModel
         }
 
 
-        private void TourLogService_TourLogDeleted(int id)
+        private void TourLogService_TourLogDeleted(Guid id)
         {
             CloseTourLogModificationWindow();
         }

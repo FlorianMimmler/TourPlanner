@@ -114,7 +114,7 @@
         MinWidth="140"/>
                 <TextBox Grid.Column="2"  Text="{Binding Difficulty}" Style="{StaticResource FormTextBoxStyle}"></TextBox>
             </Grid>
-            <Label Grid.Row="10" Content="{Binding ElementName=DfficultyInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <Label Grid.Row="10" Content="{Binding ElementName=DifficultyInput, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
 
 
             <!-- Rating -->

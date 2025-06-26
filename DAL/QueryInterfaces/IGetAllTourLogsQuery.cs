@@ -1,6 +1,6 @@
 ﻿using TourPlanner.Domain.Model;
 
-namespace TourPlanner.DAL.QueryInterfaces
+namespace DAL.QueryInterfaces
 {
     public interface IGetAllTourLogsQuery
     {

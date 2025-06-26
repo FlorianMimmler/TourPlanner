@@ -5,21 +5,21 @@ namespace TourPlanner.BusinessLayer.Services
     public class TourStatisticsService
     {
 
-        private TourLogService _tourLogService;
+        private ITourLogService _tourLogService;
 
-        public TourStatisticsService(TourLogService tourLogService)
+        public TourStatisticsService(ITourLogService tourLogService)
         {
             _tourLogService = tourLogService;
         }
 
-        public double CalculatePopularity(Tour tour)
+        public async Task<double> CalculatePopularity(Tour tour)
         {
             if (tour == null)
             {
                 //throw new ArgumentNullException(nameof(tour), "Tour cannot be null");
                 return 0;
             }
-            var tourlogs = _tourLogService.GetTourlogsByTour(tour.Id);
+            var tourlogs = await _tourLogService.GetTourlogsByTour(tour.Id);
 
             var tourlogsCount = tourlogs.Count();
 
@@ -28,14 +28,14 @@ namespace TourPlanner.BusinessLayer.Services
             return Math.Min(Math.Round(popularity, 1), 10);
         }
 
-        public double CalculateChildFriendliness(Tour tour)
+        public async Task<double> CalculateChildFriendliness(Tour tour)
         {
             if (tour == null)
             {
                 //throw new ArgumentNullException(nameof(tour), "Tour cannot be null");
                 return 0;
             }
-            var tourlogs = _tourLogService.GetTourlogsByTour(tour.Id);
+            var tourlogs = await _tourLogService.GetTourlogsByTour(tour.Id);
 
             if(tourlogs.Count() == 0)
             {

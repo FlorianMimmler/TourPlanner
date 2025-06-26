@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.DAL;
+using DAL;
 using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
@@ -22,9 +22,9 @@ namespace PresentationLayer.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ITourService _toursService;
-        private TourLogService _tourlogService; // to change logs after adding tour
+        private ITourLogService _tourlogService; // to change logs after adding tour
 
-        public CreateTourLogViewModel(ITourService toursService, TourLogService tourlogService, Tour? selectedTour)
+        public CreateTourLogViewModel(ITourService toursService, ITourLogService tourlogService, Tour? selectedTour)
         {
             _toursService = toursService;
             _tourlogService = tourlogService;
@@ -93,9 +93,9 @@ namespace PresentationLayer.ViewModel
             CloseView();
         }
 
-        private Tour? _selectedTour;
+        private Tour _selectedTour;
         [Required(ErrorMessage = "Tour is required!")]
-        public Tour? SelectedTour {
+        public Tour SelectedTour {
             get { return _selectedTour; }
             set
             {

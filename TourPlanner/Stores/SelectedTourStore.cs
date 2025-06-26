@@ -43,7 +43,7 @@ namespace PresentationLayer.Stores
             SelectedTour = tour;
         }
 
-        private void TourService_TourDeleted(int id)
+        private void TourService_TourDeleted(Guid id)
         {
             if(id == SelectedTour?.Id)
             {

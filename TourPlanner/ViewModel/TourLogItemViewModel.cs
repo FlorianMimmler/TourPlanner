@@ -14,7 +14,7 @@ namespace PresentationLayer.ViewModel
     public class TourLogItemViewModel : ViewModelBase
     {
         private  TourLog _tourLog;
-        private readonly TourLogService _tourLogService;
+        private readonly ITourLogService _tourLogService;
         public string Date => _tourLog.Date.ToShortDateString() ?? "";
         public string Duration => _tourLog.Duration ?? "";
         public string Distance => _tourLog.Distance.ToString() ?? "";
@@ -23,8 +23,8 @@ namespace PresentationLayer.ViewModel
         public string Comment => _tourLog.Comment ?? "";
         public ICommand OpenModifyTourLogCommand { get; }
 
-        public int Id=> _tourLog.Id;
-        public TourLogItemViewModel(TourLog tourLog,TourLogService tourLogService)
+        public Guid Id => _tourLog.Id;
+        public TourLogItemViewModel(TourLog tourLog, ITourLogService tourLogService)
         {
             _tourLog = tourLog;
             _tourLogService = tourLogService;
@@ -34,7 +34,7 @@ namespace PresentationLayer.ViewModel
 
         private void OpenModifyTourLogView()
         {
-            ModifyTourLogViewModel modifyTourLogViewModel = new(_tourLog,_tourLogService);
+            ModifyTourLogViewModel modifyTourLogViewModel = new(_tourLog, _tourLogService);
             ModifyTourLogView modifyTourLogView = new()
             {
                 DataContext = modifyTourLogViewModel
