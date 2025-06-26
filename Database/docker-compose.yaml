@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    container_name: tourplanner_postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - tourplanner_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=TourPlanner
+
+volumes:
+  tourplanner_volume:

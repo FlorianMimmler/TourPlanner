@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.BusinessLayer.Model;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.PresentationLayer.Stores;
-using TourPlanner.PresentationLayer.ViewModel;
 using NSubstitute;
+using PresentationLayer.ViewModel;
+using PresentationLayer.Stores;
 
 namespace TourPlanner_UnitTests
 {

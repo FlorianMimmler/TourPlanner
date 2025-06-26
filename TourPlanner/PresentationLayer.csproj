@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\img\map_placeholder.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="res.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\img\map_placeholder.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+
+</Project>

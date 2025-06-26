@@ -1,6 +1,6 @@
+using PresentationLayer.Stores;
 using TourPlanner;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.PresentationLayer.Stores;
 using TourPlanner.PresentationLayer.ViewModel;
 
 namespace TourPlanner_UnitTests
