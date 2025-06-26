@@ -11,7 +11,10 @@
 
     <Menu Background="{DynamicResource ControlLightBrush}" Foreground="{DynamicResource ControlDarkBrush}">
         <MenuItem Header="File"></MenuItem>
-        <MenuItem Header="Edit"></MenuItem>
+        <MenuItem Header="Import/Export">
+            <MenuItem Header="Import Tour" Command="{Binding OpenImportTourFormCommand}"/>
+            <MenuItem Header="Export Tour" Command="{Binding OpenExportTourFormCommand}"/>
+        </MenuItem>
         <MenuItem Header="Themes">
             <MenuItem Foreground="black" Header="Light" Command="{Binding LightThemeCommand}"/>
             <MenuItem Foreground="black" Header="Dark" Command="{Binding DarkThemeCommand}" />

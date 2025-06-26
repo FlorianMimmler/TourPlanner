@@ -57,7 +57,14 @@ namespace TourPlanner.DAL
 
         public Tour AddTour(Tour tour)
         {
-            tour.Id = _tours.Count() + 1;
+            if (_tours.Count == 0)
+            {
+                tour.Id = 1;
+            }
+            else
+            {
+                tour.Id = Math.Max(_tours.Count, _tours.Last<Tour>().Id) + 1;
+            }
             _tours.Add(tour);
             return tour;
         }

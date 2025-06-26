@@ -42,6 +42,11 @@ namespace TourPlanner.BusinessLayer.Services
             }
             var tourlogs = _tourLogService.GetTourlogsByTour(tour.Id);
 
+            if(tourlogs.Count() == 0)
+            {
+                return 0;
+            }
+
             double avgDifficulty = tourlogs.Average(log => log.Difficulty);
             double avgTime = tourlogs
                 .Select(log => ParseTimeToMinutes(log.Duration))

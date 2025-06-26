@@ -19,6 +19,8 @@ public partial class App : Application
     private readonly ITourService _tourService;
     private TourLogService _tourLogService;
     private TourStatisticsService _tourStatisticsService;
+    private TourOutputService _tourOutputService;
+    private TourImportService _tourImportService;
 
     public App()
     {
@@ -26,13 +28,15 @@ public partial class App : Application
         _selectedTourStore = new SelectedTourStore(_tourService);
         _tourLogService = new TourLogService();
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
+        _tourOutputService = new TourOutputService(_tourService, _tourLogService);
+        _tourImportService = new TourImportService(_tourService, _tourLogService);
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
         MainWindow = new MainView()
         {
-            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService)
+            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService)
         };
         MainWindow.Show();
 
