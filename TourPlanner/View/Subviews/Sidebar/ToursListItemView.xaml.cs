@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
+namespace PresentationLayer.View.Subviews.Sidebar
 {
     /// <summary>
     /// Interaktionslogik für TourListItemView.xaml

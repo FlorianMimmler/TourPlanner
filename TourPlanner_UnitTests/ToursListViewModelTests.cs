@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourPlanner.BusinessLayer.Model;
+using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
 using NSubstitute;
 using PresentationLayer.ViewModel;

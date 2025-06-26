@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
 using TourPlanner.DAL;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
 {

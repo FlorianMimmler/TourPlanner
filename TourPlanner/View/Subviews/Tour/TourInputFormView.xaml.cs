@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Tour
+namespace PresentationLayer.View.Subviews.Tour
 {
     /// <summary>
     /// Interaktionslogik für TourInputForm.xaml

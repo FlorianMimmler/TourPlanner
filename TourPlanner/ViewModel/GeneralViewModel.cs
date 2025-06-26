@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using TourPlanner.Domain.Model;
 using System.Diagnostics.Metrics;
 using System.Windows;
-using TourPlanner.PresentationLayer.View.Subviews.Maincontent;
+using PresentationLayer.View.Subviews.Maincontent;
 using TourPlanner.BusinessLayer.Services;
 using PresentationLayer.Stores;
 

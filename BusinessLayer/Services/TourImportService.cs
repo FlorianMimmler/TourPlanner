@@ -14,7 +14,7 @@ namespace TourPlanner.BusinessLayer.Services
             _tourLogService = tourLogService;
         }
 
-        public void ImportToursFromJson(string filePath = "../tourdata.json")
+        public async Task ImportToursFromJson(string filePath = "../tourdata.json")
         {
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("JSON file not found", filePath);
@@ -45,14 +45,14 @@ namespace TourPlanner.BusinessLayer.Services
                 };
 
                 // Check if the tour already exists
-                var existingTour = _tourService.GetTours().FirstOrDefault(t => t.Id == tour.Id);
+                var existingTour = (await _tourService.GetTours()).FirstOrDefault(t => t.Id == tour.Id);
                 if (existingTour != null)
                 {
                     _tourService.UpdateTour(tour);
                 }
                 else
                 {
-                    _tourService.AddTour(tour);
+                    await _tourService.AddTour(tour);
                 }
             }
         }

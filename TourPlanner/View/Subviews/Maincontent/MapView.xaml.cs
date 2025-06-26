@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Maincontent
+namespace PresentationLayer.View.Subviews.Maincontent
 {
     /// <summary>
     /// Interaction logic for MaincontentMap.xaml

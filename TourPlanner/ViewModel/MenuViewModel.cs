@@ -1,12 +1,12 @@
 ﻿using Microsoft.Win32;
 using PresentationLayer;
+using PresentationLayer.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.BusinessLayer.Services;
 
 namespace PresentationLayer.ViewModel
@@ -21,15 +21,15 @@ namespace PresentationLayer.ViewModel
 
         public ICommand OpenImportTourFormCommand { get; }
 
-        private TourOutputService _tourOutputService;
+        private TourExportService _tourOutputService;
         private TourImportService _tourImportService;
 
-        public MenuViewModel(TourOutputService tourOutputService, TourImportService tourImportService)
+        public MenuViewModel(TourExportService tourOutputService, TourImportService tourImportService)
         {
             LightThemeCommand = new RelayCommand(SwitchToLightTheme);
             DarkThemeCommand = new RelayCommand(SwitchToDarkTheme);
-            OpenExportTourFormCommand = new RelayCommand(OpenExportTourForm);
-            OpenImportTourFormCommand = new RelayCommand(OpenImportTourForm);
+            OpenExportTourFormCommand = new AsyncRelayCommand(OpenExportTourForm);
+            OpenImportTourFormCommand = new AsyncRelayCommand(OpenImportTourForm);
             _tourOutputService = tourOutputService;
             _tourImportService = tourImportService;
         }
@@ -44,7 +44,7 @@ namespace PresentationLayer.ViewModel
             AppTheme.ChangeTheme(new Uri("Resources/themes/light.xaml", UriKind.Relative));
         }
 
-        public void OpenExportTourForm()
+        public async Task OpenExportTourForm()
         {
             var dialog = new OpenFolderDialog
             {
@@ -54,12 +54,12 @@ namespace PresentationLayer.ViewModel
 
             if (dialog.ShowDialog() == true)
             {
-                _tourOutputService.ExportToursToJson(dialog.FolderName);
+                await _tourOutputService.ExportToursToJson(dialog.FolderName);
             }
             
         }
 
-        public void OpenImportTourForm()
+        public async Task OpenImportTourForm()
         {
             var dialog = new OpenFileDialog
             {
@@ -69,7 +69,7 @@ namespace PresentationLayer.ViewModel
 
             if (dialog.ShowDialog() == true)
             {
-                _tourImportService.ImportToursFromJson(dialog.FileName);
+                await _tourImportService.ImportToursFromJson(dialog.FileName);
             }
         }
 

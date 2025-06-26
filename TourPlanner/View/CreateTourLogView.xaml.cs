@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourPlanner.View
+namespace PresentationLayer.View
 {
     /// <summary>
     /// Interaction logic for CreateTourLogView.xaml

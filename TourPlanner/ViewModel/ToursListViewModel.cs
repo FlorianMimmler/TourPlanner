@@ -43,15 +43,22 @@ namespace PresentationLayer.ViewModel
             _selectedTourStore = selectedTourStore;
             _tours = new ObservableCollection<TourListItemViewModel>();
 
-            foreach (var tour in _tourService.GetTours())
-            {
-                var tourListItemViewModel = new TourListItemViewModel(tour, tourService);
-                _tours.Add(tourListItemViewModel);
-            }
+            Load();
 
             _tourService.TourAdded += TourService_TourAdded;
             _tourService.TourUpdated += TourService_TourUpdated;
             _tourService.TourDeleted += _tourService_TourDeleted;
+        }
+
+        private async Task Load()
+        {
+            var tours = await _tourService.GetTours();
+
+            foreach (var tour in tours)
+            {
+                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService);
+                _tours.Add(tourListItemViewModel);
+            }
         }
 
         private void _tourService_TourDeleted(int id)

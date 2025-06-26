@@ -35,6 +35,9 @@ namespace TourPlanner.DAL.Queries
                 Rating = tourLog.Rating
             };
 
+            context.TourLogs.Add(tourLogDTO);
+            await context.SaveChangesAsync();
+
         }
 
     }

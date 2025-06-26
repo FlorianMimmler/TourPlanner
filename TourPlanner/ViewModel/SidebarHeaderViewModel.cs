@@ -1,12 +1,12 @@
-﻿using System;
+﻿using PresentationLayer.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.PresentationLayer.View;
+using PresentationLayer.View;
 
 namespace PresentationLayer.ViewModel
 {

@@ -18,7 +18,7 @@ namespace DAL
 
             // Replace with your actual connection string
             var connectionString = "Host=localhost;Port=5432;Database=TourPlanner;Username=admin;Password=password;";
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
 
             return new TourPlannerDbContext(optionsBuilder.Options);
         }

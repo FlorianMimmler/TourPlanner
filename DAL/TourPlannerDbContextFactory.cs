@@ -10,16 +10,16 @@ namespace TourPlanner.DAL
     public class TourPlannerDbContextFactory
     {
 
-        private readonly DbContextOptions _options;
+        private readonly DbContextOptions<TourPlannerDbContext> _options;
 
-        public TourPlannerDbContextFactory(DbContextOptions options)
+        public TourPlannerDbContextFactory(DbContextOptions<TourPlannerDbContext> options)
         {
             _options = options;
         }
 
         public TourPlannerDbContext Create()
         {
-            return new TourPlannerDbContext((DbContextOptions<TourPlannerDbContext>)_options);
+            return new TourPlannerDbContext(_options);
         }
 
     }

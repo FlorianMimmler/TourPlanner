@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Menu
+namespace PresentationLayer.View.Subviews.Menu
 {
     /// <summary>
     /// Interaktionslogik für MenuView.xaml

@@ -2,23 +2,23 @@
 
 namespace TourPlanner.BusinessLayer.Services
 {
-    public class TourOutputService
+    public class TourExportService
     {
 
         private ITourService _tourService;
         private TourLogService _tourLogService;
 
-        public TourOutputService(ITourService tourService, TourLogService tourLogService)
+        public TourExportService(ITourService tourService, TourLogService tourLogService)
         {
             _tourService = tourService;
             _tourLogService = tourLogService;
         }
 
 
-        public void ExportToursToJson(string filePath = "..")
+        public async Task ExportToursToJson(string filePath = "..")
         {
 
-            var tours = _tourService.GetTours();
+            var tours = await _tourService.GetTours();
 
             var json = JsonConvert.SerializeObject(tours, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(filePath + "/tourdata.json", json);

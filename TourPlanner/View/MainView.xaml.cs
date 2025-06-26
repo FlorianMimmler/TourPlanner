@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.PresentationLayer.View.Subviews.Sidebar;
-using TourPlanner.PresentationLayer.ViewModel;
+using PresentationLayer.View.Subviews.Sidebar;
+using PresentationLayer.ViewModel;
 
-namespace TourPlanner.PresentationLayer.View
+namespace PresentationLayer.View
 {
     /// <summary>
     /// Interaktionslogik für MainView.xaml

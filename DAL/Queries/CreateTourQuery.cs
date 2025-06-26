@@ -36,6 +36,9 @@ namespace TourPlanner.DAL.Queries
                 Image = tour.Image
             };
 
+            context.Tours.Add(tourDTO);
+            await context.SaveChangesAsync();
+
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TourPlanner.PresentationLayer.ViewModel;
+using PresentationLayer.ViewModel;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
+namespace PresentationLayer.View.Subviews.Sidebar
 {
     /// <summary>
     /// Interaktionslogik für SidebarHeaderView.xaml

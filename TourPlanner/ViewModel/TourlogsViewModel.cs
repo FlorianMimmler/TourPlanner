@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.View;
+using PresentationLayer.View;
+using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
 {

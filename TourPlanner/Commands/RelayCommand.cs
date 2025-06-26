@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace TourPlanner.BusinessLayer.Commands
+namespace PresentationLayer.Commands
 {
     class RelayCommand : ICommand
     {

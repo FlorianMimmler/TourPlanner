@@ -1,6 +1,6 @@
 ﻿using PresentationLayer.Stores;
 using TourPlanner.BusinessLayer.Services;
-using TourPlanner.PresentationLayer.View.Subviews.Maincontent;
+using PresentationLayer.View.Subviews.Maincontent;
 
 namespace PresentationLayer.ViewModel
 {

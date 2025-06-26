@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
 using TourPlanner.DAL;
+using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
 {
@@ -35,6 +35,8 @@ namespace PresentationLayer.ViewModel
             _tourlogService.TourLogAdded += TourLogService_TourLogAdded;
 
             Date = DateTime.Now;
+
+            LoadToursAsync();
         }
 
         private void TourLogService_TourLogAdded(TourLog log)
@@ -104,15 +106,18 @@ namespace PresentationLayer.ViewModel
                 }
                 
             }
-        } 
-
-        public IEnumerable<Tour> Tours
-        {
-            get
-            {
-                return _toursService.GetTours();
-            }
         }
+
+        public async Task LoadToursAsync()
+        {
+            var loadedTours = await _toursService.GetTours();
+            _tours = loadedTours.ToList();
+            OnPropertyChanged(nameof(Tours));
+        }
+
+        private List<Tour> _tours = new();
+
+        public IEnumerable<Tour> Tours => _tours;
 
         private DateTime _date;
         [Required(ErrorMessage = "Date is required!")]

@@ -3,7 +3,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using PresentationLayer.ViewModel;
-using TourPlanner.PresentationLayer.View;
+using PresentationLayer.View;
 using TourPlanner.BusinessLayer.Services;
 using TourPlanner.DAL.QueryInterfaces;
 using TourPlanner.DAL.Queries;
@@ -23,7 +23,7 @@ public partial class App : Application
     private readonly ITourService _tourService;
     private TourLogService _tourLogService;
     private TourStatisticsService _tourStatisticsService;
-    private TourOutputService _tourOutputService;
+    private TourExportService _tourOutputService;
     private TourImportService _tourImportService;
 
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
@@ -32,12 +32,12 @@ public partial class App : Application
     private readonly IGetAllTourLogsQuery _getAllTourLogsQuery;
     private readonly ICreateTourLogQuery _createTourLogQuery;
 
-    private readonly string _connectionString = "Host=localhost;Port=5432;Database=TourPlanner;Username=admin;Password=password;";
+    private readonly string _connectionString = $"Host=localhost;Port=5432;Database=TourPlanner;Username=admin;Password=password;";
 
     public App()
     {
         _tourPlannerDbContextFactory = new TourPlannerDbContextFactory(
-            (DbContextOptions<TourPlannerDbContext>)new DbContextOptionsBuilder().UseSqlServer(_connectionString).Options);
+            new DbContextOptionsBuilder<TourPlannerDbContext>().UseNpgsql(_connectionString).Options);
         _getAllToursQuery = new GetAllToursQuery(_tourPlannerDbContextFactory);
         _createTourQuery = new CreateTourQuery(_tourPlannerDbContextFactory);
         _getAllTourLogsQuery = new GetAllTourLogsQuery(_tourPlannerDbContextFactory);
@@ -46,7 +46,7 @@ public partial class App : Application
         _selectedTourStore = new SelectedTourStore(_tourService);
         _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery);
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
-        _tourOutputService = new TourOutputService(_tourService, _tourLogService);
+        _tourOutputService = new TourExportService(_tourService, _tourLogService);
         _tourImportService = new TourImportService(_tourService, _tourLogService);
     }
 
@@ -54,7 +54,7 @@ public partial class App : Application
     {
         using(TourPlannerDbContext context = _tourPlannerDbContextFactory.Create())
         {
-            context.Database.Migrate();
+            context.Database.EnsureCreated();
         }
 
         MainWindow = new MainView()

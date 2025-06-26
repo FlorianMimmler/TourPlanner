@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourPlanner.PresentationLayer.View
+namespace PresentationLayer.View
 {
     /// <summary>
     /// Interaktionslogik für ModifyTourView.xaml

@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using TourPlanner.BusinessLayer.Commands;
 using TourPlanner.Domain.Model;
 using TourPlanner.BusinessLayer.Services;
+using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
 {

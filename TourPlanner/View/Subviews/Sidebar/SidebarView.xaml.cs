@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TourPlanner.BusinessLayer.Services;
 
-namespace TourPlanner.PresentationLayer.View.Subviews.Sidebar
+namespace PresentationLayer.View.Subviews.Sidebar
 {
     /// <summary>
     /// Interaktionslogik für SidebarView.xaml
