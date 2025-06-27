@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.View;
 using PresentationLayer.Commands;
 

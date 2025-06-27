@@ -2,7 +2,7 @@
 using DAL;
 using DAL.QueryInterfaces;
 
-namespace TourPlanner.BusinessLayer.Services
+namespace BusinessLayer.Services
 {
     public class TourService : ITourService
     {

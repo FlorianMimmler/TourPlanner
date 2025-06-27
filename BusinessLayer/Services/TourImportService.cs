@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using TourPlanner.Domain.Model;
 
-namespace TourPlanner.BusinessLayer.Services
+namespace BusinessLayer.Services
 {
     public class TourImportService
     {

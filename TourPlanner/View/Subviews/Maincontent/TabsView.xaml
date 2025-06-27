@@ -139,7 +139,7 @@
             <maincontent:GeneralView DataContext="{Binding GeneralViewModel}"></maincontent:GeneralView>
         </TabItem>
         <TabItem Header="Route">
-            <maincontent:MapView Padding="10"></maincontent:MapView>
+            <maincontent:MapView DataContext="{Binding MapViewModel}"></maincontent:MapView>
         </TabItem>
         <TabItem Header="Misc">
             <maincontent:MiscView></maincontent:MiscView>

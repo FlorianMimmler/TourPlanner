@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.Domain.Model;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.View.Subviews.Sidebar;
 
 namespace PresentationLayer.ViewModel
@@ -17,10 +17,10 @@ namespace PresentationLayer.ViewModel
         public SidebarViewModel SidebarViewModel { get; }
         public MainContentViewModel MainContentViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
-        public MainViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ITourLogService tourlogsService, TourStatisticsService tourStatisticsService, TourExportService tourOutputService, TourImportService tourImportService)
+        public MainViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ITourLogService tourlogsService, TourStatisticsService tourStatisticsService, TourExportService tourOutputService, TourImportService tourImportService, IMapService mapService)
         {
             SidebarViewModel = new SidebarViewModel(_selectedTourStore, tourService);
-            MainContentViewModel = new MainContentViewModel(_selectedTourStore, tourService, tourlogsService, tourStatisticsService);
+            MainContentViewModel = new MainContentViewModel(_selectedTourStore, tourService, tourlogsService, tourStatisticsService, mapService);
             MenuViewModel = new MenuViewModel(tourOutputService, tourImportService);
         }
     }

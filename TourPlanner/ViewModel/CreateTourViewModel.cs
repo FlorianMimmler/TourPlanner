@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TourPlanner.BusinessLayer.Services
+namespace BusinessLayer.Services
 {
     public class TourExportService
     {

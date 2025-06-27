@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using PresentationLayer.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,36 @@ namespace PresentationLayer.View.Subviews.Maincontent
         public MapView()
         {
             InitializeComponent();
+
+            webView.Loaded += InitView;
+        }
+
+        private async void InitView(object sender, RoutedEventArgs e)
+        {
+            var exeDir = AppDomain.CurrentDomain.BaseDirectory;
+            var filePath = System.IO.Path.Combine(exeDir, "Map", "map.html");
+            var uri = new Uri(filePath);
+            await webView.EnsureCoreWebView2Async();
+            webView.CoreWebView2.Settings.IsStatusBarEnabled = false;
+            webView.CoreWebView2.Navigate(uri.AbsoluteUri);
+
+            webView.CoreWebView2.NavigationCompleted += CallUpdateMap;
+
+            if (DataContext is MapViewModel vm)
+            {
+                vm.CallJsFunction = async (jsCode) =>
+                {
+                    await webView.CoreWebView2.ExecuteScriptAsync(jsCode);
+                };
+            }
+        }
+
+        private void CallUpdateMap(object? sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            if (DataContext is MapViewModel vm)
+            {
+                vm.UpdateMap();
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using TourPlanner.Domain.Model;
 
-namespace TourPlanner.BusinessLayer.Services
+namespace BusinessLayer.Services
 {
     public interface ITourService
     {

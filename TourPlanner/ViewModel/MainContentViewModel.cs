@@ -1,5 +1,5 @@
 ﻿using PresentationLayer.Stores;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.View.Subviews.Maincontent;
 
 namespace PresentationLayer.ViewModel
@@ -9,9 +9,9 @@ namespace PresentationLayer.ViewModel
         public TabsViewModel TabsViewModel { get;}
         public TourlogsViewModel TourlogsViewModel { get; }
 
-        public MainContentViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ITourLogService tourlogsService, TourStatisticsService tourStatisticsService)
+        public MainContentViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ITourLogService tourlogsService, TourStatisticsService tourStatisticsService, IMapService mapService)
         {
-            TabsViewModel = new TabsViewModel(selectedTourStore, tourStatisticsService);
+            TabsViewModel = new TabsViewModel(selectedTourStore, tourStatisticsService, mapService);
             TourlogsViewModel = new TourlogsViewModel(tourService, tourlogsService, selectedTourStore);
         }
     }

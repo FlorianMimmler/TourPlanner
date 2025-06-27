@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using PresentationLayer.ViewModel;
 using PresentationLayer.View;
-using TourPlanner.BusinessLayer.Services;
 using DAL.QueryInterfaces;
 using DAL.Queries;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using PresentationLayer.Stores;
 using System.Configuration;
+using System.Runtime.CompilerServices;
+using BusinessLayer.Services;
 
 namespace TourPlanner;
 
@@ -23,6 +24,7 @@ public partial class App : Application
     private TourStatisticsService _tourStatisticsService;
     private TourExportService _tourOutputService;
     private TourImportService _tourImportService;
+    private IMapService _mapService;
 
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
     private readonly IGetAllToursQuery _getAllToursQuery;
@@ -37,6 +39,7 @@ public partial class App : Application
     private readonly IDeleteTourLogQuery _deleteTourLogQuery;
 
     private readonly string? _connectionString = ConfigurationManager.ConnectionStrings["connection_string"]?.ConnectionString;
+    private readonly string? _orsApiKey = ConfigurationManager.AppSettings["ORSApiKey"];
 
     public App()
     {
@@ -57,6 +60,7 @@ public partial class App : Application
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
         _tourOutputService = new TourExportService(_tourService, _tourLogService);
         _tourImportService = new TourImportService(_tourService, _tourLogService);
+        _mapService = new MapService(_orsApiKey);
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -68,7 +72,7 @@ public partial class App : Application
 
         MainWindow = new MainView()
         {
-            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService)
+            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService)
         };
         MainWindow.Show();
 

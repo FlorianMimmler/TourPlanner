@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 
 namespace PresentationLayer.ViewModel
 {

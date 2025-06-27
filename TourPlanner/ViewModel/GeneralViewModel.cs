@@ -9,7 +9,7 @@ using TourPlanner.Domain.Model;
 using System.Diagnostics.Metrics;
 using System.Windows;
 using PresentationLayer.View.Subviews.Maincontent;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.Stores;
 
 namespace PresentationLayer.ViewModel
