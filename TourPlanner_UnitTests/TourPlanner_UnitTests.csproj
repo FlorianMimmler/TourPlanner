@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TourPlanner\TourPlanner.csproj" />
+    <ProjectReference Include="..\TourPlanner\PresentationLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="PresentationLayer.View.Subviews.Sidebar.SidebarHeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PresentationLayer.View.Subviews.Sidebar"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800">
+    <Grid Margin="0 2 0 2" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" FontSize="18" Foreground="{DynamicResource ControlDarkBrush}">Tours</TextBlock>
+        <Button Grid.Column="1" Padding="4,2" Command="{Binding OpenCreateTourCommand}" Cursor="Hand">
+            <Viewbox Width="14" Height="14">
+                <Path 
+                Stretch="Uniform"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Data="M468.83-469.33H253.67v-22.34h215.16v-215.16h22.34v215.16h215.16v22.34H491.17v215.16h-22.34v-215.16Z"
+                Fill="{DynamicResource ControlDarkBrush}" />
+            </Viewbox>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <!-- Flat blue color -->
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ControlDarkBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
+                    <!-- White text -->
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border 
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="4"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover Effect -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <!-- Slightly darker blue -->
+                                    </Trigger>
+                                    <!-- Pressed Effect -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#1f618d"/>
+                                        <!-- Even darker blue -->
+                                    </Trigger>
+                                    <!-- Disabled Effect -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="{DynamicResource DisabledControlBrushLight}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+
+        </Button>
+    </Grid>
+</UserControl>

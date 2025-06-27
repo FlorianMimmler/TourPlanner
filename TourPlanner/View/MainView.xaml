@@ -1,0 +1,46 @@
+﻿<Window x:Class="PresentationLayer.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresentationLayer.View" xmlns:sys="clr-namespace:System;assembly=netstandard"
+        xmlns:sidebar="clr-namespace:PresentationLayer.View.Subviews.Sidebar" 
+        xmlns:menu="clr-namespace:PresentationLayer.View.Subviews.Menu" 
+        xmlns:maincontent="clr-namespace:PresentationLayer.View.Subviews.Maincontent" 
+        xmlns:vms="clr-namespace:PresentationLayer.ViewModel"
+        mc:Ignorable="d"
+        Title="Tour Planner" Height="600" Width="900"
+        Background="{DynamicResource WindowBrush}">
+
+    <ScrollViewer HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto">
+        <Grid>
+            <DockPanel LastChildFill="True">
+            
+                <!-- Top Menu -->
+                <menu:MenuView DockPanel.Dock="Top" DataContext="{Binding MenuViewModel}"></menu:MenuView>
+
+                <!-- Main Layout -->
+                <Grid DockPanel.Dock="Top" Margin="5, 10" Cursor="">
+                    <Grid.ColumnDefinitions>
+                        <!-- Sidebar -->
+                        <ColumnDefinition Width="200"/>
+                        <!-- Spacer Column for the Border -->
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Main Content -->
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sidebar -->
+                    <sidebar:SidebarView x:Name="sidebarView" DataContext="{Binding SidebarViewModel}" Grid.Column="0" Margin="5 0 5 0"></sidebar:SidebarView>
+
+                    <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="{DynamicResource BorderLightBrush}" />
+                
+                    <!-- Main Content -->
+                    <maincontent:MaincontentView DataContext="{Binding MainContentViewModel}" Grid.Column="2" Margin="5 0 5 0"></maincontent:MaincontentView>
+            
+            
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
