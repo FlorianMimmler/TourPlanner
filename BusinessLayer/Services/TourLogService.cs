@@ -12,16 +12,20 @@ namespace TourPlanner.BusinessLayer.Services
         private readonly IGetAllTourLogsQuery _getAllTourLogsQuery;
         private readonly ICreateTourLogQuery _createTourLogQuery;
         private readonly IGetTourLogsByTourQuery _getTourLogsByTourQuery;
+        private readonly IUpdateTourLogQuery _updateTourLogQuery;
+        private readonly IDeleteTourLogQuery _deleteTourLogQuery;
 
         public event Action<TourLog> TourLogAdded;
         public event Action<TourLog> TourLogUpdated;
         public event Action<Guid> TourLogDeleted;
 
-        public TourLogService(IGetAllTourLogsQuery getAllTourLogsQuery, ICreateTourLogQuery createTourLogQuery, IGetTourLogsByTourQuery getTourLogsByTourQuery)
+        public TourLogService(IGetAllTourLogsQuery getAllTourLogsQuery, ICreateTourLogQuery createTourLogQuery, IGetTourLogsByTourQuery getTourLogsByTourQuery, IUpdateTourLogQuery updateTourLogQuery, IDeleteTourLogQuery deleteTourLogQuery)
         {
             _getAllTourLogsQuery = getAllTourLogsQuery;
             _createTourLogQuery = createTourLogQuery;
             _getTourLogsByTourQuery = getTourLogsByTourQuery;
+            _updateTourLogQuery = updateTourLogQuery;
+            _deleteTourLogQuery = deleteTourLogQuery;
         }
 
         public async Task<IEnumerable<TourLog>> GetTourlogs()
@@ -34,48 +38,23 @@ namespace TourPlanner.BusinessLayer.Services
             return await _getTourLogsByTourQuery.ExecuteAsync(tourId);
         }
 
-        public async Task AddTourLog(TourLog log)
+        public async Task AddTourLog(TourLog tourlog)
         {
-            log.Id = Guid.NewGuid();
-            await _createTourLogQuery.ExecuteAsync(log);
-            TourLogAdded?.Invoke(log);
+            await _createTourLogQuery.ExecuteAsync(tourlog);
+            TourLogAdded?.Invoke(tourlog);
         }
 
-        public void DeleteTour(Guid tourlogid)
+        public async Task DeleteTourLog(TourLog tourlog)
         {
-            /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
-            if (tourToRemove != null)
-            {
-                _tours.Remove(tourToRemove);
-            }
-            */
-            //_database.DeleteTour(tourlogid);
-            TourLogDeleted?.Invoke(tourlogid);
-        }
-
-        public void DeleteTourLog(Guid id)
-        {
-            /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
-            if (tourToRemove != null)
-            {
-                _tours.Remove(tourToRemove);
-            }
-            */
-            //_database.DeleteTourLog(id);
-            TourLogDeleted?.Invoke(id);
+            var success = await _deleteTourLogQuery.ExecuteAsync(tourlog);
+            if(success) TourLogDeleted?.Invoke(tourlog.Id);
         }
 
 
-        public void UpdateTourLog(TourLog tourlog)
+        public async Task UpdateTourLog(TourLog tourlog)
         {
-            /*var tourToRemove = _tours.FirstOrDefault(t => t.Id == id);
-            if (tourToRemove != null)
-            {
-                _tours.Remove(tourToRemove);
-            }
-            */
-            _database.UpdateTourLogs(tourlog);
-            TourLogUpdated?.Invoke(tourlog);
+            var success = await _updateTourLogQuery.ExecuteAsync(tourlog);
+            if(success) TourLogUpdated?.Invoke(tourlog);
         }
     }
 }

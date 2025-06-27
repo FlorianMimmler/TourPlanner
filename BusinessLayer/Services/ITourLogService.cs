@@ -8,11 +8,10 @@ namespace TourPlanner.BusinessLayer.Services
         event Action<Guid> TourLogDeleted;
         event Action<TourLog> TourLogUpdated;
 
-        Task AddTourLog(TourLog log);
-        void DeleteTour(Guid tourlogid);
-        void DeleteTourLog(Guid id);
         Task<IEnumerable<TourLog>> GetTourlogs();
         Task<IEnumerable<TourLog>> GetTourlogsByTour(Guid tourId);
-        void UpdateTourLog(TourLog tourlog);
+        Task AddTourLog(TourLog tourlog);
+        Task UpdateTourLog(TourLog tourlog);
+        Task DeleteTourLog(TourLog tourlog);
     }
 }

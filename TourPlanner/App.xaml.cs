@@ -30,6 +30,11 @@ public partial class App : Application
     private readonly IGetAllTourLogsQuery _getAllTourLogsQuery;
     private readonly ICreateTourLogQuery _createTourLogQuery;
 
+    private readonly IUpdateTourQuery _updateTourQuery;
+    private readonly IUpdateTourLogQuery _updateTourLogQuery;
+    private readonly IDeleteTourQuery _deleteTourQuery;
+    private readonly IDeleteTourLogQuery _deleteTourLogQuery;
+
     private readonly string _connectionString = $"Host=localhost;Port=5432;Database=TourPlanner;Username=admin;Password=password;";
 
     public App()
@@ -41,9 +46,13 @@ public partial class App : Application
         _createTourQuery = new CreateTourQuery(_tourPlannerDbContextFactory);
         _getAllTourLogsQuery = new GetAllTourLogsQuery(_tourPlannerDbContextFactory);
         _createTourLogQuery = new CreateTourLogQuery(_tourPlannerDbContextFactory);
-        _tourService = new TourService(_getAllToursQuery, _createTourQuery);
+        _updateTourQuery = new UpdateTourQuery(_tourPlannerDbContextFactory);
+        _deleteTourQuery = new DeleteTourQuery(_tourPlannerDbContextFactory);
+        _updateTourLogQuery = new UpdateTourLogQuery(_tourPlannerDbContextFactory);
+        _deleteTourLogQuery = new DeleteTourLogQuery(_tourPlannerDbContextFactory);
+        _tourService = new TourService(_getAllToursQuery, _createTourQuery, _updateTourQuery, _deleteTourQuery);
         _selectedTourStore = new SelectedTourStore(_tourService);
-        _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery);
+        _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery, _updateTourLogQuery, _deleteTourLogQuery);
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
         _tourOutputService = new TourExportService(_tourService, _tourLogService);
         _tourImportService = new TourImportService(_tourService, _tourLogService);

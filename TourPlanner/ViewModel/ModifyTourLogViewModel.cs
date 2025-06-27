@@ -160,7 +160,7 @@ namespace PresentationLayer.ViewModel
 
         private void DeleteTourLog()
         {
-            _tourLogService.DeleteTourLog(_tourLog.Id);
+            _tourLogService.DeleteTourLog(_tourLog);
         }
 
         private void TourLogService_TourUpdated(TourLog tourLog)

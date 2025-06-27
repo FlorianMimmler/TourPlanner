@@ -60,7 +60,7 @@ namespace PresentationLayer.ViewModel
 
         private void DeleteTour()
         {
-            _toursService.DeleteTour(_tour.Id);
+            _toursService.DeleteTour(_tour);
         }
 
         private void TourService_TourUpdated(Tour tour)
