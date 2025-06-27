@@ -9,7 +9,7 @@ namespace DAL.Queries
 
         public CreateTourQuery(TourPlannerDbContextFactory contextFactory): base(contextFactory) { }
 
-        public async Task ExecuteAsync(Tour tour)
+        public async Task<bool> ExecuteAsync(Tour tour)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace DAL.Queries
                 };
 
                 context.Tours.Add(tourDTO);
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync() == 1;
             }
             catch (Exception ex)
             {

@@ -4,6 +4,6 @@ namespace DAL.QueryInterfaces
 {
     public interface ICreateTourQuery
     {
-        Task ExecuteAsync(Tour tour);
+        Task<bool> ExecuteAsync(Tour tour);
     }
 }

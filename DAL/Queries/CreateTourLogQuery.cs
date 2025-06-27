@@ -10,7 +10,7 @@ namespace DAL.Queries
 
         public CreateTourLogQuery(TourPlannerDbContextFactory contextFactory): base(contextFactory) { }
 
-        public async Task ExecuteAsync(TourLog tourLog)
+        public async Task<bool> ExecuteAsync(TourLog tourLog)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace DAL.Queries
                 };
 
                 context.TourLogs.Add(tourLogDTO);
-                await context.SaveChangesAsync();
+                return await context.SaveChangesAsync() == 1;
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());

@@ -72,6 +72,7 @@ namespace PresentationLayer.ViewModel
 
             TourLog tourLog = new TourLog()
             {
+                Id = Guid.NewGuid(),
                 Date = Date,
                 Duration = Duration,
                 Distance = parsedDistance,

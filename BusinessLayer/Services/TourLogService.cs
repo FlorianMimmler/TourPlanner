@@ -6,9 +6,6 @@ namespace TourPlanner.BusinessLayer.Services
 {
     public class TourLogService : ITourLogService
     {
-
-        private SingletonDatabase _database = SingletonDatabase.Instance;
-
         private readonly IGetAllTourLogsQuery _getAllTourLogsQuery;
         private readonly ICreateTourLogQuery _createTourLogQuery;
         private readonly IGetTourLogsByTourQuery _getTourLogsByTourQuery;
@@ -40,21 +37,18 @@ namespace TourPlanner.BusinessLayer.Services
 
         public async Task AddTourLog(TourLog tourlog)
         {
-            await _createTourLogQuery.ExecuteAsync(tourlog);
-            TourLogAdded?.Invoke(tourlog);
+            if( await _createTourLogQuery.ExecuteAsync(tourlog) ) TourLogAdded?.Invoke(tourlog);
         }
 
         public async Task DeleteTourLog(TourLog tourlog)
         {
-            var success = await _deleteTourLogQuery.ExecuteAsync(tourlog);
-            if(success) TourLogDeleted?.Invoke(tourlog.Id);
+            if( await _deleteTourLogQuery.ExecuteAsync(tourlog) ) TourLogDeleted?.Invoke(tourlog.Id);
         }
 
 
         public async Task UpdateTourLog(TourLog tourlog)
         {
-            var success = await _updateTourLogQuery.ExecuteAsync(tourlog);
-            if(success) TourLogUpdated?.Invoke(tourlog);
+            if( await _updateTourLogQuery.ExecuteAsync(tourlog) ) TourLogUpdated?.Invoke(tourlog);
         }
     }
 }

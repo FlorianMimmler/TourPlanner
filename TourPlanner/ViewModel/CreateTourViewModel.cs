@@ -67,6 +67,7 @@ namespace PresentationLayer.ViewModel
 
             Tour tour = new()
             {
+                Id = Guid.NewGuid(),
                 Name = TourInputFormViewModel.TourName,
                 Description = TourInputFormViewModel.TourDescription,
                 From = TourInputFormViewModel.From,

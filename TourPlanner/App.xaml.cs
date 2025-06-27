@@ -7,6 +7,7 @@ using DAL.Queries;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using PresentationLayer.Stores;
+using System.Configuration;
 
 namespace TourPlanner;
 
@@ -35,7 +36,7 @@ public partial class App : Application
     private readonly IDeleteTourQuery _deleteTourQuery;
     private readonly IDeleteTourLogQuery _deleteTourLogQuery;
 
-    private readonly string _connectionString = $"Host=localhost;Port=5432;Database=TourPlanner;Username=admin;Password=password;";
+    private readonly string? _connectionString = ConfigurationManager.ConnectionStrings["connection_string"]?.ConnectionString;
 
     public App()
     {
