@@ -55,10 +55,36 @@ namespace BusinessLayer.Services
             var encodedPlace = HttpUtility.UrlEncode(place);
 
             var url = $"https://nominatim.openstreetmap.org/search?q={encodedPlace}&format=json&limit=1";
-            var response = await client.GetAsync(url);
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.GetAsync(url);
+            } catch (Exception ex)
+            {
+                return [-1, -1];
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                return [-1, -1];
+            }
+
+            var contentType = response.Content.Headers.ContentType?.MediaType;
+
+            if (contentType == null || !contentType.Contains("json"))
+            {
+                return [-1, -1];
+            }
 
             var json = await response.Content.ReadAsStringAsync();
-            var results = JsonDocument.Parse(json).RootElement;
+            JsonElement results;
+            try
+            {
+                results = JsonDocument.Parse(json).RootElement;
+            } catch (System.Text.Json.JsonException ex)
+            {
+                return [-1, -1];
+            }
+            
 
             if (results.GetArrayLength() == 0)
                 throw new Exception($"No geocoding result for '{place}'.");
