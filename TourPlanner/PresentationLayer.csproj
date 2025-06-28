@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="log4net.config" />
     <None Remove="Map\map.html" />
     <None Remove="Resources\img\map_placeholder.jpeg" />
   </ItemGroup>
