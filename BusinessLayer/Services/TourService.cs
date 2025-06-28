@@ -11,9 +11,11 @@ namespace BusinessLayer.Services
         private readonly IUpdateTourQuery _updateTourQuery;
         private readonly IDeleteTourQuery _deleteTourQuery;
 
+
         public event Action<Tour> TourAdded;
         public event Action<Tour> TourUpdated;
         public event Action<Guid> TourDeleted;
+        public event Action<Guid> TourSelected;
 
         public TourService(IGetAllToursQuery getAllToursQuery, ICreateTourQuery createTourQuery, IUpdateTourQuery updateTourQuery, IDeleteTourQuery deleteTourQuery)
         {
@@ -30,17 +32,19 @@ namespace BusinessLayer.Services
 
         public async Task AddTour(Tour tour)
         {
-            if( await _createTourQuery.ExecuteAsync(tour) ) TourAdded?.Invoke(tour);
+            if (await _createTourQuery.ExecuteAsync(tour)) TourAdded?.Invoke(tour);
         }
 
         public async Task UpdateTour(Tour tour)
         {
-            if( await _updateTourQuery.ExecuteAsync(tour) ) TourUpdated?.Invoke(tour);
+            if (await _updateTourQuery.ExecuteAsync(tour)) TourUpdated?.Invoke(tour);
         }
 
         public async Task DeleteTour(Tour tour)
         {
-            if( await _deleteTourQuery.ExecuteAsync(tour) ) TourDeleted?.Invoke(tour.Id);
+            if (await _deleteTourQuery.ExecuteAsync(tour)) TourDeleted?.Invoke(tour.Id);
         }
+
+
     }
 }

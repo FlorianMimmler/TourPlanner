@@ -23,7 +23,7 @@ namespace PresentationLayer.ViewModel
 
         private TourExportService _tourOutputService;
         private TourImportService _tourImportService;
-
+        private CreateTourReportService _createTourReportService;
         public MenuViewModel(TourExportService tourOutputService, TourImportService tourImportService)
         {
             LightThemeCommand = new RelayCommand(SwitchToLightTheme);
@@ -72,6 +72,8 @@ namespace PresentationLayer.ViewModel
                 await _tourImportService.ImportToursFromJson(dialog.FileName);
             }
         }
+
+
 
     }
 }

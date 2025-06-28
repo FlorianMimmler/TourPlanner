@@ -19,11 +19,13 @@ namespace PresentationLayer.ViewModel
 
         public event EventHandler<Tour> TourSelected;
 
+        private CreateTourReportService _createTourReportService;
 
         private ObservableCollection<TourListItemViewModel> _tours;
         public IEnumerable<TourListItemViewModel> Tours => _tours;
 
         private TourListItemViewModel _selectedTour;
+
         public TourListItemViewModel SelectedTour
         {
             get => _selectedTour;
@@ -37,17 +39,20 @@ namespace PresentationLayer.ViewModel
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, CreateTourReportService createTourReportService)
         {
             _tourService = tourService;
             _selectedTourStore = selectedTourStore;
             _tours = new ObservableCollection<TourListItemViewModel>();
+
+            _createTourReportService = createTourReportService;
 
             Load();
 
             _tourService.TourAdded += TourService_TourAdded;
             _tourService.TourUpdated += TourService_TourUpdated;
             _tourService.TourDeleted += _tourService_TourDeleted;
+           // _createTourReportService.ReportCreated += TourService_ReportCreated;
         }
 
         private async Task Load()
@@ -56,7 +61,7 @@ namespace PresentationLayer.ViewModel
 
             foreach (var tour in tours)
             {
-                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService);
+                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService,_createTourReportService);
                 _tours.Add(tourListItemViewModel);
             }
         }
@@ -78,7 +83,14 @@ namespace PresentationLayer.ViewModel
 
         private void TourService_TourAdded(Tour tour)
         {
-            _tours.Add(new TourListItemViewModel(tour, _tourService));
+            _tours.Add(new TourListItemViewModel(tour, _tourService,_createTourReportService));
         }
+
+        /*private void TourService_ReportCreated(Tour tour)
+        {
+            _tours.First(t => t.Tour.Id == tour.Id)?.ExecuteCreateReportService(tour);
+        }*/
+
+       
     }
 }

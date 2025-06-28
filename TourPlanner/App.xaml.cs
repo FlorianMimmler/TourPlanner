@@ -25,6 +25,7 @@ public partial class App : Application
     private TourExportService _tourOutputService;
     private TourImportService _tourImportService;
     private IMapService _mapService;
+    private CreateTourReportService _createReportService;
 
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
     private readonly IGetAllToursQuery _getAllToursQuery;
@@ -37,6 +38,7 @@ public partial class App : Application
     private readonly IUpdateTourLogQuery _updateTourLogQuery;
     private readonly IDeleteTourQuery _deleteTourQuery;
     private readonly IDeleteTourLogQuery _deleteTourLogQuery;
+    
 
     private readonly string? _connectionString = ConfigurationManager.ConnectionStrings["connection_string"]?.ConnectionString;
     private readonly string? _orsApiKey = ConfigurationManager.AppSettings["ORSApiKey"];
@@ -61,7 +63,8 @@ public partial class App : Application
         _tourOutputService = new TourExportService(_tourService, _tourLogService);
         _tourImportService = new TourImportService(_tourService, _tourLogService);
         _mapService = new MapService(_orsApiKey);
-    }
+        _createReportService = new CreateTourReportService(_tourService,_tourLogService);
+    }   
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -72,7 +75,7 @@ public partial class App : Application
 
         MainWindow = new MainView()
         {
-            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService)
+            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService,_createReportService)
         };
         MainWindow.Show();
 

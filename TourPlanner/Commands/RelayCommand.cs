@@ -24,6 +24,8 @@ namespace PresentationLayer.Commands
             return _canExecute == null || _canExecute();
         }
 
+        
+
         public void Execute(object? parameter)
         {
             _execute();

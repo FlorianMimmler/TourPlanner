@@ -1,20 +1,26 @@
-﻿using System;
+﻿using BusinessLayer.Services;
+using DAL;
+using DAL.Queries;
+using DAL.QueryInterfaces;
+using PresentationLayer.Commands;
+using PresentationLayer.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TourPlanner;
 using TourPlanner.Domain.Model;
-using BusinessLayer.Services;
-using PresentationLayer.View;
-using PresentationLayer.Commands;
 
 namespace PresentationLayer.ViewModel
 {
     public class TourListItemViewModel : ViewModelBase
     {
-        private ITourService _tourService;
 
+
+        private ITourService _tourService;
+        private CreateTourReportService _createTourReportService;
         public Tour Tour { get; private set; }
 
         public string Name => Tour.Name;
@@ -23,11 +29,19 @@ namespace PresentationLayer.ViewModel
 
         public ICommand ModifyCommand { get; }
 
-        public TourListItemViewModel(Tour tour, ITourService tourService)
+
+
+        public ICommand CreateReport { get; }
+
+        public TourListItemViewModel(Tour tour, ITourService tourService,CreateTourReportService createTourReportService)
         {
             ModifyCommand = new RelayCommand(OpenModifyTourView);
+            CreateReport = new RelayCommand(async () => await _createTourReportService.CreateTourReport(Tour));
             Tour = tour;
             _tourService = tourService;
+
+            _createTourReportService = createTourReportService;
+            
         }
 
         private void OpenModifyTourView()
@@ -47,5 +61,16 @@ namespace PresentationLayer.ViewModel
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Id));
         }
+
+        public void ExecuteCreateReportService()
+        {
+
+
+
+            _=_createTourReportService.CreateTourReport(Tour);
+
+
+        }
+
     }
 }

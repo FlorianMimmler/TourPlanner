@@ -13,9 +13,10 @@ namespace PresentationLayer.ViewModel
         public ToursListViewModel ToursListViewModel { get; }
         public SidebarHeaderViewModel SidebarHeaderViewModel { get; }
 
-        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService)
+
+        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService,CreateTourReportService createTourReportService)
         {
-            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService);
+            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService);
             SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService);
         }
     }
