@@ -9,7 +9,12 @@ using PresentationLayer.Stores;
 using System.Configuration;
 using System.Runtime.CompilerServices;
 using BusinessLayer.Services;
+using log4net.Core;
+using log4net;
+using BusinessLayer.Logger;
+using System.IO;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace TourPlanner;
 
 /// <summary>
@@ -45,6 +50,7 @@ public partial class App : Application
     {
         _tourPlannerDbContextFactory = new TourPlannerDbContextFactory(
             new DbContextOptionsBuilder<TourPlannerDbContext>().UseNpgsql(_connectionString).Options);
+
         _getAllToursQuery = new GetAllToursQuery(_tourPlannerDbContextFactory);
         _getTourLogsByTourQuery = new GetTourLogsByTourQuery(_tourPlannerDbContextFactory);
         _createTourQuery = new CreateTourQuery(_tourPlannerDbContextFactory);
@@ -54,18 +60,21 @@ public partial class App : Application
         _deleteTourQuery = new DeleteTourQuery(_tourPlannerDbContextFactory);
         _updateTourLogQuery = new UpdateTourLogQuery(_tourPlannerDbContextFactory);
         _deleteTourLogQuery = new DeleteTourLogQuery(_tourPlannerDbContextFactory);
+
         _tourService = new TourService(_getAllToursQuery, _createTourQuery, _updateTourQuery, _deleteTourQuery);
         _selectedTourStore = new SelectedTourStore(_tourService);
         _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery, _updateTourLogQuery, _deleteTourLogQuery);
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
-        _tourOutputService = new TourExportService(_tourService, _tourLogService);
-        _tourImportService = new TourImportService(_tourService, _tourLogService);
-        _mapService = new MapService(_orsApiKey);
+        _tourOutputService = new TourExportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourExportService)));
+        _tourImportService = new TourImportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourImportService)));
+        _mapService = new MapService(_orsApiKey, new LoggerWrapper(typeof(MapService)));
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        using(TourPlannerDbContext context = _tourPlannerDbContextFactory.Create())
+        log4net.Config.XmlConfigurator.Configure(new FileInfo("log4net.config"));
+
+        using (TourPlannerDbContext context = _tourPlannerDbContextFactory.Create())
         {
             context.Database.EnsureCreated();
         }
