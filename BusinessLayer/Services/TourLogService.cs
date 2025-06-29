@@ -55,14 +55,14 @@ namespace BusinessLayer.Services
             }
         }
 
-        public async Task DeleteTourLog(TourLog tourlog)
+        public async Task UpdateTourLog(TourLog tourlog)
         {
             try
             {
-                if (await _deleteTourLogQuery.ExecuteAsync(tourlog))
+                if (await _updateTourLogQuery.ExecuteAsync(tourlog))
                 {
                     _logger.Info($"Tourlog updated: {tourlog.Id}");
-                    TourLogDeleted?.Invoke(tourlog.Id);
+                    TourLogUpdated?.Invoke(tourlog);
                 }
             }
             catch (Exception ex)
@@ -71,15 +71,14 @@ namespace BusinessLayer.Services
             }
         }
 
-
-        public async Task UpdateTourLog(TourLog tourlog)
+        public async Task DeleteTourLog(TourLog tourlog)
         {
             try
             {
-                if (await _updateTourLogQuery.ExecuteAsync(tourlog))
+                if (await _deleteTourLogQuery.ExecuteAsync(tourlog))
                 {
                     _logger.Info($"Tourlog deleted: {tourlog.Id}");
-                    TourLogUpdated?.Invoke(tourlog);
+                    TourLogDeleted?.Invoke(tourlog.Id);
                 }
             }
             catch (Exception ex)
