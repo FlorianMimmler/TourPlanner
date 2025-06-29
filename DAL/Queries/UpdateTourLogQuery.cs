@@ -15,24 +15,30 @@ namespace DAL.Queries
 
         public async Task<bool> ExecuteAsync(TourLog tourLog)
         {
-
-            using var context = ContextFactory.Create();
-
-            var tourLogDTO = new TourLogDto
+            try
             {
-                Id = tourLog.Id,
-                TourId = tourLog.TourId,
-                Date = tourLog.Date.ToUniversalTime(),
-                Duration = tourLog.Duration,
-                Distance = tourLog.Distance,
-                Comment = tourLog.Comment,
-                Difficulty = tourLog.Difficulty,
-                Rating = tourLog.Rating
-            };
+                using var context = ContextFactory.Create();
 
-            context.TourLogs.Update(tourLogDTO);
+                var tourLogDTO = new TourLogDto
+                {
+                    Id = tourLog.Id,
+                    TourId = tourLog.TourId,
+                    Date = tourLog.Date.ToUniversalTime(),
+                    Duration = tourLog.Duration,
+                    Distance = tourLog.Distance,
+                    Comment = tourLog.Comment,
+                    Difficulty = tourLog.Difficulty,
+                    Rating = tourLog.Rating
+                };
 
-            return await context.SaveChangesAsync() == 1;
+                context.TourLogs.Update(tourLogDTO);
+
+                return await context.SaveChangesAsync() == 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"[UpdateTourLogQuery] Error updating tourlog: {tourLog.Id}. {ex.Message}");
+            }
 
         }
     }

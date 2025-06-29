@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using BusinessLayer.Services;
 using PresentationLayer.View;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {

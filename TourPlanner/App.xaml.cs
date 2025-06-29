@@ -13,6 +13,7 @@ using log4net.Core;
 using log4net;
 using BusinessLayer.Logger;
 using System.IO;
+using BusinessLayer.Interfaces;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace TourPlanner;
@@ -61,9 +62,9 @@ public partial class App : Application
         _updateTourLogQuery = new UpdateTourLogQuery(_tourPlannerDbContextFactory);
         _deleteTourLogQuery = new DeleteTourLogQuery(_tourPlannerDbContextFactory);
 
-        _tourService = new TourService(_getAllToursQuery, _createTourQuery, _updateTourQuery, _deleteTourQuery);
+        _tourService = new TourService(_getAllToursQuery, _createTourQuery, _updateTourQuery, _deleteTourQuery, new LoggerWrapper(typeof(TourService)));
         _selectedTourStore = new SelectedTourStore(_tourService);
-        _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery, _updateTourLogQuery, _deleteTourLogQuery);
+        _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery, _updateTourLogQuery, _deleteTourLogQuery, new LoggerWrapper(typeof(TourLogService)));
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
         _tourOutputService = new TourExportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourExportService)));
         _tourImportService = new TourImportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourImportService)));

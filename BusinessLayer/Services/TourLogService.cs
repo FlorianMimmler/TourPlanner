@@ -1,6 +1,7 @@
 ﻿using DAL.QueryInterfaces;
 using DAL;
 using TourPlanner.Domain.Model;
+using BusinessLayer.Interfaces;
 
 namespace BusinessLayer.Services
 {
@@ -16,13 +17,16 @@ namespace BusinessLayer.Services
         public event Action<TourLog> TourLogUpdated;
         public event Action<Guid> TourLogDeleted;
 
-        public TourLogService(IGetAllTourLogsQuery getAllTourLogsQuery, ICreateTourLogQuery createTourLogQuery, IGetTourLogsByTourQuery getTourLogsByTourQuery, IUpdateTourLogQuery updateTourLogQuery, IDeleteTourLogQuery deleteTourLogQuery)
+        private readonly ILoggerWrapper _logger;
+
+        public TourLogService(IGetAllTourLogsQuery getAllTourLogsQuery, ICreateTourLogQuery createTourLogQuery, IGetTourLogsByTourQuery getTourLogsByTourQuery, IUpdateTourLogQuery updateTourLogQuery, IDeleteTourLogQuery deleteTourLogQuery, ILoggerWrapper logger)
         {
             _getAllTourLogsQuery = getAllTourLogsQuery;
             _createTourLogQuery = createTourLogQuery;
             _getTourLogsByTourQuery = getTourLogsByTourQuery;
             _updateTourLogQuery = updateTourLogQuery;
             _deleteTourLogQuery = deleteTourLogQuery;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<TourLog>> GetTourlogs()
@@ -37,18 +41,51 @@ namespace BusinessLayer.Services
 
         public async Task AddTourLog(TourLog tourlog)
         {
-            if( await _createTourLogQuery.ExecuteAsync(tourlog) ) TourLogAdded?.Invoke(tourlog);
+            try
+            {
+                if (await _createTourLogQuery.ExecuteAsync(tourlog))
+                {
+                    _logger.Info($"New tourlog added: {tourlog.Id}");
+                    TourLogAdded?.Invoke(tourlog);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
 
         public async Task DeleteTourLog(TourLog tourlog)
         {
-            if( await _deleteTourLogQuery.ExecuteAsync(tourlog) ) TourLogDeleted?.Invoke(tourlog.Id);
+            try
+            {
+                if (await _deleteTourLogQuery.ExecuteAsync(tourlog))
+                {
+                    _logger.Info($"Tourlog updated: {tourlog.Id}");
+                    TourLogDeleted?.Invoke(tourlog.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
 
 
         public async Task UpdateTourLog(TourLog tourlog)
         {
-            if( await _updateTourLogQuery.ExecuteAsync(tourlog) ) TourLogUpdated?.Invoke(tourlog);
+            try
+            {
+                if (await _updateTourLogQuery.ExecuteAsync(tourlog))
+                {
+                    _logger.Info($"Tourlog deleted: {tourlog.Id}");
+                    TourLogUpdated?.Invoke(tourlog);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
     }
 }

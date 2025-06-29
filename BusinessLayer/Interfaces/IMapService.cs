@@ -1,5 +1,4 @@
-﻿
-namespace BusinessLayer.Services
+﻿namespace BusinessLayer.Interfaces
 {
     public interface IMapService
     {

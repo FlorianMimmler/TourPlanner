@@ -12,5 +12,6 @@ namespace BusinessLayer.Interfaces
         void Error(string message);
         void Fatal(string message);
         void Warn(string message);
+        void Info(string message);
     }
 }

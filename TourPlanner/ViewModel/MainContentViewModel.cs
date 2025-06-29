@@ -1,6 +1,7 @@
 ﻿using PresentationLayer.Stores;
 using BusinessLayer.Services;
 using PresentationLayer.View.Subviews.Maincontent;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {

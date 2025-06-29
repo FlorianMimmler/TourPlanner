@@ -1,6 +1,7 @@
 ﻿using PresentationLayer.Stores;
 using TourPlanner.Domain.Model;
 using BusinessLayer.Services;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {

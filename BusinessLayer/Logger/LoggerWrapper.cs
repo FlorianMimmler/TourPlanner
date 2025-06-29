@@ -17,6 +17,11 @@ namespace BusinessLayer.Logger
             _log = LogManager.GetLogger(type);
         }
 
+        public void Info(string message)
+        {
+            _log.Info(message);
+        }
+
         public void Debug(string message)
         {
             _log.Debug(message);
