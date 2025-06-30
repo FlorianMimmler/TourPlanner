@@ -28,8 +28,6 @@ namespace PresentationLayer.ViewModel
         public TransportType TransportType => SelectedTour?.TransportType ?? TransportType.Unknown;
         public string Distance => SelectedTour?.Distance.ToString() ?? "0";
         public string EstimatedTime => SelectedTour?.EstimatedTime ?? "unknown";
-        public string Popularity => _tourStatisticsService.CalculatePopularity(SelectedTour).ToString() ?? "0";
-        public string ChildFriendliness => _tourStatisticsService.CalculateChildFriendliness(SelectedTour).ToString() ?? "0";
 
 
 
@@ -38,7 +36,8 @@ namespace PresentationLayer.ViewModel
             _selectedTourStore = selectedTourStore;
             _tourStatisticsService = tourStatisticsService;
             _selectedTourStore.SelectedTourChanged += _selectedTourStore_SelectedTourChanged;
-
+            _selectedTourStore.SelectedTourChanged += async() => await LoadPopularityAsync();
+            _selectedTourStore.SelectedTourChanged += async () => await LoadChildFriendliness();
         }
 
         protected override void Dispose()
@@ -57,6 +56,56 @@ namespace PresentationLayer.ViewModel
             OnPropertyChanged(nameof(EstimatedTime));
             OnPropertyChanged(nameof(Popularity));
             OnPropertyChanged(nameof(ChildFriendliness));
+        }
+
+        private string _popularity = "Loading...";
+        public string Popularity
+        {
+            get => _popularity;
+            private set
+            {
+                _popularity = value;
+                OnPropertyChanged(nameof(Popularity));
+            }
+        }
+
+        private string _childFriendliness = "Loading...";
+
+        public string ChildFriendliness
+        {
+            get => _childFriendliness;
+            private set
+            {
+                _childFriendliness = value;
+                OnPropertyChanged(nameof(ChildFriendliness));
+            }
+        }
+
+        private async Task LoadPopularityAsync()
+        {
+            if (SelectedTour != null)
+            {
+                var result = await _tourStatisticsService.CalculatePopularity(SelectedTour);
+                Popularity = (result.ToString() ?? "0") + "/10";
+            }
+            else
+            {
+                Popularity = "0";
+            }
+        }
+
+        private async Task LoadChildFriendliness()
+        {
+            if (SelectedTour != null)
+            {
+                var result = await _tourStatisticsService.CalculateChildFriendliness(SelectedTour);
+                ChildFriendliness = (result.ToString() ?? "0") + "/10";
+
+            }
+            else
+            {
+                ChildFriendliness = "0";
+            }
         }
     }
 }

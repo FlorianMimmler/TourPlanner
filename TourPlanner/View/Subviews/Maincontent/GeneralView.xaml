@@ -49,8 +49,8 @@
                     <TextBlock Text="{Binding TransportType}"></TextBlock>
                     <TextBlock Text="{Binding Distance}"></TextBlock>
                     <TextBlock Text="{Binding EstimatedTime}"></TextBlock>
-                    <TextBlock Text="{Binding Popularity, StringFormat=' {0}/10'}"></TextBlock>
-                    <TextBlock Text="{Binding ChildFriendliness, StringFormat=' {0}/10'}"></TextBlock>
+                    <TextBlock Text="{Binding Popularity}"></TextBlock>
+                    <TextBlock Text="{Binding ChildFriendliness}"></TextBlock>
                 </StackPanel>
             </Grid>
             
