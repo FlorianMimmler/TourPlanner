@@ -19,7 +19,7 @@ namespace PresentationLayer.ViewModel
         public SidebarHeaderViewModel SidebarHeaderViewModel { get; }
         
 
-        private CreateTourReportService _createTourReportService;
+        private ICreateTourReportService _createTourReportService;
 
 
         public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService)

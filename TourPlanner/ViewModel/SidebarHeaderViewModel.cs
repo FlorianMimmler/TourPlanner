@@ -22,11 +22,11 @@ namespace PresentationLayer.ViewModel
 
         public ICommand CreateSummary { get; }
         
-        private CreateTourReportService _createTourReportService;
+        private ICreateTourReportService _createTourReportService;
 
 
 
-        public SidebarHeaderViewModel(ITourService tourService, CreateTourReportService createTourReportService)
+        public SidebarHeaderViewModel(ITourService tourService, ICreateTourReportService createTourReportService)
         {
             OpenCreateTourCommand = new RelayCommand(OpenCreateTour);
             _tourService = tourService;

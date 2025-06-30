@@ -27,7 +27,7 @@ public partial class App : Application
     private readonly SelectedTourStore _selectedTourStore;
     private readonly ITourService _tourService;
     private ITourLogService _tourLogService;
-    private ITourStatisticsService _tourStatisticsService;
+    private TourStatisticsService _tourStatisticsService;
     private ITourExportService _tourOutputService;
     private ITourImportService _tourImportService;
     private IMapService _mapService;
