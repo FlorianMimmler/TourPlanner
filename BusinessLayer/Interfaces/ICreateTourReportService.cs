@@ -6,6 +6,6 @@ namespace BusinessLayer.Interfaces
     {
         event Action<Tour> ReportCreated;
 
-        Task CreateTourReport(Tour tour);
+        Task CreateTourReport(Tour tour, string path);
     }
 }

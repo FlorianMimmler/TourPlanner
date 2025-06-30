@@ -29,10 +29,10 @@ namespace TourPlanner_UnitTests
             _selectedTourStore = new SelectedTourStore(_mockTourService);
 
             var tours = new List<Tour>
-        {
-            new Tour { Id = Guid.NewGuid(), Name = "Tour A" },
-            new Tour { Id = Guid.NewGuid(), Name = "Tour B" }
-        };
+            {
+                new Tour { Id = Guid.NewGuid(), Name = "Tour A" },
+                new Tour { Id = Guid.NewGuid(), Name = "Tour B" }
+            };
 
             _mockTourService.GetTours().Returns(tours);
 
