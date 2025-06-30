@@ -1,4 +1,5 @@
-﻿using TourPlanner.Domain.Model;
+﻿using BusinessLayer.Interfaces;
+using TourPlanner.Domain.Model;
 
 namespace BusinessLayer.Services
 {

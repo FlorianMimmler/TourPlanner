@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TourPlanner.Domain.Model;
+using BusinessLayer.Interfaces;
 using BusinessLayer.Services;
 
 namespace PresentationLayer.ViewModel

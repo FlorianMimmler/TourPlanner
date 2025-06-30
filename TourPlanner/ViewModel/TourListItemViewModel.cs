@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner;
 using TourPlanner.Domain.Model;
+using PresentationLayer.View;
+using PresentationLayer.Commands;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {

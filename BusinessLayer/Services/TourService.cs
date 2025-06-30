@@ -1,6 +1,7 @@
 ﻿using TourPlanner.Domain.Model;
 using DAL;
 using DAL.QueryInterfaces;
+using BusinessLayer.Interfaces;
 
 namespace BusinessLayer.Services
 {
@@ -17,12 +18,16 @@ namespace BusinessLayer.Services
         public event Action<Guid> TourDeleted;
         public event Action<Guid> TourSelected;
 
-        public TourService(IGetAllToursQuery getAllToursQuery, ICreateTourQuery createTourQuery, IUpdateTourQuery updateTourQuery, IDeleteTourQuery deleteTourQuery)
+        private readonly ILoggerWrapper _logger;
+
+        public TourService(IGetAllToursQuery getAllToursQuery, ICreateTourQuery createTourQuery, IUpdateTourQuery updateTourQuery, IDeleteTourQuery deleteTourQuery, ILoggerWrapper logger)
         {
             _getAllToursQuery = getAllToursQuery;
             _createTourQuery = createTourQuery;
             _updateTourQuery = updateTourQuery;
             _deleteTourQuery = deleteTourQuery;
+
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Tour>> GetTours()
@@ -32,17 +37,51 @@ namespace BusinessLayer.Services
 
         public async Task AddTour(Tour tour)
         {
-            if (await _createTourQuery.ExecuteAsync(tour)) TourAdded?.Invoke(tour);
+            try
+            {
+                if (await _createTourQuery.ExecuteAsync(tour))
+                {
+                    _logger.Info($"New tour added: {tour.Id}");
+                    TourAdded?.Invoke(tour);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
 
         public async Task UpdateTour(Tour tour)
         {
-            if (await _updateTourQuery.ExecuteAsync(tour)) TourUpdated?.Invoke(tour);
+            try
+            {
+                if (await _updateTourQuery.ExecuteAsync(tour))
+                {
+                    _logger.Info($"Tour updated: {tour.Id}");
+                    TourUpdated?.Invoke(tour);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
+            
         }
 
         public async Task DeleteTour(Tour tour)
         {
-            if (await _deleteTourQuery.ExecuteAsync(tour)) TourDeleted?.Invoke(tour.Id);
+            try
+            {
+                if (await _deleteTourQuery.ExecuteAsync(tour))
+                {
+                    _logger.Info($"Tour deleted: {tour.Id}");
+                    TourDeleted?.Invoke(tour.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
 
 

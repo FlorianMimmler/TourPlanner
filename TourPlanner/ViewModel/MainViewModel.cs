@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TourPlanner.Domain.Model;
 using BusinessLayer.Services;
 using PresentationLayer.View.Subviews.Sidebar;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {

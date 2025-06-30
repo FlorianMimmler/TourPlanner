@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using BusinessLayer.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,12 @@ namespace BusinessLayer.Services
 
         private readonly string? _apiKey = "";
 
-        public MapService(string? apiKey)
+        private readonly ILoggerWrapper _logger;
+
+        public MapService(string? apiKey, ILoggerWrapper logger)
         {
             _apiKey = apiKey;
+            _logger = logger;
         }
 
         public async Task<string> GetRouteGeoJson(string start, string end)
@@ -25,8 +30,18 @@ namespace BusinessLayer.Services
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", _apiKey);
 
-            var startGeoCode = await GetGeoCodeFromPlace(start);
-            var endGeoCode = await GetGeoCodeFromPlace(end);
+            double[] startGeoCode = [0.0, 0.0];
+            double[] endGeoCode = [0.0, 0.0];
+
+            try
+            {
+                startGeoCode = await GetGeoCodeFromPlace(start);
+                endGeoCode = await GetGeoCodeFromPlace(end);
+            } catch (Exception ex)
+            {
+                _logger.Error($"Error getting geocode for start or end location [From: {start}; To: {end}]: {ex.Message}");
+                return "error";
+            }
 
             var body = new
             {
@@ -41,6 +56,7 @@ namespace BusinessLayer.Services
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();
+                _logger.Error($"Failed to get route from OpenRouteService [From: {start}; To: {end}]: {error}");
                 return "error";
             }
 
@@ -61,18 +77,19 @@ namespace BusinessLayer.Services
                 response = await client.GetAsync(url);
             } catch (Exception ex)
             {
-                return [-1, -1];
+                _logger.Error($"Exception during geocode API call for '{place}': {ex}");
+                throw;
             }
             if (!response.IsSuccessStatusCode)
             {
-                return [-1, -1];
+                throw new Exception($"Failed to get geocode for place: {place}. Status code: {response.StatusCode}");
             }
 
             var contentType = response.Content.Headers.ContentType?.MediaType;
 
             if (contentType == null || !contentType.Contains("json"))
             {
-                return [-1, -1];
+                throw new Exception($"Unexpected content type: {contentType} for place: {place}");
             }
 
             var json = await response.Content.ReadAsStringAsync();
@@ -82,12 +99,12 @@ namespace BusinessLayer.Services
                 results = JsonDocument.Parse(json).RootElement;
             } catch (System.Text.Json.JsonException ex)
             {
-                return [-1, -1];
+                throw new Exception($"{ex.Message}");
             }
-            
+
 
             if (results.GetArrayLength() == 0)
-                throw new Exception($"No geocoding result for '{place}'.");
+                throw new Exception("No results found for place: " + place);
 
             var firstResult = results[0];
             var lat = double.Parse(firstResult.GetProperty("lat").GetString() ?? "-1", System.Globalization.CultureInfo.InvariantCulture);

@@ -24,7 +24,6 @@ namespace PresentationLayer.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return _canExecute();
             return !_isExecuting && (_canExecute == null || _canExecute());
         }
 

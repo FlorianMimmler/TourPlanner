@@ -1,6 +1,6 @@
 ﻿using TourPlanner.Domain.Model;
 
-namespace BusinessLayer.Services
+namespace BusinessLayer.Interfaces
 {
     public interface ITourLogService
     {

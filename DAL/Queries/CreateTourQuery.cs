@@ -33,8 +33,7 @@ namespace DAL.Queries
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[CreateTourQuery] Error: {ex.Message}");
-                throw;
+                throw new Exception($"[CreateTourQuery] Error creating tour. {ex.Message}");
             }
 
         }

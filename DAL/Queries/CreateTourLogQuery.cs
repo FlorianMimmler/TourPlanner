@@ -14,8 +14,6 @@ namespace DAL.Queries
         {
             try
             {
-
-
                 using var context = ContextFactory.Create();
 
                 var tourLogDTO = new TourLogDto
@@ -34,8 +32,7 @@ namespace DAL.Queries
                 return await context.SaveChangesAsync() == 1;
             } catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                throw;
+                throw new Exception($"[CreateTourLogQuery] Error creating tourlog. {ex.Message}");
             }
 
         }

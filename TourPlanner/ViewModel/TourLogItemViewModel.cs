@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner.Domain.Model;
-using BusinessLayer.Services;
 using PresentationLayer.View;
 using PresentationLayer.Commands;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {
