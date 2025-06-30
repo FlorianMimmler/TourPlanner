@@ -17,7 +17,7 @@ using TourPlanner.Domain.Model;
 
 namespace BusinessLayer.Services
 {
-    public class CreateTourReportService
+    public class CreateTourReportService : ICreateTourReportService
     {
 
         private ITourService _tourService;

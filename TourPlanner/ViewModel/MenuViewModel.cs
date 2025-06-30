@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BusinessLayer.Services;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {
@@ -21,10 +22,10 @@ namespace PresentationLayer.ViewModel
 
         public ICommand OpenImportTourFormCommand { get; }
 
-        private TourExportService _tourOutputService;
-        private TourImportService _tourImportService;
+        private ITourExportService _tourOutputService;
+        private ITourImportService _tourImportService;
         private CreateTourReportService _createTourReportService;
-        public MenuViewModel(TourExportService tourOutputService, TourImportService tourImportService)
+        public MenuViewModel(ITourExportService tourOutputService, ITourImportService tourImportService)
         {
             LightThemeCommand = new RelayCommand(SwitchToLightTheme);
             DarkThemeCommand = new RelayCommand(SwitchToDarkTheme);

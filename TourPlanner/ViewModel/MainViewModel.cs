@@ -18,7 +18,7 @@ namespace PresentationLayer.ViewModel
         public SidebarViewModel SidebarViewModel { get; }
         public MainContentViewModel MainContentViewModel { get; }
         public MenuViewModel MenuViewModel { get; }
-        public MainViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ITourLogService tourlogsService, TourStatisticsService tourStatisticsService, TourExportService tourOutputService, TourImportService tourImportService, IMapService mapService,CreateTourReportService createTourReportService)
+        public MainViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ITourLogService tourlogsService, ITourStatisticsService tourStatisticsService, ITourExportService tourOutputService, ITourImportService tourImportService, IMapService mapService, ICreateTourReportService createTourReportService)
         {
             SidebarViewModel = new SidebarViewModel(_selectedTourStore, tourService,createTourReportService);
             MainContentViewModel = new MainContentViewModel(_selectedTourStore, tourService, tourlogsService, tourStatisticsService, mapService);

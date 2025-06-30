@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.Domain.Model;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using NSubstitute;
 using PresentationLayer.ViewModel;
 using PresentationLayer.Stores;
+using BusinessLayer.Interfaces;
 
 namespace TourPlanner_UnitTests
 {
@@ -16,6 +17,7 @@ namespace TourPlanner_UnitTests
     {
 
         private ITourService _mockTourService;
+        private ICreateTourReportService _createTourReportService;
         private SelectedTourStore _selectedTourStore;
         private ToursListViewModel _viewModel;
 
@@ -23,17 +25,18 @@ namespace TourPlanner_UnitTests
         public void Setup()
         {
             _mockTourService = Substitute.For<ITourService>();
+            _createTourReportService = Substitute.For<ICreateTourReportService>();
             _selectedTourStore = new SelectedTourStore(_mockTourService);
 
             var tours = new List<Tour>
         {
-            new Tour { Id = 1, Name = "Tour A" },
-            new Tour { Id = 2, Name = "Tour B" }
+            new Tour { Id = Guid.NewGuid(), Name = "Tour A" },
+            new Tour { Id = Guid.NewGuid(), Name = "Tour B" }
         };
 
             _mockTourService.GetTours().Returns(tours);
 
-            _viewModel = new ToursListViewModel(_selectedTourStore, _mockTourService);
+            _viewModel = new ToursListViewModel(_selectedTourStore, _mockTourService, _createTourReportService);
         }
 
         [Test]
@@ -62,7 +65,7 @@ namespace TourPlanner_UnitTests
         public void TourService_TourAdded_ShouldAddTourToCollection()
         {
             // Arrange
-            var newTour = new Tour { Id = 3, Name = "Tour C" };
+            var newTour = new Tour { Id = Guid.NewGuid(), Name = "Tour C" };
 
             // Act
             _mockTourService.TourAdded += Raise.Event<Action<Tour>>(newTour);
@@ -76,13 +79,14 @@ namespace TourPlanner_UnitTests
         public void TourService_TourUpdated_ShouldUpdateTourInCollection()
         {
             // Arrange
-            var updatedTour = new Tour { Id = 1, Name = "Updated Tour A" };
+            Guid tourId = _viewModel.Tours.ElementAt(0).Tour.Id;
+            var updatedTour = new Tour { Id = tourId, Name = "Updated Tour A" };
 
             // Act
             _mockTourService.TourUpdated += Raise.Event<Action<Tour>>(updatedTour);
 
             // Assert
-            var updatedItem = _viewModel.Tours.First(t => t.Tour.Id == 1);
+            var updatedItem = _viewModel.Tours.First(t => t.Tour.Id == tourId);
             Assert.That(updatedItem.Tour.Name, Is.EqualTo("Updated Tour A"), "Tour name should be updated.");
         }
 
@@ -90,10 +94,10 @@ namespace TourPlanner_UnitTests
         public void TourService_TourDeleted_ShouldRemoveTourFromCollection()
         {
             // Arrange
-            int idToDelete = 1;
+            Guid idToDelete = _viewModel.Tours.ElementAt(0).Tour.Id;
 
             // Act
-            _mockTourService.TourDeleted += Raise.Event<Action<int>>(idToDelete);
+            _mockTourService.TourDeleted += Raise.Event<Action<Guid>>(idToDelete);
 
             // Assert
             Assert.That(_viewModel.Tours.Any(t => t.Tour.Id == idToDelete), Is.False,

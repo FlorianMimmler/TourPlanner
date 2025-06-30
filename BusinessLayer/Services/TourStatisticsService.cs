@@ -3,7 +3,7 @@ using TourPlanner.Domain.Model;
 
 namespace BusinessLayer.Services
 {
-    public class TourStatisticsService
+    public class TourStatisticsService : ITourStatisticsService
     {
 
         private ITourLogService _tourLogService;
@@ -38,7 +38,7 @@ namespace BusinessLayer.Services
             }
             var tourlogs = await _tourLogService.GetTourlogsByTour(tour.Id);
 
-            if(tourlogs.Count() == 0)
+            if (tourlogs.Count() == 0)
             {
                 return 0;
             }

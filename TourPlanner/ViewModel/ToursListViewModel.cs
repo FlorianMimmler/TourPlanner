@@ -20,7 +20,7 @@ namespace PresentationLayer.ViewModel
 
         public event EventHandler<Tour> TourSelected;
 
-        private CreateTourReportService _createTourReportService;
+        private ICreateTourReportService _createTourReportService;
 
         private ObservableCollection<TourListItemViewModel> _tours;
         public IEnumerable<TourListItemViewModel> Tours => _tours;
@@ -40,7 +40,7 @@ namespace PresentationLayer.ViewModel
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, CreateTourReportService createTourReportService)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService)
         {
             _tourService = tourService;
             _selectedTourStore = selectedTourStore;
