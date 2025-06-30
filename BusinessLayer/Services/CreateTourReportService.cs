@@ -35,10 +35,10 @@ namespace BusinessLayer.Services
             _tourLogService = tourLogService;
         }
 
-        public async Task CreateTourReport(Tour tour)
+        public async Task CreateTourReport(Tour tour,string path)
         {
 
-            using PdfWriter writer = new(tour.Name + "Report.pdf");
+            using PdfWriter writer = new(path+"/"+tour.Name + "Report.pdf");
             using PdfDocument pdf = new(writer);
             using iText.Layout.Document report = new iText.Layout.Document(pdf);
 

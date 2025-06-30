@@ -1,8 +1,12 @@
-﻿using BusinessLayer.Services;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
 using DAL;
 using DAL.Queries;
 using DAL.QueryInterfaces;
+using Microsoft.Win32;
 using PresentationLayer.Commands;
+using PresentationLayer.Commands;
+using PresentationLayer.View;
 using PresentationLayer.View;
 using System;
 using System.Collections.Generic;
@@ -12,9 +16,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner;
 using TourPlanner.Domain.Model;
-using PresentationLayer.View;
-using PresentationLayer.Commands;
-using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {
@@ -39,7 +40,7 @@ namespace PresentationLayer.ViewModel
         public TourListItemViewModel(Tour tour, ITourService tourService,CreateTourReportService createTourReportService)
         {
             ModifyCommand = new RelayCommand(OpenModifyTourView);
-            CreateReport = new RelayCommand(async () => await _createTourReportService.CreateTourReport(Tour));
+            CreateReport = new RelayCommand(async () => await CreateTourReport(tour));
             Tour = tour;
             _tourService = tourService;
 
@@ -65,7 +66,7 @@ namespace PresentationLayer.ViewModel
             OnPropertyChanged(nameof(Id));
         }
 
-        public void ExecuteCreateReportService()
+        /*public void ExecuteCreateReportService()
         {
 
 
@@ -73,7 +74,23 @@ namespace PresentationLayer.ViewModel
             _=_createTourReportService.CreateTourReport(Tour);
 
 
-        }
+        }*/
 
+
+
+        public async Task CreateTourReport(Tour tour)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Title = "Select Folder"
+            };
+            
+
+            if (dialog.ShowDialog() == true)
+            {
+                _createTourReportService.CreateTourReport(tour,dialog.FolderName);
+            }
+        }
     }
 }
