@@ -34,6 +34,7 @@ public partial class App : Application
     private ICreateTourReportService _createReportService;
 
 
+
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
     private readonly IGetAllToursQuery _getAllToursQuery;
     private readonly IGetTourLogsByTourQuery _getTourLogsByTourQuery;
