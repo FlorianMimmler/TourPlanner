@@ -4,7 +4,7 @@ using TourPlanner.Domain.Model;
 
 namespace BusinessLayer.Services
 {
-    public class TourImportService
+    public class TourImportService : ITourImportService
     {
         private ITourService _tourService;
         private ITourLogService _tourLogService;
@@ -33,7 +33,8 @@ namespace BusinessLayer.Services
             {
                 var json = File.ReadAllText(filePath);
                 importedDtos = JsonConvert.DeserializeObject<List<TourImportDto>>(json) ?? [];
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.Error($"Failed to import tours from JSON at '{filePath}'. Exception: {ex}");
                 //throw new InvalidDataException("Error reading or deserializing JSON file", ex);

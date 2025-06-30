@@ -1,7 +1,10 @@
 using PresentationLayer.Stores;
 using TourPlanner;
-using TourPlanner.BusinessLayer.Services;
+using BusinessLayer.Services;
 using PresentationLayer.ViewModel;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Logger;
+using NSubstitute;
 
 namespace TourPlanner_UnitTests
 {
@@ -17,16 +20,21 @@ namespace TourPlanner_UnitTests
         public void Constructor_ShouldInitializeViewModels()
         {
             // Act
-            /*TourService TourService = new();
-            TourLogService TourlogsService = new();
-            SelectedTourStore SelectedTourStore = new(TourService);
-            var viewModel = new MainViewModel(SelectedTourStore, TourService, TourlogsService);
+            ITourService _tourService = Substitute.For<ITourService>();
+            ITourLogService _tourLogService = Substitute.For<ITourLogService>();
+            SelectedTourStore _selectedTourStore = new SelectedTourStore(_tourService);
+            ITourStatisticsService _tourStatisticsService = Substitute.For<ITourStatisticsService>();
+            ITourExportService _tourOutputService = Substitute.For<ITourExportService>();
+            ITourImportService _tourImportService = Substitute.For<ITourImportService>();
+            IMapService _mapService = Substitute.For<IMapService>();
+            ICreateTourReportService _createReportService = Substitute.For<ICreateTourReportService>();
+            var viewModel = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService, _createReportService);
 
             // Assert
             Assert.IsNotNull(viewModel.MainContentViewModel,
                 "MainContentViewModel should be initialized in the constructor.");
             Assert.IsNotNull(viewModel.SidebarViewModel, "SidebarViewModel should be initialized in the constructor.");
-            */
+            
         }
     }
 }

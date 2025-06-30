@@ -11,6 +11,7 @@ using System.Windows;
 using PresentationLayer.View.Subviews.Maincontent;
 using BusinessLayer.Services;
 using PresentationLayer.Stores;
+using BusinessLayer.Interfaces;
 
 namespace PresentationLayer.ViewModel
 {
@@ -18,7 +19,7 @@ namespace PresentationLayer.ViewModel
     {
 
         private SelectedTourStore _selectedTourStore;
-        private TourStatisticsService _tourStatisticsService;
+        private ITourStatisticsService _tourStatisticsService;
         public Tour SelectedTour => _selectedTourStore.SelectedTour;
         public string Name => SelectedTour?.Name ?? "unknown";
         public string Description => SelectedTour?.Description ?? "unknown";
@@ -32,7 +33,7 @@ namespace PresentationLayer.ViewModel
 
 
 
-        public GeneralViewModel(SelectedTourStore selectedTourStore, TourStatisticsService tourStatisticsService)
+        public GeneralViewModel(SelectedTourStore selectedTourStore, ITourStatisticsService tourStatisticsService)
         {
             _selectedTourStore = selectedTourStore;
             _tourStatisticsService = tourStatisticsService;

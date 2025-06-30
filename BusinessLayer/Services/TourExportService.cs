@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace BusinessLayer.Services
 {
-    public class TourExportService
+    public class TourExportService : ITourExportService
     {
 
         private ITourService _tourService;

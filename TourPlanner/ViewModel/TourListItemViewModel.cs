@@ -24,7 +24,7 @@ namespace PresentationLayer.ViewModel
 
 
         private ITourService _tourService;
-        private CreateTourReportService _createTourReportService;
+        private ICreateTourReportService _createTourReportService;
         public Tour Tour { get; private set; }
 
         public string Name => Tour.Name;
@@ -37,7 +37,7 @@ namespace PresentationLayer.ViewModel
 
         public ICommand CreateReport { get; }
 
-        public TourListItemViewModel(Tour tour, ITourService tourService,CreateTourReportService createTourReportService)
+        public TourListItemViewModel(Tour tour, ITourService tourService, ICreateTourReportService createTourReportService)
         {
             ModifyCommand = new RelayCommand(OpenModifyTourView);
             CreateReport = new RelayCommand(async () => await CreateTourReport(tour));

@@ -15,7 +15,7 @@ namespace PresentationLayer.ViewModel
         public SidebarHeaderViewModel SidebarHeaderViewModel { get; }
 
 
-        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, CreateTourReportService createTourReportService)
+        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService)
         {
             ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService);
             SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService);
