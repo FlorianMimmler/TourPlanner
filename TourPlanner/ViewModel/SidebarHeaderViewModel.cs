@@ -1,12 +1,16 @@
-﻿using PresentationLayer.Commands;
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
+using Microsoft.Win32;
+using PresentationLayer.Commands;
+using PresentationLayer.Stores;
+using PresentationLayer.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using PresentationLayer.View;
-using BusinessLayer.Interfaces;
+using TourPlanner.Domain.Model;
 
 namespace PresentationLayer.ViewModel
 {
@@ -16,10 +20,29 @@ namespace PresentationLayer.ViewModel
 
         public ICommand OpenCreateTourCommand { get; }
 
-        public SidebarHeaderViewModel(ITourService tourService)
+        public ICommand CreateSummary { get; }
+        
+        private CreateTourReportService _createTourReportService;
+
+
+
+        public SidebarHeaderViewModel(ITourService tourService, CreateTourReportService createTourReportService)
         {
             OpenCreateTourCommand = new RelayCommand(OpenCreateTour);
             _tourService = tourService;
+            var allTours = LoadTours();
+
+            CreateSummary = new RelayCommand(async () => await CreateTourSummary());
+            _createTourReportService = createTourReportService;
+
+
+        }
+
+
+        private async Task<IEnumerable<Tour>> LoadTours()
+        {
+            var tours = await _tourService.GetTours();
+            return tours;
         }
 
         private void OpenCreateTour()
@@ -31,6 +54,23 @@ namespace PresentationLayer.ViewModel
             };
             createTourViewModel.CloseWindow += (s, e) => createTourView.Close();
             createTourView.ShowDialog();
+        }
+
+
+
+        public async Task CreateTourSummary()
+        {
+            var dialog = new OpenFolderDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Title = "Select Folder"
+            };
+
+
+            if (dialog.ShowDialog() == true)
+            {
+                _createTourReportService.CreateSummary(dialog.FolderName);
+            }
         }
     }
 }

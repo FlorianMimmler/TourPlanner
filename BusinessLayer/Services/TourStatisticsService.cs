@@ -66,6 +66,9 @@ namespace BusinessLayer.Services
             return (double)Math.Round(Math.Clamp(totalScore, 0, 10), 1);
         }
 
+
+
+
         private static int ParseTimeToMinutes(string time)
         {
             if (TimeSpan.TryParse(time, out TimeSpan ts))

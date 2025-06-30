@@ -10,6 +10,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+
+
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" FontSize="18" Foreground="{DynamicResource ControlDarkBrush}">Tours</TextBlock>
         <Button Grid.Column="1" Padding="4,2" Command="{Binding OpenCreateTourCommand}" Cursor="Hand">
@@ -64,6 +67,51 @@
                 </Style>
             </Button.Style>
 
+        </Button>
+
+        <Button Grid.Column="2" Content="Summarize" FontSize="14" Command="{Binding CreateSummary}" Padding="10, 2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <!-- Flat blue color -->
+                    <Setter Property="Foreground" Value="{DynamicResource BorderDarkBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderLightBrush}"/>
+                    <!-- White text -->
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border 
+            Background="Transparent"
+            CornerRadius="4"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="1"
+            Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover Effect -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ControlMouseOverBrush}"/>
+                                        <!-- Slightly darker blue -->
+                                    </Trigger>
+                                    <!-- Pressed Effect -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#1f618d"/>
+                                        <!-- Even darker blue -->
+                                    </Trigger>
+                                    <!-- Disabled Effect -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#bdc3c7"/>
+                                        <!-- Gray when disabled -->
+                                        <Setter Property="Foreground" Value="#7f8c8d"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
     </Grid>
 </UserControl>

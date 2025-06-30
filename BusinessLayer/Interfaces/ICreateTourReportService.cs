@@ -7,5 +7,6 @@ namespace BusinessLayer.Interfaces
         event Action<Tour> ReportCreated;
 
         Task CreateTourReport(Tour tour, string path);
+        Task<double> CalculateChildFriendliness(Tour tour);
     }
 }

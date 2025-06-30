@@ -33,6 +33,7 @@ public partial class App : Application
     private IMapService _mapService;
     private ICreateTourReportService _createReportService;
 
+
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
     private readonly IGetAllToursQuery _getAllToursQuery;
     private readonly IGetTourLogsByTourQuery _getTourLogsByTourQuery;
@@ -71,7 +72,7 @@ public partial class App : Application
         _tourOutputService = new TourExportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourExportService)));
         _tourImportService = new TourImportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourImportService)));
         _mapService = new MapService(_orsApiKey, new LoggerWrapper(typeof(MapService)));
-        _createReportService = new CreateTourReportService(_tourService,_tourLogService);
+        _createReportService = new CreateTourReportService(_tourService,_tourLogService, _tourStatisticsService);
     }
 
     protected override void OnStartup(StartupEventArgs e)
