@@ -19,6 +19,7 @@ namespace PresentationLayer.ViewModel
         private readonly SelectedTourStore _selectedTourStore;
         private readonly SearchStore _searchStore;
         private readonly ITourFilterService _tourFilterService;
+        private readonly SelectedTabStore _selectedTabStore;
 
         public event EventHandler<Tour> TourSelected;
 
@@ -42,7 +43,7 @@ namespace PresentationLayer.ViewModel
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService, SelectedTabStore selectedTabStore)
         {
             _tourService = tourService;
             _selectedTourStore = selectedTourStore;
@@ -58,6 +59,7 @@ namespace PresentationLayer.ViewModel
             _tourService.TourUpdated += TourService_TourUpdated;
             _tourService.TourDeleted += _tourService_TourDeleted;
             _searchStore.PropertyChanged += SearchStore_PropertyChanged;
+            _selectedTabStore = selectedTabStore;
             // _createTourReportService.ReportCreated += TourService_ReportCreated;
         }
 
@@ -75,7 +77,7 @@ namespace PresentationLayer.ViewModel
             _tours.Clear();
             foreach (var tour in filtered)
             {
-                _tours.Add(new TourListItemViewModel(tour, _tourService, _createTourReportService));
+                _tours.Add(new TourListItemViewModel(tour, _tourService, _createTourReportService, _selectedTourStore, _selectedTabStore));
             }
         }
 
@@ -85,7 +87,7 @@ namespace PresentationLayer.ViewModel
 
             foreach (var tour in tours)
             {
-                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService, _createTourReportService);
+                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService, _createTourReportService, _selectedTourStore, _selectedTabStore);
                 _tours.Add(tourListItemViewModel);
             }
         }
@@ -107,7 +109,7 @@ namespace PresentationLayer.ViewModel
 
         private void TourService_TourAdded(Tour tour)
         {
-            _tours.Add(new TourListItemViewModel(tour, _tourService,_createTourReportService));
+            _tours.Add(new TourListItemViewModel(tour, _tourService,_createTourReportService, _selectedTourStore, _selectedTabStore));
         }
 
         /*private void TourService_ReportCreated(Tour tour)

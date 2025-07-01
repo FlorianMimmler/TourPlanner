@@ -1,19 +1,11 @@
 ﻿using Microsoft.Web.WebView2.Core;
+using PresentationLayer.Stores;
 using PresentationLayer.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PresentationLayer.View.Subviews.Maincontent
 {
@@ -46,7 +38,35 @@ namespace PresentationLayer.View.Subviews.Maincontent
                 {
                     await webView.CoreWebView2.ExecuteScriptAsync(jsCode);
                 };
+
+                vm.CallCreateImageFunction = async (string filename) =>
+                {
+
+                    await SaveMapImage(filename);
+                };
             }
+
+            webView.CoreWebView2.WebMessageReceived += async (sender, e) =>
+            {
+                var message = e.TryGetWebMessageAsString();
+                if (message == "map_ready" && DataContext is MapViewModel vm && vm.ImageFilename is not null)
+                {
+                    await SaveMapImage(vm.ImageFilename);
+                    vm.ImageFilename = null;
+                }
+            };
+        }
+
+        private async Task SaveMapImage(string filename)
+        {
+            var path_to_save = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages");
+            Directory.CreateDirectory(path_to_save);
+
+            var filepath = Path.Combine(path_to_save, filename + "_image.png");
+            
+            using var memoryStream = new MemoryStream();
+            await webView.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Png, memoryStream);
+            File.WriteAllBytes(filepath, memoryStream.ToArray());
         }
 
         private void CallUpdateMap(object? sender, CoreWebView2NavigationCompletedEventArgs e)

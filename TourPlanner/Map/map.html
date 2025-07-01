@@ -42,7 +42,15 @@
             routeLayer = L.geoJSON(route_geojson, {
                 style: {color: 'blue', weight: 5}
             }).addTo(map);
-            map.fitBounds(routeLayer.getBounds());
+
+            map.invalidateSize();
+            map.flyToBounds(routeLayer.getBounds());
+
+            map.on('zoomend', () => {
+                if (window.chrome?.webview) {
+                    chrome.webview.postMessage("map_ready");
+                }
+            })
         }
 
      

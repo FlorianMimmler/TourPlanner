@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
+using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -42,6 +43,24 @@ namespace BusinessLayer.Services
 
         }
 
+        private async Task<bool> WaitForTourImage(Guid tourId)
+        {
+            var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tourId.ToString() + "_image.png");
+
+            var timeoutTask = Task.Delay(TimeSpan.FromSeconds(10));
+            var waitTask = Task.Run(async () =>
+            {
+                while (!File.Exists(filepath))
+                {
+                    await Task.Delay(10);
+                }
+            });
+
+            var completedTask = await Task.WhenAny(waitTask, timeoutTask);
+
+            return completedTask == waitTask;
+        }
+
         public async Task CreateTourReport(Tour tour,string path)
         {
 
@@ -52,6 +71,27 @@ namespace BusinessLayer.Services
 
             Paragraph header = new Paragraph("REPORT: " + tour.Name).SetFontSize(24).SetFontColor(ColorConstants.RED);
             report.Add(header);
+
+            byte[]? image = null;
+
+            if(await WaitForTourImage(tour.Id))
+            {
+                image = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tour.Id.ToString() + "_image.png"));
+            }
+
+            if(image != null)
+            {
+                ImageData imageData = ImageDataFactory.Create(image);
+                Image mapImage = new Image(imageData);
+                mapImage.SetAutoScale(true);
+                report.Add(new Paragraph("Tour Map:").SetFontSize(16).SetMarginTop(20));
+                report.Add(mapImage);
+            } else
+            {
+                report.Add(new Paragraph("Tour Map:").SetFontSize(16).SetMarginTop(14));
+                report.Add(new Paragraph("No Image found").SetFontSize(12));
+            }
+
 
             Paragraph description = new Paragraph("All tour Logs of tour " + tour.Name + ":").SetFontSize(14);
             report.Add(description);

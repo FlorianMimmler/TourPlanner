@@ -3,13 +3,16 @@ using BusinessLayer.Services;
 using DAL;
 using DAL.Queries;
 using DAL.QueryInterfaces;
+using Domain.Model;
 using Microsoft.Win32;
 using PresentationLayer.Commands;
 using PresentationLayer.Commands;
+using PresentationLayer.Stores;
 using PresentationLayer.View;
 using PresentationLayer.View;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +28,9 @@ namespace PresentationLayer.ViewModel
 
         private ITourService _tourService;
         private ICreateTourReportService _createTourReportService;
+        private readonly SelectedTourStore _selectedTourStore;
+        private readonly SelectedTabStore _selectedTabStore;
+
         public Tour Tour { get; private set; }
 
         public string Name => Tour.Name;
@@ -33,19 +39,27 @@ namespace PresentationLayer.ViewModel
 
         public ICommand ModifyCommand { get; }
 
-
-
         public ICommand CreateReport { get; }
 
-        public TourListItemViewModel(Tour tour, ITourService tourService, ICreateTourReportService createTourReportService)
+        public TourListItemViewModel(Tour tour, ITourService tourService, ICreateTourReportService createTourReportService, SelectedTourStore selectedTourStore, SelectedTabStore selectedTabStore)
         {
             ModifyCommand = new RelayCommand(OpenModifyTourView);
-            CreateReport = new RelayCommand(async () => await CreateTourReport(tour));
+            CreateReport = new RelayCommand(ProcessCreateReportRequest);
+            //CreateReport = new RelayCommand(async () => await CreateTourReport(tour));
             Tour = tour;
             _tourService = tourService;
 
             _createTourReportService = createTourReportService;
+            _selectedTourStore = selectedTourStore;
+            _selectedTabStore = selectedTabStore;
+        }
+
+        private async void ProcessCreateReportRequest()
+        {
+            _selectedTourStore.SelectedTour = Tour;
+            _selectedTabStore.SelectedTab = TabType.Route;
             
+            await CreateTourReport();
         }
 
         private void OpenModifyTourView()
@@ -78,7 +92,7 @@ namespace PresentationLayer.ViewModel
 
 
 
-        public async Task CreateTourReport(Tour tour)
+        public async Task CreateTourReport()
         {
             var dialog = new OpenFolderDialog
             {
@@ -89,7 +103,7 @@ namespace PresentationLayer.ViewModel
 
             if (dialog.ShowDialog() == true)
             {
-                _createTourReportService.CreateTourReport(tour,dialog.FolderName);
+                await _createTourReportService.CreateTourReport(Tour, dialog.FolderName);
             }
         }
 

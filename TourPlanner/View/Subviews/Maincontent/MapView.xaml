@@ -29,7 +29,7 @@
         </Grid>
 
         <!-- Map Screen -->
-        <wv2:WebView2 Name="webView" Visibility="{Binding IsLoaded, Converter={StaticResource BoolToVis}}" />
+        <wv2:WebView2 x:Name="webView" Visibility="{Binding IsLoaded, Converter={StaticResource BoolToVis}}" />
 
     </Grid>
 </UserControl>

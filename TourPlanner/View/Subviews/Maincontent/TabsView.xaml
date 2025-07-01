@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
 
-    <TabControl >
+    <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
         <TabControl.Resources>
             <Style TargetType="TabItem">
                 <Setter Property="FontSize" Value="14"/>

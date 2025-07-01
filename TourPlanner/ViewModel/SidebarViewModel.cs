@@ -20,9 +20,9 @@ namespace PresentationLayer.ViewModel
         private readonly SearchStore _searchStore;
 
 
-        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService)
+        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService, SelectedTabStore selectedTabStore)
         {
-            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService, searchStore, tourFilterService);
+            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService, searchStore, tourFilterService, selectedTabStore);
             SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService, createTourReportService);
 
             _searchStore = searchStore;

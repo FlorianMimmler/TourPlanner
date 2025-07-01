@@ -10,9 +10,9 @@ namespace PresentationLayer.ViewModel
         public TabsViewModel TabsViewModel { get;}
         public TourlogsViewModel TourlogsViewModel { get; }
 
-        public MainContentViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ITourLogService tourlogsService, ITourStatisticsService tourStatisticsService, IMapService mapService)
+        public MainContentViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ITourLogService tourlogsService, ITourStatisticsService tourStatisticsService, IMapService mapService, SelectedTabStore selectedTabStore)
         {
-            TabsViewModel = new TabsViewModel(selectedTourStore, tourStatisticsService, mapService);
+            TabsViewModel = new TabsViewModel(selectedTourStore, tourStatisticsService, mapService, selectedTabStore);
             TourlogsViewModel = new TourlogsViewModel(tourService, tourlogsService, selectedTourStore);
         }
     }
