@@ -53,7 +53,17 @@ namespace BusinessLayer.Services
             Paragraph header = new Paragraph("REPORT: " + tour.Name).SetFontSize(24).SetFontColor(ColorConstants.RED);
             report.Add(header);
 
-            Paragraph description = new Paragraph("All tour Logs of tour " + tour.Name + ":").SetFontSize(14);
+            var description = new Paragraph("All tour Logs of tour " + tour.Name + ":"
+
+                + "\n\nTo: " + tour.To
+                + "\nFrom: " + tour.From
+                + "\nEstimated Time: " + tour.EstimatedTime.ToString()
+                + "\nDistance: " + tour.Distance.ToString()
+                + "\nMode of Transport: " + tour.TransportType.ToString()
+                + "\nTour Description: " + tour.Description +"\n\n\n"
+                
+                ).SetFontSize(14);
+            
             report.Add(description);
 
             Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
