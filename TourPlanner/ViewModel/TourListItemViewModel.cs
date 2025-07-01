@@ -92,5 +92,9 @@ namespace PresentationLayer.ViewModel
                 _createTourReportService.CreateTourReport(tour,dialog.FolderName);
             }
         }
+
+
+
+
     }
 }

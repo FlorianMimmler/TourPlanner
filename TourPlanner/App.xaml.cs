@@ -28,12 +28,14 @@ public partial class App : Application
     private readonly SearchStore _searchStore;
     private readonly ITourService _tourService;
     private ITourLogService _tourLogService;
-    private ITourStatisticsService _tourStatisticsService;
+    private TourStatisticsService _tourStatisticsService;
     private ITourExportService _tourOutputService;
     private ITourImportService _tourImportService;
     private IMapService _mapService;
     private ITourFilterService _tourFilterService;
     private ICreateTourReportService _createReportService;
+
+
 
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
     private readonly IGetAllToursQuery _getAllToursQuery;
@@ -75,7 +77,7 @@ public partial class App : Application
         _tourImportService = new TourImportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourImportService)));
         _mapService = new MapService(_orsApiKey, new LoggerWrapper(typeof(MapService)));
         _tourFilterService = new TourFilterService(_tourService, _tourLogService, _tourStatisticsService);
-        _createReportService = new CreateTourReportService(_tourService,_tourLogService);
+        _createReportService = new CreateTourReportService(_tourService,_tourLogService, _tourStatisticsService);
     }
 
     protected override void OnStartup(StartupEventArgs e)
