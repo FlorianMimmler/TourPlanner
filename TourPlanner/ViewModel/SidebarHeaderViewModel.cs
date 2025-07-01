@@ -32,5 +32,6 @@ namespace PresentationLayer.ViewModel
             createTourViewModel.CloseWindow += (s, e) => createTourView.Close();
             createTourView.ShowDialog();
         }
+
     }
 }

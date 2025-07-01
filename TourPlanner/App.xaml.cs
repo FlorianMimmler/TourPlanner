@@ -25,12 +25,14 @@ public partial class App : Application
 {
 
     private readonly SelectedTourStore _selectedTourStore;
+    private readonly SearchStore _searchStore;
     private readonly ITourService _tourService;
     private ITourLogService _tourLogService;
     private ITourStatisticsService _tourStatisticsService;
     private ITourExportService _tourOutputService;
     private ITourImportService _tourImportService;
     private IMapService _mapService;
+    private ITourFilterService _tourFilterService;
     private ICreateTourReportService _createReportService;
 
     private readonly TourPlannerDbContextFactory _tourPlannerDbContextFactory;
@@ -66,11 +68,13 @@ public partial class App : Application
 
         _tourService = new TourService(_getAllToursQuery, _createTourQuery, _updateTourQuery, _deleteTourQuery, new LoggerWrapper(typeof(TourService)));
         _selectedTourStore = new SelectedTourStore(_tourService);
+        _searchStore = new SearchStore();
         _tourLogService = new TourLogService(_getAllTourLogsQuery, _createTourLogQuery, _getTourLogsByTourQuery, _updateTourLogQuery, _deleteTourLogQuery, new LoggerWrapper(typeof(TourLogService)));
         _tourStatisticsService = new TourStatisticsService(_tourLogService);
         _tourOutputService = new TourExportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourExportService)));
         _tourImportService = new TourImportService(_tourService, _tourLogService, new LoggerWrapper(typeof(TourImportService)));
         _mapService = new MapService(_orsApiKey, new LoggerWrapper(typeof(MapService)));
+        _tourFilterService = new TourFilterService(_tourService, _tourLogService, _tourStatisticsService);
         _createReportService = new CreateTourReportService(_tourService,_tourLogService);
     }
 
@@ -85,7 +89,7 @@ public partial class App : Application
 
         MainWindow = new MainView()
         {
-            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService,_createReportService)
+            DataContext = new MainViewModel(_selectedTourStore, _tourService, _tourLogService, _tourStatisticsService, _tourOutputService, _tourImportService, _mapService,_createReportService, _searchStore, _tourFilterService)
         };
         MainWindow.Show();
 

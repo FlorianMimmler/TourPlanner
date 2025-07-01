@@ -14,7 +14,7 @@
 
         <sidebar:SidebarHeaderView x:Name="sidebarHeaderView" DataContext="{Binding SidebarHeaderViewModel}"></sidebar:SidebarHeaderView>
 
-        <TextBox Name="myTextBox" Margin="0 5 0 0" Padding="2,1, 15, 1" Width="auto" FontSize="16" Cursor="IBeam">
+        <TextBox Name="myTextBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 0" Padding="2,1, 15, 1" Width="auto" FontSize="16" Cursor="IBeam">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Setter Property="Background" Value="Transparent" />

@@ -13,12 +13,20 @@ namespace PresentationLayer.ViewModel
     {
         public ToursListViewModel ToursListViewModel { get; }
         public SidebarHeaderViewModel SidebarHeaderViewModel { get; }
-
-
-        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService)
+        private readonly SearchStore _searchStore;
+        public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService)
         {
-            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService);
+            ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService, searchStore, tourFilterService);
             SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService);
+
+            _searchStore = searchStore;
         }
+
+        public string SearchText
+        {
+            get => _searchStore.SearchText;
+            set => _searchStore.SearchText = value;
+        }
+
     }
 }

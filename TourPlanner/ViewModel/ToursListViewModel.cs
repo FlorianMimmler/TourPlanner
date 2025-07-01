@@ -17,6 +17,8 @@ namespace PresentationLayer.ViewModel
     {
         private readonly ITourService _tourService;
         private readonly SelectedTourStore _selectedTourStore;
+        private readonly SearchStore _searchStore;
+        private readonly ITourFilterService _tourFilterService;
 
         public event EventHandler<Tour> TourSelected;
 
@@ -40,10 +42,12 @@ namespace PresentationLayer.ViewModel
             }
         }
 
-        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService)
+        public ToursListViewModel(SelectedTourStore selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService)
         {
             _tourService = tourService;
             _selectedTourStore = selectedTourStore;
+            _searchStore = searchStore;
+            _tourFilterService = tourFilterService;
             _tours = new ObservableCollection<TourListItemViewModel>();
 
             _createTourReportService = createTourReportService;
@@ -53,7 +57,26 @@ namespace PresentationLayer.ViewModel
             _tourService.TourAdded += TourService_TourAdded;
             _tourService.TourUpdated += TourService_TourUpdated;
             _tourService.TourDeleted += _tourService_TourDeleted;
-           // _createTourReportService.ReportCreated += TourService_ReportCreated;
+            _searchStore.PropertyChanged += SearchStore_PropertyChanged;
+            // _createTourReportService.ReportCreated += TourService_ReportCreated;
+        }
+
+        private async void SearchStore_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SearchStore.SearchText))
+            {
+                await ApplySearch(_searchStore.SearchText);
+            }
+        }
+
+        private async Task ApplySearch(string searchText)
+        {
+            var filtered = await _tourFilterService.FilterToursAsync(searchText);
+            _tours.Clear();
+            foreach (var tour in filtered)
+            {
+                _tours.Add(new TourListItemViewModel(tour, _tourService, _createTourReportService));
+            }
         }
 
         private async Task Load()
@@ -62,7 +85,7 @@ namespace PresentationLayer.ViewModel
 
             foreach (var tour in tours)
             {
-                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService,_createTourReportService);
+                var tourListItemViewModel = new TourListItemViewModel(tour, _tourService, _createTourReportService);
                 _tours.Add(tourListItemViewModel);
             }
         }
