@@ -18,15 +18,13 @@ namespace PresentationLayer.ViewModel
         public ToursListViewModel ToursListViewModel { get; }
         public SidebarHeaderViewModel SidebarHeaderViewModel { get; }
         private readonly SearchStore _searchStore;
-        private ICreateTourReportService _createTourReportService;
 
 
         public SidebarViewModel(SelectedTourStore _selectedTourStore, ITourService tourService, ICreateTourReportService createTourReportService, SearchStore searchStore, ITourFilterService tourFilterService)
         {
             ToursListViewModel = new ToursListViewModel(_selectedTourStore, tourService, createTourReportService, searchStore, tourFilterService);
-            SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService);
+            SidebarHeaderViewModel = new SidebarHeaderViewModel(tourService, createTourReportService);
 
-            _createTourReportService = createTourReportService;
             _searchStore = searchStore;
         }
 
