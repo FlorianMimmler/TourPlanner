@@ -1,0 +1,84 @@
+﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
+using NSubstitute;
+using PresentationLayer.Stores;
+using PresentationLayer.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TourPlanner.Domain.Model;
+
+namespace TourPlanner_UnitTests
+{
+    [TestFixture]
+    public class CreateReprotAndSummaryTests
+    {
+        private ITourLogService _mockTourLogService;
+        private ITourService _mockTourService;
+        private CreateTourReportService _createTourReportService;
+        private SelectedTourStore _selectedTourStore;
+        private ToursListViewModel _viewModel;
+        private TourStatisticsService _tourStatisticsService;
+
+        private SidebarHeaderViewModel _sideHeaderViewModel;
+
+
+
+
+        private List<Tour> tours1;
+
+        private List<TourLog> tourLogsOfTourOne;
+
+
+
+        [SetUp]
+        public void Setup()
+        {
+            _mockTourService = Substitute.For<ITourService>();
+            _mockTourLogService = Substitute.For<ITourLogService>();
+
+            //_selectedTourStore = new SelectedTourStore(_mockTourService);
+
+            tours1 = new List<Tour>
+            {
+                new Tour { Id = Guid.NewGuid(), Name = "Tour A" },
+                new Tour { Id = Guid.NewGuid(), Name = "Tour B" }
+            };
+
+
+             tourLogsOfTourOne = new List<TourLog>
+            {
+                new TourLog {Id = Guid.NewGuid(), Date = DateTime.Now, Comment = "TestComment", Difficulty = 10.5, Distance = 11.5, Duration = "100", Rating =12.5, TourId = tours1[0].Id },
+                new TourLog {Id = Guid.NewGuid(), Date = DateTime.Now, Comment = "TestComment2", Difficulty = 13.5, Distance = 14.5, Duration = "120", Rating =15.5, TourId = tours1[0].Id }
+
+            };
+            
+
+
+        _mockTourService.GetTours().Returns(tours1);
+            _mockTourLogService.GetTourlogsByTour(tours1[0].Id).Returns(tourLogsOfTourOne);
+
+            _createTourReportService = new CreateTourReportService(_mockTourService,_mockTourLogService,_tourStatisticsService);
+        }
+
+        [Test]
+        public async Task CreateTourReport_ShouldGenerateReportAndCallTourLogs()
+        {
+            // Arrange
+            var path = "../../../../TourPlanner/bin/debug/net8.0-windows/Reports";
+
+
+            Tour test = tours1[0];
+
+            // Act
+            await _createTourReportService.CreateTourReport(test, path);
+            // Assert
+            Assert.True(File.Exists(path+"/"+"Tour AReport.pdf"));
+            // Cleanup
+            File.Delete(path+ "/" +"Tour AReport.pdf");
+            Directory.Delete(path);
+        }
+    }
+}

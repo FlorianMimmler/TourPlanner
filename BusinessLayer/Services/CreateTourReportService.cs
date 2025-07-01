@@ -89,12 +89,25 @@ namespace BusinessLayer.Services
             } else
             {
                 report.Add(new Paragraph("Tour Map:").SetFontSize(16).SetMarginTop(14));
-                report.Add(new Paragraph("No Image found").SetFontSize(12));
+                report.Add(new Paragraph("No Image found").SetFontSize(14));
             }
 
 
-            Paragraph description = new Paragraph("All tour Logs of tour " + tour.Name + ":").SetFontSize(14);
+            
+            var description = new Paragraph(""
+
+                + "\n\nTo: " + tour.To
+                + "\nFrom: " + tour.From
+                + "\nEstimated Time: " + tour.EstimatedTime.ToString()
+                + "\nDistance: " + tour.Distance.ToString()
+                + "\nMode of Transport: " + tour.TransportType.ToString()
+                + "\nTour Description: " + tour.Description +"\n\n\n"
+                
+                ).SetFontSize(14);
+            
             report.Add(description);
+
+            Paragraph description = new Paragraph("Tour Logs:").SetFontSize(16);
 
             Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
             iText.Layout.Element.Table tourLogTable = new iText.Layout.Element.Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
