@@ -2,18 +2,8 @@
 using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
-using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NetTopologySuite.Index.HPRtree;
-using Npgsql.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using TourPlanner.Domain.Model;
 
 
@@ -89,10 +79,8 @@ namespace BusinessLayer.Services
             } else
             {
                 report.Add(new Paragraph("Tour Map:").SetFontSize(16).SetMarginTop(14));
-                report.Add(new Paragraph("No Image found").SetFontSize(14));
+                report.Add(new Paragraph("No Image found").SetFontSize(12));
             }
-
-
             
             var description = new Paragraph(""
 
@@ -111,7 +99,7 @@ namespace BusinessLayer.Services
 
             report.Add(tourLogTableHeader);
 
-            iText.Layout.Element.Table tourLogTable = new iText.Layout.Element.Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
+            Table tourLogTable = new Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
 
 
             //Column titles
@@ -172,7 +160,7 @@ namespace BusinessLayer.Services
             summary.Add(description);
 
             Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
-            iText.Layout.Element.Table tourLogTable = new iText.Layout.Element.Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
+            Table tourLogTable = new Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
 
 
             //Column titles
