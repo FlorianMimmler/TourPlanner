@@ -20,6 +20,9 @@ namespace TourPlanner_UnitTests
         private ICreateTourReportService _createTourReportService;
         private SelectedTourStore _selectedTourStore;
         private ToursListViewModel _viewModel;
+        private ITourFilterService _tourFilterService;
+        private SelectedTabStore _selectedTabStore;
+        private SearchStore _searchStore;
 
         [SetUp]
         public void Setup()
@@ -27,6 +30,9 @@ namespace TourPlanner_UnitTests
             _mockTourService = Substitute.For<ITourService>();
             _createTourReportService = Substitute.For<ICreateTourReportService>();
             _selectedTourStore = new SelectedTourStore(_mockTourService);
+            _tourFilterService = Substitute.For<ITourFilterService>();
+            _selectedTabStore = new SelectedTabStore();
+            _searchStore = new SearchStore();
 
             var tours = new List<Tour>
             {
@@ -36,7 +42,7 @@ namespace TourPlanner_UnitTests
 
             _mockTourService.GetTours().Returns(tours);
 
-            _viewModel = new ToursListViewModel(_selectedTourStore, _mockTourService, _createTourReportService);
+            _viewModel = new ToursListViewModel(_selectedTourStore, _mockTourService, _createTourReportService, _searchStore, _tourFilterService, _selectedTabStore);
         }
 
         [Test]

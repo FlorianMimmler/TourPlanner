@@ -43,8 +43,8 @@ namespace TourPlanner_UnitTests
 
             tours1 = new List<Tour>
             {
-                new Tour { Id = Guid.NewGuid(), Name = "Tour A" },
-                new Tour { Id = Guid.NewGuid(), Name = "Tour B" }
+                new Tour { Id = Guid.NewGuid(), Name = "Tour A", Description="test description", Distance = 10, EstimatedTime= "10", From = "Wien", To="Graz", TransportType = TransportType.Bike},
+                new Tour { Id = Guid.NewGuid(), Name = "Tour B", Description="test description", Distance = 10, EstimatedTime= "10", From = "Wien", To="Graz", TransportType = TransportType.Bike}
             };
 
 
@@ -67,7 +67,8 @@ namespace TourPlanner_UnitTests
         public async Task CreateTourReport_ShouldGenerateReportAndCallTourLogs()
         {
             // Arrange
-            var path = "../../../../TourPlanner/bin/debug/net8.0-windows/Reports";
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
+            Directory.CreateDirectory(path);
 
 
             Tour test = tours1[0];
