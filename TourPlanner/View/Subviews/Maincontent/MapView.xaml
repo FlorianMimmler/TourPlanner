@@ -17,14 +17,14 @@
         <!-- Loading Screen -->
         <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Loading map..." FontSize="20" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Loading map..." FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
 
         <!-- Error Screen -->
         <Grid Visibility="{Binding IsError, Converter={StaticResource BoolToVis}}" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Sorry, route couldn't be loaded" FontSize="20" Foreground="Black" HorizontalAlignment="Center"/>
+                <TextBlock Text="Sorry, route couldn't be loaded" FontSize="20" HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
 

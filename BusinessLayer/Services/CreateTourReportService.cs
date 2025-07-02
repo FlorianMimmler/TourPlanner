@@ -107,9 +107,10 @@ namespace BusinessLayer.Services
             
             report.Add(description);
 
-            Paragraph description = new Paragraph("Tour Logs:").SetFontSize(16);
+            Paragraph tourLogTableHeader = new Paragraph("Tourlogs:").SetFontSize(16);
 
-            Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
+            report.Add(tourLogTableHeader);
+
             iText.Layout.Element.Table tourLogTable = new iText.Layout.Element.Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
 
 

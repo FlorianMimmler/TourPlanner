@@ -39,6 +39,11 @@ namespace PresentationLayer.ViewModel
 
         public async void UpdateMap()
         {
+            if(_selectedTourStore.SelectedTour == null)
+            {
+                return;
+            }
+
             CurrentState = MapViewState.Loading;
 
             if (_selectedTourStore.SelectedTour == null)
