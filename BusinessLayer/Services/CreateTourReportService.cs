@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
 using iText.IO.Image;
 using iText.Kernel.Colors;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using iText.Layout.Properties;
@@ -35,7 +36,7 @@ namespace BusinessLayer.Services
 
         private async Task<bool> WaitForTourImage(Guid tourId)
         {
-            var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tourId.ToString() + "_image.png");
+            var filepath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tourId.ToString() + "_image.png");
 
             var timeoutTask = Task.Delay(TimeSpan.FromSeconds(10));
             var waitTask = Task.Run(async () =>
@@ -66,7 +67,7 @@ namespace BusinessLayer.Services
 
             if(await WaitForTourImage(tour.Id))
             {
-                image = File.ReadAllBytes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tour.Id.ToString() + "_image.png"));
+                image = File.ReadAllBytes(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TourMapImages", tour.Id.ToString() + "_image.png"));
             }
 
             if(image != null)
@@ -151,8 +152,9 @@ namespace BusinessLayer.Services
 
             using PdfWriter writer = new(path + "/" + "TourSummary.pdf");
             using PdfDocument pdf = new(writer);
-            using iText.Layout.Document summary = new iText.Layout.Document(pdf);
-
+            PageSize landscape = PageSize.A4.Rotate();                              // put pdf in lanscape mode
+            using iText.Layout.Document summary = new iText.Layout.Document(pdf,landscape);
+  
             Paragraph header = new Paragraph("Tours Summary: ").SetFontSize(24).SetFontColor(ColorConstants.RED);
             summary.Add(header);
 
@@ -161,7 +163,6 @@ namespace BusinessLayer.Services
 
             Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
             Table tourLogTable = new Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
-
 
             //Column titles
             tourLogTable.AddHeaderCell("Name of tour");
@@ -211,12 +212,12 @@ namespace BusinessLayer.Services
                 // add values to according cells 
             tourLogTable.AddCell(tour.Name?? "");
             tourLogTable.AddCell(tour.Id.ToString() ?? "");
-            tourLogTable.AddCell(averageDifficulty.ToString() ?? "");
-            tourLogTable.AddCell(averageDistance.ToString() ?? "");
-            tourLogTable.AddCell(averageDuration.ToString() ?? "");
-            tourLogTable.AddCell(averageRating.ToString() ?? "");
-            tourLogTable.AddCell(childfriendlyness.ToString() ?? "");
-            tourLogTable.AddCell(popularity.ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(averageDifficulty,2).ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(averageDistance,2).ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(averageDuration, 2).ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(averageRating, 2).ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(childfriendlyness, 2).ToString() ?? "");
+            tourLogTable.AddCell(Math.Round(popularity, 2).ToString() ?? "");
             tourLogTable.AddCell(logCount.ToString() ?? "");
             }
 
