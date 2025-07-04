@@ -140,7 +140,7 @@ namespace BusinessLayer.Services
 
         }
 
-        public async Task CreateSummary(string path)
+        public async Task CreateTourSummary(string path)
         {
 
             IEnumerable<TourLog> _tourLogs;
@@ -162,10 +162,12 @@ namespace BusinessLayer.Services
             summary.Add(description);
 
             Paragraph tourLogTableHeader = new Paragraph("Tourlogs:");
-            Table tourLogTable = new Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
+            //Table tourLogTable = new Table(UnitValue.CreatePercentArray(8)).UseAllAvailableWidth();
+            Table tourLogTable = new Table(UnitValue.CreatePercentArray(new float[] { 10, 20, 10, 10, 10, 10, 10,10,10 })).UseAllAvailableWidth();
+            tourLogTable.SetFixedLayout();
 
             //Column titles
-            tourLogTable.AddHeaderCell("Name of tour");
+            tourLogTable.AddHeaderCell("Tour Name");
             tourLogTable.AddHeaderCell("ID");
             tourLogTable.AddHeaderCell("AVG. Difficulty");
             tourLogTable.AddHeaderCell("AVG. Distance in km");
@@ -173,7 +175,7 @@ namespace BusinessLayer.Services
             tourLogTable.AddHeaderCell("AVG. Rating");
             tourLogTable.AddHeaderCell("Childfriendlyness");
             tourLogTable.AddHeaderCell("Poplarity");
-            tourLogTable.AddHeaderCell("Amount of Logs");
+            tourLogTable.AddHeaderCell("Log Count");
 
             tourLogTable.SetFontSize(14).SetBackgroundColor(ColorConstants.WHITE);
 

@@ -69,7 +69,7 @@ namespace PresentationLayer.ViewModel
 
             if (dialog.ShowDialog() == true)
             {
-                _createTourReportService.CreateSummary(dialog.FolderName);
+                _createTourReportService.CreateTourSummary(dialog.FolderName);
             }
         }
     }
